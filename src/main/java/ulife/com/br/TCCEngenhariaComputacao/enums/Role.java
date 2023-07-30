@@ -1,5 +1,6 @@
 package ulife.com.br.TCCEngenhariaComputacao.enums;
 
-public class Role {
-
+public enum Role {
+    ROLE_MEDICO,
+    ROLE_PACIENTE
 }
