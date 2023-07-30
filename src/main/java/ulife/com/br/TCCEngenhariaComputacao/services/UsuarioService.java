@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import ulife.com.br.TCCEngenhariaComputacao.repositories.UsuarioRepository;
 
 @Service
-public class AutenticacaoService implements UserDetailsService{
+public class UsuarioService implements UserDetailsService{
 
     @Autowired
     private UsuarioRepository usuarioRepository;
