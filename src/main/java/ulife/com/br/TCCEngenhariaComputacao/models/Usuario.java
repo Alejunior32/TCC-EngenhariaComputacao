@@ -6,12 +6,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import ulife.com.br.TCCEngenhariaComputacao.enums.Role;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 @Table(name = "usuarios")
@@ -27,6 +25,8 @@ public class Usuario implements UserDetails {
     private Long id;
     private String login;
     private String senha;
+
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     @Override

@@ -12,7 +12,7 @@ import ulife.com.br.TCCEngenhariaComputacao.models.Usuario;
 public class AutenticacaoService {
     @Autowired
     private AuthenticationManager authenticationManager;
-    
+
     @Autowired
     private TokenService tokenService;
 

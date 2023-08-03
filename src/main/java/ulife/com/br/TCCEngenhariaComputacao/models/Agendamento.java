@@ -5,30 +5,31 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ulife.com.br.TCCEngenhariaComputacao.enums.Role;
 
-@Table(name = "medicos")
+import java.time.LocalDate;
+
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Medico extends Usuario{
+public class Agendamento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nome;
-
-    private Integer crm;
-
     @ManyToOne
     private Especialidade especialidade;
 
-    @OneToOne
-    private Usuario usuario;
+    @ManyToOne
+    private Medico medico;
 
+    @ManyToOne
+    private Paciente paciente;
 
+    @ManyToOne
+    private Horario horario;
 
+    private LocalDate dataConsulta;
 }
