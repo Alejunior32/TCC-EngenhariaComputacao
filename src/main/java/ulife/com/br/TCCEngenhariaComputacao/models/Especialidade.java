@@ -1,6 +1,7 @@
 package ulife.com.br.TCCEngenhariaComputacao.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.util.List;
@@ -18,8 +19,10 @@ public class Especialidade {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
     private String titulo;
 
+    @NotBlank
     private String descricao;
 
 }

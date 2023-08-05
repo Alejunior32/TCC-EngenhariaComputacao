@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">
+<head>
+    <title>TCC | Especialidade</title>
+</head>
+<body>
+    <div layout:fragment="content">
+        <h1>Especialidades</h1>
+        <div class="alert alert-primary" th:if="${#lists.isEmpty(especialidades)}">
+            Nenhuma especialidade cadastrada!
+        </div>
+        <div class="alert alert-success" th:if="${mensagem}" th:text="${mensagem}"></div>
+        <div class="alert alert-danger" th:if="${erro}" th:text="${erro}"></div>
+
+        <div th:if="${not #lists.isEmpty(especialidades)}">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Opções</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="especialidade : ${especialidades}">
+                        <td th:text="${especialidade.titulo}"></td>
+                        <td>
+                            <a th:href="@{/especialidade/{idEspecialidade}(id=${especialidade.id})}" class="btn btn-outline-secondary">Detalhes</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <a href="/especialidade/cadastrar" class="btn btn-primary">Nova Especialidade</a>
+
+    </div>
+
+</body>
+</html>

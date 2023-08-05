@@ -31,4 +31,6 @@ public class Paciente{
     @OneToOne
     private Usuario usuario;
 
+    private boolean primeiroAcesso;
+
 }
