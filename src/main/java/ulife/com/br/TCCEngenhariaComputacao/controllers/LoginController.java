@@ -9,8 +9,11 @@ public class LoginController {
 
     @GetMapping("/login")
     public String login(){
-        System.out.println(new BCryptPasswordEncoder().encode("12345"));
         return "login/login";
     }
 
+    @GetMapping("/")
+    public String layout(){
+        return "layout";
+    }
 }

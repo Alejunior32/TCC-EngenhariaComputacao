@@ -3,6 +3,7 @@ create table usuarios(
      login varchar(100) not null,
      senha varchar(255) not null,
      role varchar(100) not null,
+     ativo boolean,
      primary key(id)
 );
 

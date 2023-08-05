@@ -13,7 +13,7 @@ import ulife.com.br.TCCEngenhariaComputacao.enums.Role;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Medico extends Usuario{
+public class Medico {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +28,5 @@ public class Medico extends Usuario{
 
     @OneToOne
     private Usuario usuario;
-
-
 
 }

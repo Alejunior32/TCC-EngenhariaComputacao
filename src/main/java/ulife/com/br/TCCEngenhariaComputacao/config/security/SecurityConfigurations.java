@@ -23,10 +23,14 @@ public class SecurityConfigurations {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(requests -> requests
-                        .requestMatchers(HttpMethod.POST,"/login").permitAll())
+//                        .requestMatchers(HttpMethod.POST,"/login").permitAll()
+//                        .anyRequest().authenticated()
+                                .anyRequest().permitAll()
+                )
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .defaultSuccessUrl("/",true)
+                        .defaultSuccessUrl("/home",true)
+                        .failureUrl("/login-error")
                         .permitAll())
                 .logout(logout -> logout.logoutUrl("/logout"))
                 .csrf().disable()
