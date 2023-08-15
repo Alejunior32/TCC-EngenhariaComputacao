@@ -13,7 +13,7 @@
         <div class="alert alert-success" th:if="${mensagem}" th:text="${mensagem}"></div>
         <div class="alert alert-danger" th:if="${erro}" th:text="${erro}"></div>
 
-        <div th:if="${not #lists.isEmpty(especialidades)}">
+        <div class="card"  th:if="${not #lists.isEmpty(especialidades)}">
             <table class="table">
                 <thead>
                 <tr>
@@ -25,7 +25,7 @@
                     <tr th:each="especialidade : ${especialidades}">
                         <td th:text="${especialidade.titulo}"></td>
                         <td>
-                            <a th:href="@{/especialidade/{idEspecialidade}(id=${especialidade.id})}" class="btn btn-outline-secondary">Detalhes</a>
+                            <a th:href="@{/especialidade/(id=${especialidade.id})}" class="btn btn-outline-secondary">Detalhes</a>
                         </td>
                     </tr>
                 </tbody>

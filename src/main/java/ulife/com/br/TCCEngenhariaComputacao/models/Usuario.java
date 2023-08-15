@@ -28,6 +28,8 @@ public class Usuario implements UserDetails {
 
     private Boolean ativo;
 
+    private Boolean primeiroAcesso;
+
     @Enumerated(EnumType.STRING)
     private Role role;
 

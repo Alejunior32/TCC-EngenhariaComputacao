@@ -4,6 +4,7 @@ create table usuarios(
      senha varchar(255) not null,
      role varchar(100) not null,
      ativo boolean,
+     primeiro_acesso boolean,
      primary key(id)
 );
 
