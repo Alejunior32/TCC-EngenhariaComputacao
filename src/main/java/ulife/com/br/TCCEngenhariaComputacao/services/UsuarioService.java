@@ -25,4 +25,8 @@ public class UsuarioService implements UserDetailsService{
         Usuario usuario = new Usuario(null,medico.getNome(), medico.getCrm().toString().substring(0,5),true,true, Role.ROLE_MEDICO);
         return usuarioRepository.save(usuario);
     }
+
+    public Usuario salvarUsuario(Usuario usuario) {
+        return usuarioRepository.save(usuario);
+    }
 }

@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ulife.com.br.TCCEngenhariaComputacao.dto.paciente.CadastroPacienteDTO;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -30,7 +31,4 @@ public class Paciente{
 
     @OneToOne
     private Usuario usuario;
-
-    private boolean primeiroAcesso;
-
 }

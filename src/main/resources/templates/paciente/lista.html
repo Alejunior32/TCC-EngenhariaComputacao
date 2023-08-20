@@ -2,40 +2,37 @@
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout.html}">
 <head>
-    <title>TCC | Especialidade</title>
+    <title>TCC | Pacientes</title>
 </head>
 <body>
 <div layout:fragment="content">
-    <h1>Médicos</h1>
-    <div class="alert alert-primary" th:if="${#lists.isEmpty(medicos)}">
-        Nenhum médico cadastrado!
+    <h1>Pacientes</h1>
+    <div class="alert alert-primary" th:if="${#lists.isEmpty(pacientes)}">
+        Nenhum paciente cadastrado!
     </div>
     <div class="alert alert-success" th:if="${mensagem}" th:text="${mensagem}"></div>
     <div class="alert alert-danger" th:if="${erro}" th:text="${erro}"></div>
 
-    <div class="card"  th:if="${not #lists.isEmpty(medicos)}">
+    <div class="card"  th:if="${not #lists.isEmpty(pacientes)}">
         <table class="table">
             <thead>
             <tr>
                 <th>Nome</th>
-                <th>crm</th>
-                <th>Especialidade</th>
+                <th>Data de Nacimento</th>
                 <th>Detalhes</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="medico : ${medicos}">
-                <td th:text="${medico.nome}"></td>
-                <td th:number="${medico.crm}"></td>
-                <td th:text="${medico.especialidade.titulo}"></td>
+            <tr th:each="paciente : ${pacientes}">
+                <td th:text="${paciente.nome}"></td>
+                <td th:number="${paciente.dataNascimento}"></td>
                 <td>
-                    <a th:href="@{/medico/(idMedico=${medico.id})}" class="btn btn-outline-secondary">Detalhes</a>
+                    <a th:href="@{/agendamento/(idPaciente=${medico.id})}" class="btn btn-outline-secondary">Agendamentos</a>
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
-    <a href="/medico/cadastrar" class="btn btn-primary">Novo médico</a>
 
 </div>
 

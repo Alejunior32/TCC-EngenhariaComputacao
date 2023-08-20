@@ -25,7 +25,7 @@
                     <tr th:each="especialidade : ${especialidades}">
                         <td th:text="${especialidade.titulo}"></td>
                         <td>
-                            <a th:href="@{/especialidade/(id=${especialidade.id})}" class="btn btn-outline-secondary">Detalhes</a>
+                            <a th:href="@{/especialidade/detalhes(idEspecialidade=${especialidade.id})}" class="btn btn-outline-secondary">Detalhes</a>
                         </td>
                     </tr>
                 </tbody>

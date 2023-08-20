@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import ulife.com.br.TCCEngenhariaComputacao.dto.paciente.CadastroPacienteDTO;
 import ulife.com.br.TCCEngenhariaComputacao.enums.Role;
 
 import java.util.Collection;

@@ -3,6 +3,7 @@ package ulife.com.br.TCCEngenhariaComputacao.services;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ulife.com.br.TCCEngenhariaComputacao.dto.usuario.UsuarioMapper;
 import ulife.com.br.TCCEngenhariaComputacao.enums.Role;
 import ulife.com.br.TCCEngenhariaComputacao.models.Medico;
 import ulife.com.br.TCCEngenhariaComputacao.models.Usuario;
@@ -27,9 +28,9 @@ public class MedicoService {
         return medicoRepository.findById(idMedico).orElseThrow(() -> new EntityNotFoundException("Medico não encontrado!"));
     }
 
-    public Medico salvar(Medico medico) {
-        Usuario usuario = usuarioService.salvarUsuarioMedico(medico);
-        medico.setUsuario(usuario);
+    public Medico salvar(Medico medico, Usuario usuario) {
+        Usuario usuarioSalvo = usuarioService.salvarUsuario(usuario);
+        medico.setUsuario(usuarioSalvo);
         return medicoRepository.save(medico);
     }
 }

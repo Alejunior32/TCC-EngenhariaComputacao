@@ -6,23 +6,28 @@
     <title>TCC | Médico</title>
 </head>
 <div layout:fragment="content">
+    <h1>Cadastrar Médico</h1>
+    <div class="alert alert-danger" th:if="${erro}" th:text="${erro}"></div>
     <div class="card">
-        <h1>Cadastrar Médico</h1>
-        <form method="post" th:action="@{/medico/cadastrar}" th:object="${medico}" class="card-body row" >
-            <input type="hidden" th:field="*{id}">
+        <form method="post" th:action="@{/medico/cadastrar}" th:object="${cadastroMedicoDto}" class="card-body row" >
             <div class="mb-3">
                 <label for="nome" class="form-label">Nome</label>
-                <input type="text" class="form-control" id="nome" th:field="${medico.nome}"
+                <input type="text" class="form-control" id="nome" th:field="${cadastroMedicoDto.nome}"
+                       placeholder="Digite o nome do médico" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" th:field="${cadastroMedicoDto.email}"
                        placeholder="Digite o nome do médico" required>
             </div>
             <div class="mb-3">
                 <label for="crm" class="form-label">Crm</label>
-                <input type="text" class="form-control" id="crm" rows="3" th:field="${medico.crm}"
+                <input type="text" class="form-control" id="crm" rows="3" th:field="${cadastroMedicoDto.crm}"
                        placeholder="" required></input>
             </div>
             <div class="mb-3">
                 <label for="especialidade" class="form-label">Especialidade</label>
-                <select id="especialidade"  th:field="${medico.especialidade}"  required>
+                <select id="especialidade"  th:field="${cadastroMedicoDto.especialidade}"  required>
                     <option th:each="especialidade : ${especialidades}" th:value="${especialidade.id}" th:text="${especialidade.titulo}"></option>
                 </select>
             </div>

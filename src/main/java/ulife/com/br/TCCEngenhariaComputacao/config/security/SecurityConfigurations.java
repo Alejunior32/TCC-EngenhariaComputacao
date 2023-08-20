@@ -13,7 +13,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import ulife.com.br.TCCEngenhariaComputacao.handler.LoginHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -29,7 +31,7 @@ public class SecurityConfigurations {
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .defaultSuccessUrl("/home",true)
+                        .successHandler(successHandler())
                         .failureUrl("/login-error")
                         .permitAll())
                 .logout(logout -> logout.logoutUrl("/logout"))
@@ -45,6 +47,11 @@ public class SecurityConfigurations {
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public AuthenticationSuccessHandler successHandler() {
+        return new LoginHandler();
     }
 
 }
