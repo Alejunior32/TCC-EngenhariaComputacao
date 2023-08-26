@@ -14,16 +14,19 @@
                 <label for="nome" class="form-label">Nome</label>
                 <input type="text" class="form-control" id="nome" th:field="${cadastroMedicoDto.nome}"
                        placeholder="Digite o nome do médico" required>
+                <div class="text-danger" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control" id="email" th:field="${cadastroMedicoDto.email}"
                        placeholder="Digite o nome do médico" required>
+                <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
             </div>
             <div class="mb-3">
                 <label for="crm" class="form-label">Crm</label>
                 <input type="text" class="form-control" id="crm" rows="3" th:field="${cadastroMedicoDto.crm}"
                        placeholder="" required></input>
+                <div class="text-danger" th:if="${#fields.hasErrors('crm')}" th:errors="*{crm}"></div>
             </div>
             <div class="mb-3">
                 <label for="especialidade" class="form-label">Especialidade</label>

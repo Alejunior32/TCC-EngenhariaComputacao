@@ -24,7 +24,7 @@ public class LoginHandler implements AuthenticationSuccessHandler {
         Usuario usuario = (Usuario) authentication.getPrincipal();
 
         if (usuario.getPrimeiroAcesso() && pacienteService.buscarUsuario(usuario.getId()).isEmpty()) {
-            response.sendRedirect("/trocar-senha");
+            response.sendRedirect("/primeiro-acesso");
         } else {
             response.sendRedirect("/");
         }

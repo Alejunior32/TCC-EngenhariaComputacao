@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import ulife.com.br.TCCEngenhariaComputacao.enums.Role;
 import ulife.com.br.TCCEngenhariaComputacao.models.Medico;
@@ -28,5 +29,11 @@ public class UsuarioService implements UserDetailsService{
 
     public Usuario salvarUsuario(Usuario usuario) {
         return usuarioRepository.save(usuario);
+    }
+
+    public void trocarSenhaPrimeiroAcesso(Usuario usuario,String novaSenha) {
+        usuario.setSenha(new BCryptPasswordEncoder().encode(novaSenha));
+        usuario.setPrimeiroAcesso(false);
+        usuarioRepository.save(usuario);
     }
 }

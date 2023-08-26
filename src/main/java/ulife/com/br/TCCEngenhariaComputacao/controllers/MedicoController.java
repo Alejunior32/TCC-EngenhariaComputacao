@@ -58,7 +58,7 @@ public class MedicoController {
             medicoService.salvar(MedicoMapper.fromDto(cadastroMedicoDTO), UsuarioMapper.fromMedico(cadastroMedicoDTO));
         }else {
             mv = new ModelAndView("redirect:/medico/cadastrar");
-            redirectAttributes.addAttribute("erroCrm", "crm informado incorreto!");
+            redirectAttributes.addFlashAttribute("erro", "crm informado incorreto!");
         }
         return  mv;
     }
