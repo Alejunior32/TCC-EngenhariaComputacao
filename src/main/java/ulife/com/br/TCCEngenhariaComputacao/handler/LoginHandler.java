@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
+import ulife.com.br.TCCEngenhariaComputacao.enums.Role;
 import ulife.com.br.TCCEngenhariaComputacao.models.Paciente;
 import ulife.com.br.TCCEngenhariaComputacao.models.Usuario;
 import ulife.com.br.TCCEngenhariaComputacao.services.PacienteService;
@@ -23,7 +24,7 @@ public class LoginHandler implements AuthenticationSuccessHandler {
 
         Usuario usuario = (Usuario) authentication.getPrincipal();
 
-        if (usuario.getPrimeiroAcesso() && pacienteService.buscarUsuario(usuario.getId()).isEmpty()) {
+        if (usuario.getPrimeiroAcesso() && usuario.getRole() != Role.ROLE_PACIENTE) {
             response.sendRedirect("/primeiro-acesso");
         } else {
             response.sendRedirect("/");

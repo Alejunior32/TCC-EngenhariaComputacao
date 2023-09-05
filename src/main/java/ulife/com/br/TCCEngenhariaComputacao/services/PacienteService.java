@@ -34,7 +34,7 @@ public class PacienteService {
         return pacienteRepository.findAll();
     }
 
-    public Optional<Paciente> buscarUsuario(Long id) {
-        return pacienteRepository.findByUsuario_Id(id);
+    public Paciente findByUsuario(Usuario usuario) {
+        return pacienteRepository.findByUsuario(usuario);
     }
 }

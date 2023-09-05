@@ -26,7 +26,7 @@ public class MedicoController {
     @GetMapping
     public ModelAndView listarMedicos() {
         ModelAndView mv = new ModelAndView("medico/lista.html");
-        mv.addObject("medicos",medicoService.listar());
+        mv.addObject("medicos",medicoService.listAll());
         return mv;
     }
 
@@ -34,7 +34,7 @@ public class MedicoController {
     public ModelAndView detalhesMedico(@RequestParam Long idMedico){
         ModelAndView mv = new ModelAndView("medico/detalhes.html");
         try {
-            mv.addObject("medico", medicoService.buscarPorId(idMedico));
+            mv.addObject("medico", medicoService.findById(idMedico));
         }catch (EntityNotFoundException exception){
             mv.addObject("erroBusca",exception.getMessage());
         }
@@ -55,7 +55,7 @@ public class MedicoController {
         if (String.valueOf(cadastroMedicoDTO.getCrm()).length() == 6){
             mv = new ModelAndView("redirect:/medico");
             redirectAttributes.addAttribute("message","Novo médico cadastrado com sucesso!");
-            medicoService.salvar(MedicoMapper.fromDto(cadastroMedicoDTO), UsuarioMapper.fromMedico(cadastroMedicoDTO));
+            medicoService.save(MedicoMapper.fromDto(cadastroMedicoDTO), UsuarioMapper.fromMedico(cadastroMedicoDTO));
         }else {
             mv = new ModelAndView("redirect:/medico/cadastrar");
             redirectAttributes.addFlashAttribute("erro", "crm informado incorreto!");

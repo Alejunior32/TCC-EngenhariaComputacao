@@ -22,9 +22,10 @@ public class SecurityConfigurations {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(requests -> requests
-                        .requestMatchers(HttpMethod.POST,"/login").permitAll()
+                        .requestMatchers("/images/**","/css/**","templates/**").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/paciente/cadastrar","/esqueci-senha").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/login","/paciente/cadastrar","/esqueci-senha").permitAll()
                         .anyRequest().authenticated()
-//                                .anyRequest().permitAll()
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
