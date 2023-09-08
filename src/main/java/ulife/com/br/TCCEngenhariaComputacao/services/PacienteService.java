@@ -30,9 +30,14 @@ public class PacienteService {
         return pacienteRepository.save(paciente);
     }
 
-    public List<Paciente> listar() {
+    public List<Paciente> listar(String palavra) {
+        if (palavra != null)
+            return pacienteRepository.findAllByPalavraBarraDePesquisa(palavra);
+
         return pacienteRepository.findAll();
     }
+
+
 
     public Paciente findByUsuario(Usuario usuario) {
         return pacienteRepository.findByUsuario(usuario);

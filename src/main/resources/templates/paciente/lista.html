@@ -3,17 +3,30 @@
       layout:decorate="~{layout.html}">
 <head>
     <title>TCC | Pacientes</title>
+    <link rel="stylesheet" th:href="@{/css/layout.css}">
 </head>
 <body>
 <div layout:fragment="content">
-    <h1>Pacientes</h1>
+
+    <h1 class="titulo" >Pacientes</h1>
+
     <div class="alert alert-primary" th:if="${#lists.isEmpty(pacientes)}">
         Nenhum paciente cadastrado!
     </div>
     <div class="alert alert-success" th:if="${mensagem}" th:text="${mensagem}"></div>
     <div class="alert alert-danger" th:if="${erro}" th:text="${erro}"></div>
 
-    <div class="card"  th:if="${not #lists.isEmpty(pacientes)}">
+    <div class="pesquisa">
+
+        <form class="d-flex" method="GET" th:action="@{/paciente?nome=${palavra}}">
+            <input class="form-control me-2 " type="search" name="palavra" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+
+        <a th:href="@{/paciente/cadastrar}" class="btn btn-primary mt-3">Novo Paciente</a>
+    </div>
+
+    <div class="apresentacao"  th:if="${not #lists.isEmpty(pacientes)}">
         <table class="table">
             <thead>
             <tr>
@@ -27,7 +40,7 @@
                 <td th:text="${paciente.nome}"></td>
                 <td th:number="${paciente.dataNascimento}"></td>
                 <td>
-                    <a th:href="@{/agendamento/(idPaciente=${medico.id})}" class="btn btn-outline-secondary">Agendamentos</a>
+                    <a th:href="@{/agendamento/(idPaciente=${paciente.id})}" class="btn btn-outline-secondary">Agendamentos</a>
                 </td>
             </tr>
             </tbody>

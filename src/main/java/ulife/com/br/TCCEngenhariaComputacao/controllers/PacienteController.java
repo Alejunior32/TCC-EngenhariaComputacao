@@ -4,10 +4,7 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ulife.com.br.TCCEngenhariaComputacao.dto.paciente.CadastroPacienteDTO;
@@ -27,15 +24,16 @@ public class PacienteController {
 
 
     @GetMapping
-    public ModelAndView listarPacientes() {
+    public ModelAndView listarPacientes(@RequestParam(name = "palavra", required = false) String palavra ) {
         ModelAndView mv = new ModelAndView("paciente/lista.html");
-        mv.addObject("pacientes",pacienteService.listar());
+        mv.addObject("pacientes", pacienteService.listar(palavra));
         return mv;
     }
 
     @GetMapping("/detalhes")
     public ModelAndView detalhesPaciente(@RequestParam Long idPaciente){
         ModelAndView mv = new ModelAndView("medico/detalhes.html");
+
         try {
             mv.addObject("medico", pacienteService.buscarPorId(idPaciente));
         }catch (EntityNotFoundException exception){
@@ -52,16 +50,13 @@ public class PacienteController {
     }
 
     @PostMapping("cadastrar")
-    public ModelAndView cadastrarMedico(@Valid CadastroPacienteDTO cadastroPacienteDTO, RedirectAttributes redirectAttributes){
+    public ModelAndView cadastrarPaciente(@Valid CadastroPacienteDTO cadastroPacienteDTO, RedirectAttributes redirectAttributes){
         ModelAndView mv;
-        if (cadastroPacienteDTO.getSenha().equals(cadastroPacienteDTO.getConfirmacaoSenha())) {
-            mv = new ModelAndView("redirect:/login");
-            redirectAttributes.addAttribute("message", "Paciente cadastrado com sucesso!");
-            pacienteService.salvar(PacienteMapper.fromDto(cadastroPacienteDTO),UsuarioMapper.fromPaciente(cadastroPacienteDTO));
-        }else {
-            mv = new ModelAndView("redirect:/paciente/cadastrar");
-            redirectAttributes.addFlashAttribute("erroSenha", "Senhas não coincidem!");
-        }
+
+        mv = new ModelAndView("redirect:/paciente");
+        redirectAttributes.addAttribute("mensagem", "Paciente cadastrado com sucesso!");
+        pacienteService.salvar(PacienteMapper.fromDto(cadastroPacienteDTO),UsuarioMapper.fromPaciente(cadastroPacienteDTO));
+
         return  mv;
     }
 

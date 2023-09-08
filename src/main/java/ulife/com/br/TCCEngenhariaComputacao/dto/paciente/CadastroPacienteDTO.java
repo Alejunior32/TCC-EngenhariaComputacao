@@ -15,6 +15,5 @@ public class CadastroPacienteDTO{
     String nome;
     LocalDate dataNascimento;
     String email;
-    String senha;
-    String confirmacaoSenha;
+
 }

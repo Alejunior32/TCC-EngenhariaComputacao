@@ -1,0 +1,23 @@
+.button__logout{
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.pesquisa{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 2%;
+}
+
+.apresentacao{
+    margin: 2%;
+    padding: 2%;
+    border: 1px solid gray;
+    border-radius: 8px;
+}
+
+.titulo{
+    display: flex;
+    margin: 2%;
+}

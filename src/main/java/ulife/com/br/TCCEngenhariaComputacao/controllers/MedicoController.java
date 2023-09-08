@@ -24,9 +24,9 @@ public class MedicoController {
     private EspecialidadeService especialidadeService;
 
     @GetMapping
-    public ModelAndView listarMedicos() {
+    public ModelAndView listarMedicos(@RequestParam(name = "palavra", required = false) String palavra ) {
         ModelAndView mv = new ModelAndView("medico/lista.html");
-        mv.addObject("medicos",medicoService.listAll());
+        mv.addObject("medicos",medicoService.listar(palavra));
         return mv;
     }
 

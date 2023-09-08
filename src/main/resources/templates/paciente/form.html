@@ -4,41 +4,37 @@
 <head>
     <link rel="stylesheet" href="@{/css/layout.css}" />
     <title>TCC | Novo Paciente</title>
+    <link rel="stylesheet" th:href="@{/css/layout.css}">
 </head>
 <div layout:fragment="content">
-    <h1>Cadastrar Paciente</h1>
-    <div class="alert alert-danger" th:if="${erroSenha}" th:text="${erroSenha}"></div>
-    <div class="card">
+
+    <div class="titulo">
+        <h1>Cadastrar Paciente</h1>
+        <a th:href="@{/paciente}" class="btn btn-primary mt-3">Voltar</a>
+    </div>
+
+    <div class="apresentacao">
         <form method="post" th:action="@{/paciente/cadastrar}" th:object="${pacienteDTO}" class="card-body row" >
-            <div class="mb-3">
-                <label for="nome" class="form-label">Nome Completo</label>
-                <input type="text" class="form-control" id="nome" th:field="${pacienteDTO.nome}"
-                       placeholder="Digite seu nome" required>
-            </div>
-            <div class="mb-3">
-                <label for="dataNascimento" class="form-label">Data de nacimento</label>
-                <input type="date" class="form-control" id="dataNascimento" th:field="${pacienteDTO.dataNascimento}"
-                       placeholder="" required>
-            </div>
-            <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="text" class="form-control" id="email" th:field="${pacienteDTO.email}"
-                       placeholder="" required>
-            </div>
-            <div class="mb-3">
-                <label for="senha" class="form-label">Senha</label>
-                <input type="password" class="form-control" id="senha" th:field="${pacienteDTO.senha}"
-                       placeholder="" required>
-            </div>
-            <div class="mb-3">
-                <label for="confirmacaoSenha" class="form-label">Confirmar Senha</label>
-                <input type="password" class="form-control" id="confirmacaoSenha" th:field="${pacienteDTO.confirmacaoSenha}"
-                       placeholder="" required>
+            <div>
+                <div class="mb-3">
+                    <label for="nome" class="form-label">Nome Completo</label>
+                    <input type="text" class="form-control" id="nome" th:field="${pacienteDTO.nome}"
+                           placeholder="Digite seu nome" required>
+                </div>
+                <div class="mb-3">
+                    <label for="dataNascimento" class="form-label">Data de nacimento</label>
+                    <input type="date" class="form-control" id="dataNascimento" th:field="${pacienteDTO.dataNascimento}"
+                           placeholder="" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="text" class="form-control" id="email" th:field="${pacienteDTO.email}"
+                           placeholder="" required>
+                </div>
             </div>
             <button type="submit" class="btn btn-primary mt-3">Cadastrar</button>
         </form>
     </div>
-    <a th:href="@{/login}" class="btn btn-primary mt-3">Já possuo conta</a>
 </div>
 
 </html>

@@ -13,11 +13,13 @@ public class UsuarioMapper {
     public static Usuario fromMedico(CadastroMedicoDTO cadastroMedicoDTO){
         Random random = new Random();
         String senha = String.valueOf(random.nextInt(900000) + 100000);
-        System.out.println(senha);
-        return new Usuario(null, cadastroMedicoDTO.getEmail(),new BCryptPasswordEncoder().encode(senha),true,true, Role.ROLE_MEDICO);
+        System.out.println("NovaSenha"+senha);
+        return new Usuario(null, cadastroMedicoDTO.getEmail(),new BCryptPasswordEncoder().encode("NovaSenha"+senha),true,true, Role.ROLE_MEDICO);
     }
 
     public static  Usuario fromPaciente(CadastroPacienteDTO cadastroPacienteDTO){
-       return new Usuario(null, cadastroPacienteDTO.getEmail(),new BCryptPasswordEncoder().encode(cadastroPacienteDTO.getSenha()),true,true,Role.ROLE_PACIENTE);
+        Random random = new Random();
+        String senha = String.valueOf(random.nextInt(900000) + 100000);
+       return new Usuario(null, cadastroPacienteDTO.getEmail(),new BCryptPasswordEncoder().encode("NovaSenha"+senha),true,true,Role.ROLE_PACIENTE);
     }
 }

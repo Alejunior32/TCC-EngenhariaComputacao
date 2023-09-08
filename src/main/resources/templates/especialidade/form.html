@@ -6,8 +6,13 @@
     <title>TCC | Especialidade</title>
 </head>
     <div layout:fragment="content">
-        <div>
+
+        <div class="titulo">
             <h1>Especialidade</h1>
+            <a th:href="@{/especialidade}" class="btn btn-primary mt-3">Voltar</a>
+        </div>
+
+        <div class="apresentacao">
             <form method="post" th:action="@{/especialidade/cadastrar}" th:object="${especialidade}" class="card-body row" >
                 <input type="hidden" th:field="*{id}">
                 <div class="mb-3">
@@ -23,7 +28,6 @@
                 <button type="submit" class="btn btn-primary mt-3">Cadastrar</button>
             </form>
         </div>
-        <a th:href="@{/especialidade}" class="btn btn-primary mt-3">Voltar</a>
     </div>
 
 </html>

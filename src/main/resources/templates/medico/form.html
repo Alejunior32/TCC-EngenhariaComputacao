@@ -6,9 +6,15 @@
     <title>TCC | Médico</title>
 </head>
 <div layout:fragment="content">
-    <h1>Cadastrar Médico</h1>
+
+    <div class="titulo">
+        <h1>Cadastrar Médico</h1>
+        <a th:href="@{/medico}" class="btn btn-primary mt-3">Voltar</a>
+    </div>
+
     <div class="alert alert-danger" th:if="${erro}" th:text="${erro}"></div>
-    <div class="card">
+
+    <div class="apresentacao">
         <form method="post" th:action="@{/medico/cadastrar}" th:object="${cadastroMedicoDto}" class="card-body row" >
             <div class="mb-3">
                 <label for="nome" class="form-label">Nome</label>
@@ -37,7 +43,7 @@
             <button type="submit" class="btn btn-primary mt-3">Cadastrar</button>
         </form>
     </div>
-    <a th:href="@{/especialidade}" class="btn btn-primary mt-3">Voltar</a>
+
 </div>
 
 </html>

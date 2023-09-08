@@ -18,7 +18,10 @@ public class MedicoService {
     @Autowired
     private UsuarioService usuarioService;
 
-    public List<Medico> listAll() {
+    public List<Medico> listar(String palavra) {
+        if (palavra != null)
+            return medicoRepository.findAllByPalavraBarraDePesquisa(palavra);
+
         return medicoRepository.findAll();
     }
 

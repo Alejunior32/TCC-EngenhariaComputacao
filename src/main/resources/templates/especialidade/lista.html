@@ -3,17 +3,24 @@
       layout:decorate="~{layout.html}">
 <head>
     <title>TCC | Especialidade</title>
+    <link rel="stylesheet" th:href="@{/css/layout.css}">
 </head>
 <body>
     <div layout:fragment="content">
-        <h1>Especialidades</h1>
+
+        <div class="titulo">
+            <h1 >Especialidades</h1>
+            <a href="/especialidade/cadastrar" class="btn btn-primary">Nova Especialidade</a>
+        </div>
+
+
         <div class="alert alert-primary" th:if="${#lists.isEmpty(especialidades)}">
             Nenhuma especialidade cadastrada!
         </div>
         <div class="alert alert-success" th:if="${mensagem}" th:text="${mensagem}"></div>
         <div class="alert alert-danger" th:if="${erro}" th:text="${erro}"></div>
 
-        <div class="card"  th:if="${not #lists.isEmpty(especialidades)}">
+        <div class="apresentacao"  th:if="${not #lists.isEmpty(especialidades)}">
             <table class="table">
                 <thead>
                 <tr>
@@ -31,8 +38,6 @@
                 </tbody>
             </table>
         </div>
-        <a href="/especialidade/cadastrar" class="btn btn-primary">Nova Especialidade</a>
-
     </div>
 
 </body>
