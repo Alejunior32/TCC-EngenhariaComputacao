@@ -31,9 +31,13 @@ public class UsuarioService implements UserDetailsService{
         return usuarioRepository.save(usuario);
     }
 
-    public void trocarSenhaPrimeiroAcesso(Usuario usuario,String novaSenha) {
+    public void trocarSenhaUsuario(Usuario usuario,String novaSenha) {
         usuario.setSenha(new BCryptPasswordEncoder().encode(novaSenha));
         usuario.setPrimeiroAcesso(false);
         usuarioRepository.save(usuario);
+    }
+
+    public boolean existsByLogin(String login){
+        return existsByLogin(login);
     }
 }

@@ -11,15 +11,10 @@ import java.util.Random;
 public class UsuarioMapper {
 
     public static Usuario fromMedico(CadastroMedicoDTO cadastroMedicoDTO){
-        Random random = new Random();
-        String senha = String.valueOf(random.nextInt(900000) + 100000);
-        System.out.println("NovaSenha"+senha);
-        return new Usuario(null, cadastroMedicoDTO.getEmail(),new BCryptPasswordEncoder().encode("NovaSenha"+senha),true,true, Role.ROLE_MEDICO);
+        return new Usuario(null, cadastroMedicoDTO.getEmail(),null,true,true, Role.ROLE_MEDICO);
     }
 
     public static  Usuario fromPaciente(CadastroPacienteDTO cadastroPacienteDTO){
-        Random random = new Random();
-        String senha = String.valueOf(random.nextInt(900000) + 100000);
-       return new Usuario(null, cadastroPacienteDTO.getEmail(),new BCryptPasswordEncoder().encode("NovaSenha"+senha),true,true,Role.ROLE_PACIENTE);
+       return new Usuario(null, cadastroPacienteDTO.getEmail(),null,true,true,Role.ROLE_PACIENTE);
     }
 }

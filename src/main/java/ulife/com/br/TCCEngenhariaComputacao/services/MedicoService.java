@@ -2,12 +2,14 @@ package ulife.com.br.TCCEngenhariaComputacao.services;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import ulife.com.br.TCCEngenhariaComputacao.models.Medico;
 import ulife.com.br.TCCEngenhariaComputacao.models.Usuario;
 import ulife.com.br.TCCEngenhariaComputacao.repositories.MedicoRepository;
 
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class MedicoService {
@@ -17,6 +19,9 @@ public class MedicoService {
 
     @Autowired
     private UsuarioService usuarioService;
+
+    @Autowired
+    private EmailService emailService;
 
     public List<Medico> listar(String palavra) {
         if (palavra != null)
@@ -30,12 +35,22 @@ public class MedicoService {
     }
 
     public Medico save(Medico medico, Usuario usuario) {
+        Random random = new Random();
+        String senha = String.valueOf(random.nextInt(900000) + 100000);
+        usuario.setSenha(new BCryptPasswordEncoder().encode("NovaSenha"+senha));
+
         Usuario usuarioSalvo = usuarioService.salvarUsuario(usuario);
         medico.setUsuario(usuarioSalvo);
+
+        emailService.sendEmail(usuario.getLogin(),"Primeiro acesso médico","Senha para fazer o primeiro acesso na aplicação: NovaSenha"+senha);
         return medicoRepository.save(medico);
     }
 
     public Medico findByUsuario(Usuario usuario) {
         return medicoRepository.findByUsuario(usuario);
+    }
+
+    public boolean usuarioExistente(String email){
+        return usuarioService.existsByLogin(email);
     }
 }

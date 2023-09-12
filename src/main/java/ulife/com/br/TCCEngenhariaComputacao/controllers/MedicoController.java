@@ -50,15 +50,21 @@ public class MedicoController {
     }
 
     @PostMapping("cadastrar")
-    public ModelAndView cadastrarMedico(@Valid CadastroMedicoDTO cadastroMedicoDTO, RedirectAttributes redirectAttributes){
+    public ModelAndView cadastrarMedico(@Valid CadastroMedicoDTO cadastroMedicoDTO, RedirectAttributes redirectAttributes) {
         ModelAndView mv;
-        if (String.valueOf(cadastroMedicoDTO.getCrm()).length() == 6){
+        if (String.valueOf(cadastroMedicoDTO.getCrm()).length() == 6 && !medicoService.usuarioExistente(cadastroMedicoDTO.getEmail())) {
+
             mv = new ModelAndView("redirect:/medico");
-            redirectAttributes.addAttribute("message","Novo médico cadastrado com sucesso!");
+            mv.addObject("message", "Novo médico cadastrado com sucesso!");
             medicoService.save(MedicoMapper.fromDto(cadastroMedicoDTO), UsuarioMapper.fromMedico(cadastroMedicoDTO));
-        }else {
+        } else if (medicoService.usuarioExistente(cadastroMedicoDTO.getEmail())) {
+
             mv = new ModelAndView("redirect:/medico/cadastrar");
-            redirectAttributes.addFlashAttribute("erro", "crm informado incorreto!");
+            mv.addObject("erro","Usuário já cadastrado");
+        } else {
+
+            mv = new ModelAndView("redirect:/medico/cadastrar");
+            mv.addObject("erro", "crm informado incorreto!");
         }
         return  mv;
     }

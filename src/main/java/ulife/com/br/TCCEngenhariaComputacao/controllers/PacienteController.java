@@ -22,7 +22,6 @@ public class PacienteController {
     @Autowired
     PacienteService pacienteService;
 
-
     @GetMapping
     public ModelAndView listarPacientes(@RequestParam(name = "palavra", required = false) String palavra ) {
         ModelAndView mv = new ModelAndView("paciente/lista.html");
@@ -53,8 +52,14 @@ public class PacienteController {
     public ModelAndView cadastrarPaciente(@Valid CadastroPacienteDTO cadastroPacienteDTO, RedirectAttributes redirectAttributes){
         ModelAndView mv;
 
+        if (pacienteService.usuarioExistente(cadastroPacienteDTO.getEmail())){
+            mv = new ModelAndView("redirect:/paciente/cadastrar");
+            mv.addObject("erro","Usuário já cadastrado");
+            return mv;
+        }
+
         mv = new ModelAndView("redirect:/paciente");
-        redirectAttributes.addAttribute("mensagem", "Paciente cadastrado com sucesso!");
+        mv.addObject("mensagem", "Paciente cadastrado com sucesso!");
         pacienteService.salvar(PacienteMapper.fromDto(cadastroPacienteDTO),UsuarioMapper.fromPaciente(cadastroPacienteDTO));
 
         return  mv;

@@ -9,4 +9,6 @@ import ulife.com.br.TCCEngenhariaComputacao.models.Usuario;
 public interface UsuarioRepository extends JpaRepository<Usuario,Long> {
 
     UserDetails findByLogin(String login);
+
+    boolean existsByLogin(String login);
 }
