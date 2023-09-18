@@ -38,6 +38,6 @@ public class UsuarioService implements UserDetailsService{
     }
 
     public boolean existsByLogin(String login){
-        return existsByLogin(login);
+        return usuarioRepository.existsByLogin(login);
     }
 }

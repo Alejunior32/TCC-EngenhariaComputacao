@@ -16,7 +16,7 @@
             <form method="post" th:action="@{/especialidade/cadastrar}" th:object="${especialidade}" class="card-body row" >
                 <input type="hidden" th:field="*{id}">
                 <div class="mb-3">
-                    <label for="titulo" class="form-label">Titulo</label>
+                    <label for="titulo" class="form-label">Especialidade</label>
                     <input type="text" class="form-control" id="titulo" th:field="${especialidade.titulo}"
                            placeholder="Digite o nome da especialidade" required>
                 </div>
@@ -25,6 +25,7 @@
                     <textarea class="form-control" id="descricao" rows="3" placeholder="Breve descrição sobre a especialidade médica"
                               th:field="${especialidade.descricao}" required></textarea>
                 </div>
+
                 <button type="submit" class="btn btn-primary mt-3">Cadastrar</button>
             </form>
         </div>

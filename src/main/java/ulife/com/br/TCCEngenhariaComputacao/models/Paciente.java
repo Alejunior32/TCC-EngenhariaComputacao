@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ulife.com.br.TCCEngenhariaComputacao.config.encrypt.EncryptString;
 import ulife.com.br.TCCEngenhariaComputacao.dto.paciente.CadastroPacienteDTO;
 
 import java.time.LocalDate;
@@ -22,6 +23,7 @@ public class Paciente{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Convert(converter = EncryptString.class)
     private String nome;
 
     private LocalDate dataNascimento;

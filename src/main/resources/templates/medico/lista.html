@@ -42,7 +42,7 @@
                 <td th:number="${medico.crm}"></td>
                 <td th:text="${medico.especialidade.titulo}"></td>
                 <td>
-                    <a th:href="@{/medico/(idMedico=${medico.id})}" class="btn btn-outline-secondary">Detalhes</a>
+                    <a th:href="@{/medico/detalhes(idMedico=${medico.id})}" class="btn btn-outline-secondary">Detalhes</a>
                 </td>
             </tr>
             </tbody>

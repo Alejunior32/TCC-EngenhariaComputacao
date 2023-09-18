@@ -8,13 +8,30 @@
 <div layout:fragment="content">
     <div>
         <h1>Detalhes do Médico</h1>
-        <div class="alert alert-primary" th:if="${#lists.isEmpty(especialidades)}">
-            Nenhuma especialidade cadastrada!
+
+        <div class="apresentacao">
+
+
+
+            <div class="apresentacao" >
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Título</th>
+                        <th>Opções</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="especialidade : ${medico.especialidade}">
+                        <td th:text="${especialidade.titulo}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <div class="alert alert-success" th:if="${mensagem}" th:text="${mensagem}"></div>
-        <div class="alert alert-danger" th:if="${erro}" th:text="${erro}"></div>
+
     </div>
-    <a th:href="@{/especialidade}" class="btn btn-primary mt-3">Voltar</a>
+    <a th:href="@{/medico}" class="btn btn-primary mt-3">Voltar</a>
 </div>
 
 </html>
