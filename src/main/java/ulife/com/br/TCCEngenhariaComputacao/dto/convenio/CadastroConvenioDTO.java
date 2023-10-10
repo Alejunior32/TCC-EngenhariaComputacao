@@ -1,6 +1,9 @@
-package ulife.com.br.TCCEngenhariaComputacao.models;
+package ulife.com.br.TCCEngenhariaComputacao.dto.convenio;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Convert;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,20 +12,14 @@ import ulife.com.br.TCCEngenhariaComputacao.config.encrypt.EncryptString;
 
 import java.time.LocalDate;
 
-@Table(name = "convenio")
-@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Convenio {
+public class CadastroConvenioDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private String nomeConvenio;
     private String plano;
-    @Convert(converter = EncryptString.class)
     private String numeroIdentificacao;
     private LocalDate dataInicio;
     private LocalDate dataTermino;

@@ -6,12 +6,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import ulife.com.br.TCCEngenhariaComputacao.config.encrypt.EncryptString;
-import ulife.com.br.TCCEngenhariaComputacao.dto.paciente.CadastroPacienteDTO;
 
 import java.time.LocalDate;
 import java.util.List;
 
-@Table(name = "pacientes")
+@Table(name = "paciente")
 @Entity
 @Getter
 @Setter
@@ -25,6 +24,10 @@ public class Paciente{
 
     @Convert(converter = EncryptString.class)
     private String nome;
+    @Convert(converter = EncryptString.class)
+    private String rg;
+    @Convert(converter = EncryptString.class)
+    private String cpf;
 
     private LocalDate dataNascimento;
 
@@ -33,4 +36,7 @@ public class Paciente{
 
     @OneToOne
     private Usuario usuario;
+
+    @OneToOne
+    private Convenio convenio;
 }

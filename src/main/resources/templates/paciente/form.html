@@ -16,10 +16,21 @@
     <div class="apresentacao">
         <form method="post" th:action="@{/paciente/cadastrar}" th:object="${pacienteDTO}" class="card-body row" >
             <div>
+                <h4>Paciente</h4>
                 <div class="mb-3">
-                    <label for="nome" class="form-label">Nome Completo</label>
-                    <input type="text" class="form-control" id="nome" th:field="${pacienteDTO.nome}"
+                    <label for="nome-paciente" class="form-label">Nome Completo</label>
+                    <input type="text" class="form-control" id="nome-paciente" th:field="${pacienteDTO.nome}"
                            placeholder="Digite seu nome" required>
+                </div>
+                <div class="mb-3">
+                    <label for="rg" class="form-label">RG</label>
+                    <input type="text" class="form-control" id="rg" th:field="${pacienteDTO.rg}"
+                           placeholder="RG" required>
+                </div>
+                <div class="mb-3">
+                    <label for="cpf" class="form-label">CPF</label>
+                    <input type="text" class="form-control" id="cpf" th:field="${pacienteDTO.cpf}"
+                           placeholder="Cpf" required>
                 </div>
                 <div class="mb-3">
                     <label for="dataNascimento" class="form-label">Data de nacimento</label>
@@ -31,6 +42,35 @@
                     <input type="text" class="form-control" id="email" th:field="${pacienteDTO.email}"
                            placeholder="" required>
                 </div>
+            </div>
+                <h4>Convênio</h4>
+                <div class="mb-3">
+                    <label for="nome-convenio" class="form-label">Nome Convênio</label>
+                    <input type="text" class="form-control" id="nome-convenio" th:field="${convenioDTO.nomeConvenio}"
+                           placeholder="Digite seu nome" required>
+                </div>
+                <div class="mb-3">
+                    <label for="plano" class="form-label">Plano</label>
+                    <input type="text" class="form-control" id="plano" th:field="${convenioDTO.plano}"
+                           placeholder="" required>
+                </div>
+                <div class="mb-3">
+                    <label for="numero-convenio" class="form-label">Numero do Convênio </label>
+                    <input type="text" class="form-control" id="numero-convenio" th:field="${convenioDTO.numeroIdentificacao}"
+                           placeholder="" required>
+                </div>
+                <div class="mb-3">
+                    <label for="dataInicio" class="form-label">Data de início</label>
+                    <input type="date" class="form-control" id="dataInicio" th:field="${convenioDTO.dataInicio}"
+                           placeholder="" required>
+                </div>
+                <div class="mb-3">
+                    <label for="dataTermino" class="form-label">Data de validade</label>
+                    <input type="date" class="form-control" id="dataTermino" th:field="${convenioDTO.dataTermino}"
+                           placeholder="" required>
+                </div>
+            <div>
+
             </div>
             <button type="submit" class="btn btn-primary mt-3">Cadastrar</button>
         </form>

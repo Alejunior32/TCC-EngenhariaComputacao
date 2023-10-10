@@ -6,7 +6,7 @@ import lombok.*;
 
 import java.util.List;
 
-@Table(name = "especialidades")
+@Table(name = "especialidade")
 @Entity
 @Getter
 @Setter

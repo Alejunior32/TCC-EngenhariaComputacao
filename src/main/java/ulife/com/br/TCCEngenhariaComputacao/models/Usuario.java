@@ -14,7 +14,7 @@ import ulife.com.br.TCCEngenhariaComputacao.enums.Role;
 import java.util.Collection;
 import java.util.List;
 
-@Table(name = "usuarios")
+@Table(name = "usuario")
 @Entity
 @Getter
 @Setter

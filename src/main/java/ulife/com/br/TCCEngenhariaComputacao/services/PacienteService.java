@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import ulife.com.br.TCCEngenhariaComputacao.dto.paciente.CadastroPacienteDTO;
+import ulife.com.br.TCCEngenhariaComputacao.models.Convenio;
 import ulife.com.br.TCCEngenhariaComputacao.models.Paciente;
 import ulife.com.br.TCCEngenhariaComputacao.models.Usuario;
 import ulife.com.br.TCCEngenhariaComputacao.repositories.PacienteRepository;
@@ -20,6 +21,9 @@ public class PacienteService {
     PacienteRepository pacienteRepository;
 
     @Autowired
+    ConvenioService convenioService;
+
+    @Autowired
     UsuarioService usuarioService;
 
     @Autowired
@@ -29,13 +33,16 @@ public class PacienteService {
         return pacienteRepository.findById(idPaciente).orElseThrow(() -> new EntityNotFoundException("Paciente não existe!"));
     }
 
-    public Paciente salvar(Paciente paciente, Usuario usuario) {
+    public Paciente salvar(Paciente paciente, Usuario usuario, Convenio convenio) {
         Random random = new Random();
         String senha = String.valueOf(random.nextInt(900000) + 100000);
         usuario.setSenha(new BCryptPasswordEncoder().encode("NovaSenha"+senha));
 
         Usuario usuarioSalvo = usuarioService.salvarUsuario(usuario);
         paciente.setUsuario(usuarioSalvo);
+
+        Convenio convenioSalvo = convenioService.salvar(convenio);
+        paciente.setConvenio(convenioSalvo);
 
         emailService.sendEmail(usuario.getLogin(),"Primeiro acesso do Paciente","Senha para fazer o primeiro acesso na aplicação: NovaSenha"+senha);
         return pacienteRepository.save(paciente);

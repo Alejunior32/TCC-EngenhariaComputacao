@@ -12,8 +12,10 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CadastroPacienteDTO{
-    String nome;
-    LocalDate dataNascimento;
-    String email;
+    private String nome;
+    private String rg;
+    private String cpf;
+    private LocalDate dataNascimento;
+    private String email;
 
 }
