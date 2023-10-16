@@ -34,5 +34,5 @@ public class Paciente{
     @OneToOne
     private Usuario usuario;
 
-    private String imagemPaciente;
+    private byte[] imagemPaciente;
 }
