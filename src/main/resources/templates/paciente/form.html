@@ -6,13 +6,7 @@
     <title>TCC | Novo Paciente</title>
     <link rel="stylesheet" th:href="@{/css/layout.css}">
 </head>
-<body>
 <div layout:fragment="content">
-
-    <video id="webcam" autoplay></video>
-    <button id="capture">Capturar Foto</button>
-    <canvas id="canvas" style="display: none;"></canvas>
-    <img id="captured-image" src="" alt="Foto capturada" style="display: none;">
 
     <div class="titulo">
         <h1>Cadastrar Paciente</h1>
@@ -43,42 +37,4 @@
     </div>
 </div>
 
-<script>
-        const webcamElement = document.getElementById('webcam');
-        const captureButton = document.getElementById('capture');
-        const canvasElement = document.getElementById('canvas');
-
-        navigator.mediaDevices.getUserMedia({ video: true })
-            .then(function (stream) {
-                webcamElement.srcObject = stream;
-            })
-            .catch(function (error) {
-                console.error('Erro ao acessar a webcam:', error);
-            });
-
-        captureButton.addEventListener('click', function () {
-            const context = canvasElement.getContext('2d');
-            canvasElement.width = webcamElement.videoWidth;
-            canvasElement.height = webcamElement.videoHeight;
-            context.drawImage(webcamElement, 0, 0, webcamElement.videoWidth, webcamElement.videoHeight);
-            const imageDataUrl = canvasElement.toDataURL('image/jpeg');
-
-            // Enviar a imagem para o backend (substitua a URL pelo seu endpoint)
-            fetch('URL_DO_BACKEND', {
-                method: 'POST',
-                body: JSON.stringify({ image: imageDataUrl }),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Imagem enviada com sucesso para o backend:', data);
-            })
-            .catch(error => {
-                console.error('Erro ao enviar imagem para o backend:', error);
-            });
-        });
-    </script>
-</body>
 </html>
