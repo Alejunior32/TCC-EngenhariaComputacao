@@ -65,4 +65,13 @@ public class PacienteController {
         return  mv;
     }
 
+    @GetMapping("webcam")
+    public ModelAndView webcam(){
+        ModelAndView mv;
+
+        mv = new ModelAndView("paciente/webcam.html");
+
+        return  mv;
+    }
+
 }

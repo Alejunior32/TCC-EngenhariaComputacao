@@ -1,47 +1,20 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ulraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout.html}">
 <head>
     <link rel="stylesheet" href="@{/css/layout.css}" />
-    <title>TCC | Novo Paciente</title>
+    <title>Webcam</title>
     <link rel="stylesheet" th:href="@{/css/layout.css}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 <body>
-<div layout:fragment="content">
-
-    <video id="webcam" autoplay></video>
-    <button id="capture">Capturar Foto</button>
-    <canvas id="canvas" style="display: none;"></canvas>
-    <img id="captured-image" src="" alt="Foto capturada" style="display: none;">
-
-    <div class="titulo">
-        <h1>Cadastrar Paciente</h1>
-        <a th:href="@{/paciente}" class="btn btn-primary mt-3">Voltar</a>
-    </div>
-
-    <div class="apresentacao">
-        <form method="post" th:action="@{/paciente/cadastrar}" th:object="${pacienteDTO}" class="card-body row" >
-            <div>
-                <div class="mb-3">
-                    <label for="nome" class="form-label">Nome Completo</label>
-                    <input type="text" class="form-control" id="nome" th:field="${pacienteDTO.nome}"
-                           placeholder="Digite seu nome" required>
-                </div>
-                <div class="mb-3">
-                    <label for="dataNascimento" class="form-label">Data de nacimento</label>
-                    <input type="date" class="form-control" id="dataNascimento" th:field="${pacienteDTO.dataNascimento}"
-                           placeholder="" required>
-                </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="text" class="form-control" id="email" th:field="${pacienteDTO.email}"
-                           placeholder="" required>
-                </div>
-            </div>
-            <button type="submit" class="btn btn-primary mt-3">Cadastrar</button>
-        </form>
-    </div>
-</div>
+<h1>Captura de Webcam</h1>
+<video id="webcam" autoplay></video>
+<button id="capture">Capturar Foto</button>
+<canvas id="canvas" style="display: none;"></canvas>
+<img id="captured-image" src="" alt="Foto capturada" style="display: none;">
 
 <script>
         const webcamElement = document.getElementById('webcam');
