@@ -31,6 +31,7 @@ create table pacientes(
     usuario_id bigint not null,
     nome varchar(255),
     data_nascimento DATE not null,
+    imagem_paciente varchar(500),
     constraint fk_usuario_id_paciente foreign key (usuario_id) references usuarios(id),
     primary key(id)
 );
