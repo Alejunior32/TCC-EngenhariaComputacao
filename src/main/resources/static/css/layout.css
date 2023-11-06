@@ -1,21 +1,37 @@
-.button__logout{
-    display: flex;
-    flex-direction: row-reverse;
+nav{
+    background-image: url(../images/Tela-fundo.avif);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
-.pesquisa{
+.logout{
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 2%;
+    justify-content: flex-end;
 }
 
-.apresentacao{
-    margin: 2%;
-    padding: 2%;
+.texto-nav{
+    color: aliceblue;
 }
 
-.titulo{
+footer{
+    background-image: url(../images/Tela-fundo.avif);
+    background-repeat: no-repeat;
+    background-size: cover;
     display: flex;
-    margin: 2%;
+    align-items: flex-end;
+    justify-content: space-around;
+    width: 100%;
+    height: 100px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
 }
+
+.texto-rodape{
+    color: aliceblue;
+}
+body{
+    overflow-y: scroll;
+    margin-bottom: 100px;
+}   
+

@@ -16,7 +16,7 @@
     <title>Document</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="texto-nav navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">
                 <img class="mb-4" th:src="@{/images/Anhembi-morumbi-logo.png}" alt=""
@@ -46,7 +46,7 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <div class="btn-group mb-2 mr-sm-2">
+                        <div class="logout btn-group mb-2 mr-sm-2" >
                             <a class="btn btn-danger button__logout" aria-current="page" href="/logout">Logout</a>
                         </div>
                     </li>
@@ -54,6 +54,27 @@
             </div>
         </div>
     </nav>
+
+    <footer>
+        <div class="texto-rodape">
+            <p>Author: Alexandre Junior</p>
+            <p><a href="https://github.com/Alejunior32">Github</a></p>
+            <p><a href="https://www.linkedin.com/in/alexandre-freire-ropero-j%C3%BAnior-812089181/">Linkdln</a></p>
+        </div>
+    
+        <div class="texto-rodape">
+            <p>Author: Pedro Trindade</p>
+            <p><a href="">Github</a></p>
+            <p><a href="">Linkdln</a></p>
+        </div>
+    
+    
+        <div class="texto-rodape">
+            <p>Author: Guilherme dos Reis</p>
+            <p><a href="">Github</a></p>
+            <p><a href="">Linkdln</a></p>
+        </div>
+    </footer>
 
     <main>
         <div layout:fragment="content"></div>
@@ -105,4 +126,5 @@ captureButton.addEventListener('click', function () {
             crossorigin="anonymous">
     </script>
 </body>
+
 </html>
