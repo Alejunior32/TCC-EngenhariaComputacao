@@ -12,6 +12,7 @@
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
           crossorigin="anonymous">
     <link rel="icon" th:href="@{/images/favicon.ico}" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
     <link rel="stylesheet" th:href="@{/css/layout.css}">
     <title>Document</title>
 </head>
@@ -55,71 +56,13 @@
         </div>
     </nav>
 
-    <footer>
-        <div class="texto-rodape">
-            <p>Author: Alexandre Junior</p>
-            <p><a href="https://github.com/Alejunior32">Github</a></p>
-            <p><a href="https://www.linkedin.com/in/alexandre-freire-ropero-j%C3%BAnior-812089181/">Linkdln</a></p>
-        </div>
-    
-        <div class="texto-rodape">
-            <p>Author: Pedro Trindade</p>
-            <p><a href="">Github</a></p>
-            <p><a href="">Linkdln</a></p>
-        </div>
-    
-    
-        <div class="texto-rodape">
-            <p>Author: Guilherme dos Reis</p>
-            <p><a href="">Github</a></p>
-            <p><a href="">Linkdln</a></p>
-        </div>
-    </footer>
+
 
     <main>
         <div layout:fragment="content"></div>
     </main>
 
-    <script>
-const webcamElement = document.getElementById('webcam');
-const captureButton = document.getElementById('capture');
-const canvasElement = document.getElementById('canvas');
-const imagemBase64Input = document.getElementById('imagemBase64'); // Campo oculto
 
-navigator.mediaDevices.getUserMedia({ video: true })
-    .then(function (stream) {
-        webcamElement.srcObject = stream;
-    })
-    .catch(function (error) {
-        console.error('Erro ao acessar a webcam:', error);
-    });
-
-captureButton.addEventListener('click', function () {
-    const context = canvasElement.getContext('2d');
-    canvasElement.width = webcamElement.videoWidth;
-    canvasElement.height = webcamElement.videoHeight;
-    context.drawImage(webcamElement, 0, 0, webcamElement.videoWidth, webcamElement.videoHeight);
-
-    // Compactação da imagem antes da conversão para base64
-    const quality = 0.6; // Qualidade da compactação (0 a 1). 0.6 geralmente é uma boa escolha para JPEG.
-    canvasElement.toBlob(function(blob) {
-        const reader = new FileReader();
-        reader.onloadend = function() {
-            // Remove o prefixo 'data:image/jpeg;base64,'
-            const imageDataUrl = reader.result.split(',')[1];
-
-            // Atualize o campo oculto com a imagem compactada em formato base64
-            imagemBase64Input.value = imageDataUrl;
-
-            // Exiba a imagem compactada (opcional)
-            const capturedImage = document.getElementById('captured-image');
-            capturedImage.src = 'data:image/jpeg;base64,' + imageDataUrl;
-            capturedImage.style.display = 'block';
-        };
-        reader.readAsDataURL(blob);
-    }, 'image/jpeg', quality);
-});
-</script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
