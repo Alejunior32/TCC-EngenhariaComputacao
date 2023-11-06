@@ -42,6 +42,13 @@
                     <input type="text" class="form-control" id="email" th:field="${pacienteDTO.email}"
                            placeholder="" required>
                 </div>
+                <div>
+                    <video id="webcam" autoplay></video>
+                    <button id="capture">Capturar Foto</button>
+                    <canvas id="canvas" style="display: none;"></canvas>
+                    <img id="captured-image" src="" alt="Foto capturada" style="display: none;">
+                    <input type="hidden" id="imagemBase64" th:field="${pacienteDTO.imagemBase64}" />
+                </div>
             </div>
                 <h4>Convênio</h4>
                 <div class="mb-3">

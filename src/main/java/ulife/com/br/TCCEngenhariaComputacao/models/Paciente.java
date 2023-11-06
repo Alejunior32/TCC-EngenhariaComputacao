@@ -37,6 +37,8 @@ public class Paciente{
     @OneToOne
     private Usuario usuario;
 
+    private byte[] imagemPaciente;
+
     @OneToOne
     private Convenio convenio;
 }

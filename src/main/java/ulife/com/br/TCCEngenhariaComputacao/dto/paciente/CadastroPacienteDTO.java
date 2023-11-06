@@ -17,5 +17,6 @@ public class CadastroPacienteDTO{
     private String cpf;
     private LocalDate dataNascimento;
     private String email;
+    private String imagemBase64;
 
 }
