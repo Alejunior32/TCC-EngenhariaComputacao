@@ -34,6 +34,8 @@ public class Paciente{
     @OneToMany(mappedBy = "paciente")
     private List<Agendamento> agendamentos;
 
+    private byte[] imagemPaciente;
+
     @OneToOne
     private Usuario usuario;
 

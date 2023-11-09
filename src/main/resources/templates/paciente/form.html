@@ -2,20 +2,69 @@
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ulraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout.html}">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="@{/css/layout.css}" />
     <title>TCC | Novo Paciente</title>
     <link rel="stylesheet" th:href="@{/css/layout.css}">
+    <style>
+        .webcam-container {
+            display: flex;
+            align-items: center;
+            gap: 20px; /* Espaço entre a webcam e a imagem capturada */
+        }
+
+        #webcam {
+            width: 350px;
+            height: auto;
+            display: inline-block;
+        }
+
+        #captured-image {
+            width: 315px;
+            height: auto;
+            display: inline-block;
+        }
+
+        #captured-image {
+            margin-top: 10px; /* Espaço entre a webcam e a imagem capturada */
+        }
+         #capture {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #capture:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <div layout:fragment="content">
-
     <div class="titulo">
         <h1>Cadastrar Paciente</h1>
-        <a th:href="@{/paciente}" class="btn btn-primary mt-3">Voltar</a>
+        <div class="btn-group mb-2 mr-sm-2">
+            <a th:href="@{/paciente}" class="btn btn-primary btn-lg">Voltar</a>
+        </div>
     </div>
-
     <div class="apresentacao">
         <form method="post" th:action="@{/paciente/cadastrar}" th:object="${pacienteDTO}" class="card-body row" >
             <div>
+                <h4>Foto do Paciente</h4>
+                <div class="webcam-container">
+                    <div>
+                        <video id="webcam" autoplay></video>
+                    </div>
+                    <div>
+                        <canvas id="canvas" style="display: none;"></canvas>
+                        <img id="captured-image" src="" alt="Foto capturada" style="display: none;">
+                        <input type="hidden" id="imagemBase64" th:field="${pacienteDTO.imagemBase64}" />
+                    </div>
+                </div>
+                    <button id="capture" type="button">Capturar Foto</button>
                 <h4>Paciente</h4>
                 <div class="mb-3">
                     <label for="nome-paciente" class="form-label">Nome Completo</label>

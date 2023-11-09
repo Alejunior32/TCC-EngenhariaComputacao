@@ -32,6 +32,7 @@ create table paciente(
     nome varchar(255),
     rg varchar(255),
     cpf varchar(255),
+    imagem_paciente blob,
     data_nascimento DATE not null,
     constraint fk_usuario_id_paciente foreign key (usuario_id) references usuario(id),
     primary key(id)
