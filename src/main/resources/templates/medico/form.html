@@ -2,48 +2,79 @@
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ulraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout.html}">
 <head>
-    <link rel="stylesheet" href="@{/css/layout.css}" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
     <title>TCC | Médico</title>
 </head>
 <div layout:fragment="content">
 
-    <div class="titulo">
-        <h1>Cadastrar Médico</h1>
-        <a th:href="@{/medico}" class="btn btn-primary mt-3">Voltar</a>
-    </div>
-
     <div class="alert alert-danger" th:if="${erro}" th:text="${erro}"></div>
 
-    <div class="apresentacao">
-        <form method="post" th:action="@{/medico/cadastrar}" th:object="${cadastroMedicoDto}" class="card-body row" >
-            <div class="mb-3">
-                <label for="nome" class="form-label">Nome</label>
-                <input type="text" class="form-control" id="nome" th:field="${cadastroMedicoDto.nome}"
-                       placeholder="Digite o nome do médico" required>
-                <div class="text-danger" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
-            </div>
-            <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" th:field="${cadastroMedicoDto.email}"
-                       placeholder="Digite o nome do médico" required>
-                <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
-            </div>
-            <div class="mb-3">
-                <label for="crm" class="form-label">Crm</label>
-                <input type="text" class="form-control" id="crm" rows="3" th:field="${cadastroMedicoDto.crm}"
-                       placeholder="" required></input>
-                <div class="text-danger" th:if="${#fields.hasErrors('crm')}" th:errors="*{crm}"></div>
-            </div>
-            <div class="mb-3">
-                <label for="especialidade" class="form-label">Especialidade</label>
-                <select id="especialidade"  th:field="${cadastroMedicoDto.especialidade}"  required>
-                    <option th:each="especialidade : ${especialidades}" th:value="${especialidade.id}" th:text="${especialidade.titulo}"></option>
-                </select>
-            </div>
-            <button type="submit" class="btn btn-primary mt-3">Cadastrar</button>
-        </form>
-    </div>
+    <div class="card">
 
+        <div>
+            <h1>Cadastrar Médico</h1>
+        </div>
+    
+        <div class="formulario">
+
+            <form method="post" th:action="@{/medico/cadastrar}" th:object="${cadastroMedicoDto}">
+    
+                <div class="mb-3">
+                    <label for="nome" class="form-label">Nome</label>
+                    <input type="text" class="form-control" id="nome" th:field="${cadastroMedicoDto.nome}"
+                        placeholder="Digite o nome do médico" required>
+                    <div class="text-danger" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" th:field="${cadastroMedicoDto.email}"
+                        placeholder="Digite o nome do médico" required>
+                    <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="crm" class="form-label">Crm</label>
+                    <input type="text" class="form-control" id="crm" rows="3" th:field="${cadastroMedicoDto.crm}"
+                        placeholder="" required></input>
+                    <div class="text-danger" th:if="${#fields.hasErrors('crm')}" th:errors="*{crm}"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="especialidade" class="form-label">Especialidade</label>
+                    <select id="especialidade"  th:field="${cadastroMedicoDto.especialidade}"  required>
+                        <option th:each="especialidade : ${especialidades}" th:value="${especialidade.id}" th:text="${especialidade.titulo}"></option>
+                    </select>
+                </div>
+    
+    
+                <div>
+                    <button type="submit" class="btn btn-primary">Cadastrar</button>
+                    <a th:href="@{/medico}" class="btn btn-primary">Voltar</a>
+                </div>
+    
+            </form>
+        </div>
+    
+    </div>
+    <footer>
+        <div class="texto-rodape">
+            <p>Author: Alexandre Junior</p>
+            <p><a href="https://github.com/Alejunior32">Github</a></p>
+            <p><a href="https://www.linkedin.com/in/alexandre-freire-ropero-j%C3%BAnior-812089181/">Linkdln</a></p>
+        </div>
+
+        <div class="texto-rodape">
+            <p>Author: Pedro Trindade</p>
+            <p><a href="">Github</a></p>
+            <p><a href="">Linkdln</a></p>
+        </div>
+
+
+        <div class="texto-rodape">
+            <p>Author: Guilherme dos Reis</p>
+            <p><a href="">Github</a></p>
+            <p><a href="">Linkdln</a></p>
+        </div>
+    </footer>
 </div>
+
 
 </html>

@@ -4,6 +4,7 @@
 <head>
     <title>TCC | Pacientes</title>
     <link rel="stylesheet" th:href="@{/css/layout.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body>
 <div layout:fragment="content">
@@ -18,12 +19,12 @@
 
     <div class="pesquisa">
 
-        <form class="d-flex" method="GET" th:action="@{/paciente?nome=${palavra}}">
+        <form class="pesquisa-barra d-flex" method="GET" th:action="@{/paciente?nome=${palavra}}">
             <input class="form-control me-2 " type="search" name="palavra" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
+            <button class="btn btn-primary" type="submit">Pesquisar</button>
         </form>
 
-        <a th:href="@{/paciente/cadastrar}" class="btn btn-primary mt-3">Novo Paciente</a>
+        <a href="/paciente/cadastrar" class="botao btn btn-primary">Novo Paciente</a>
     </div>
 
     <div class="apresentacao"  th:if="${not #lists.isEmpty(pacientes)}">

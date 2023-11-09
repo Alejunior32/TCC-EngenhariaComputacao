@@ -7,6 +7,6 @@ import java.util.Base64;
 public class PacienteMapper {
 
     public static Paciente fromDto(CadastroPacienteDTO cadastroPacienteDTO){
-        return new Paciente(null,cadastroPacienteDTO.getNome(), cadastroPacienteDTO.getRg(), cadastroPacienteDTO.getCpf(), cadastroPacienteDTO.getDataNascimento(), null,  Base64.getDecoder().decode(cadastroPacienteDTO.getImagemBase64()),null,null);
+        return new Paciente(null,cadastroPacienteDTO.getNome(), cadastroPacienteDTO.getRg(), cadastroPacienteDTO.getCpf(), cadastroPacienteDTO.getDataNascimento(), null,  Base64.getDecoder().decode(cadastroPacienteDTO.getImagemBase64()),null, null);
     }
 }
