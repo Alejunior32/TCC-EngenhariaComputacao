@@ -1,0 +1,70 @@
+.formulario{
+    padding: 5%;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+    width: 50%;
+}
+
+.card{
+    padding: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.pesquisa{
+    display:flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+.pesquisa-barra{
+    width: 50%;
+    margin: 5px;
+}
+
+.botao{
+    margin: 5px;
+}
+
+table{
+    margin: 5%;
+}
+
+
+.webcam-container {
+     display: flex;
+     align-items: center;
+     gap: 20px;
+}
+
+#webcam {
+      width: 350px;
+      height: auto;
+      display: inline-block;
+}
+
+#captured-image {
+      width: 315px;
+      height: auto;
+      display: inline-block;
+}
+
+#captured-image {
+      margin-top: 10px;
+}
+
+#capture {
+       background-color: #007bff;
+       color: white;
+       border: none;
+       padding: 10px 20px;
+       border-radius: 5px;
+       cursor: pointer;
+       transition: background-color 0.3s ease;
+}
+
+#capture:hover {
+       background-color: #0056b3;
+}

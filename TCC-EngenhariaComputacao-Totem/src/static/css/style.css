@@ -1,0 +1,24 @@
+body{
+    background-image: url(..static/images/Tela-fundo.avif);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.flashes {
+    list-style-type: none;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+}
+
+.flashes li {
+    color: #d9534f;
+}
+

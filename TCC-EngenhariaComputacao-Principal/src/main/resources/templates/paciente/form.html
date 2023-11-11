@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="pt-br"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
+    <link rel="icon" th:href="@{/images/favicon.ico}" />
+    <link rel="stylesheet" th:href="@{/css/layout.css}">
+    <title>TCC | Novo Paciente</title>
+</head>
+<body>
+<nav class="texto-nav navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">
+            <img class="mb-4" th:src="@{/images/Agp-lab-logo.png}" alt=""
+                 width="120" height="70">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/agendamentos">Agendamentos</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Administrador
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/especialidade">Especialidades</a></li>
+                        <li><a class="dropdown-item" href="/medico">Médicos</a></li>
+                        <li><a class="dropdown-item" href="/paciente">Pacientes</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <div class="logout btn-group mb-2 mr-sm-2" >
+                        <a class="btn btn-danger button__logout" aria-current="page" href="/logout">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="card">
+
+    <div class="titulo">
+        <h1>Cadastrar Paciente</h1>
+    </div>
+
+    <div class="formulario">
+        <form method="post" th:action="@{/paciente/cadastrar}" th:object="${pacienteDTO}" class="card-body row" >
+            <div>
+                <h4>Paciente</h4>
+                <div class="mb-3">
+                    <label for="nome-paciente" class="form-label">Nome Completo</label>
+                    <input type="text" class="form-control" id="nome-paciente" th:field="${pacienteDTO.nome}"
+                           placeholder="Digite seu nome" required>
+                </div>
+                <div class="mb-3">
+                    <label for="rg" class="form-label">RG</label>
+                    <input type="text" class="form-control" id="rg" th:field="${pacienteDTO.rg}"
+                           placeholder="RG" maxlength="12" oninput="formatarRG(this)" required>
+                </div>
+                <div class="mb-3">
+                    <label for="cpf" class="form-label">CPF</label>
+                    <input type="text" class="form-control" id="cpf" th:field="${pacienteDTO.cpf}"
+                           placeholder="Cpf" maxlength="14" oninput="formatarCPF(this)" required>
+                </div>
+                <div class="mb-3">
+                    <label for="dataNascimento" class="form-label">Data de nacimento</label>
+                    <input type="date" class="form-control" id="dataNascimento" th:field="${pacienteDTO.dataNascimento}"
+                           placeholder="" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="text" class="form-control" id="email" th:field="${pacienteDTO.email}"
+                           placeholder="" required>
+                </div>
+                <div>
+                    <h4>Foto do Paciente</h4>
+                    <div class="webcam-container">
+                        <div>
+                            <video id="webcam" autoplay></video>
+                        </div>
+                        <div>
+                            <canvas id="canvas" style="display: none;"></canvas>
+                            <img id="captured-image" src="" alt="Foto capturada" style="display: none;">
+                            <input type="hidden" id="imagemBase64" th:field="${pacienteDTO.imagemBase64}" />
+                        </div>
+                    </div>
+                    <button id="capture" type="button">Capturar Foto</button>
+
+                </div>
+            <h4>Convênio</h4>
+            <div class="mb-3">
+                <label for="nome-convenio" class="form-label">Nome Convênio</label>
+                <input type="text" class="form-control" id="nome-convenio" th:field="${convenioDTO.nomeConvenio}"
+                       placeholder="Digite seu nome" required>
+            </div>
+            <div class="mb-3">
+                <label for="plano" class="form-label">Plano</label>
+                <input type="text" class="form-control" id="plano" th:field="${convenioDTO.plano}"
+                       placeholder="" required>
+            </div>
+            <div class="mb-3">
+                <label for="numero-convenio" class="form-label">Numero do Convênio </label>
+                <input type="text" class="form-control" id="numero-convenio" th:field="${convenioDTO.numeroIdentificacao}"
+                       placeholder="" required>
+            </div>
+            <div class="mb-3">
+                <label for="dataInicio" class="form-label">Data de início</label>
+                <input type="date" class="form-control" id="dataInicio" th:field="${convenioDTO.dataInicio}"
+                       placeholder="" required>
+            </div>
+            <div class="mb-3">
+                <label for="dataTermino" class="form-label">Data de validade</label>
+                <input type="date" class="form-control" id="dataTermino" th:field="${convenioDTO.dataTermino}"
+                       placeholder="" required>
+            </div>
+            <div>
+
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary mt-3">Cadastrar</button>
+                <a th:href="@{/paciente}" class="btn btn-primary mt-3">Voltar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+
+<script>
+        function formatarCPF(campo) {
+            // Remove caracteres não numéricos
+            var cpfAtual = campo.value.replace(/[^\d]/g, '');
+
+            // Adiciona os pontos e traço conforme o formato do CPF
+            if (cpfAtual.length > 3 && cpfAtual.length <= 6) {
+                campo.value = cpfAtual.substring(0, 3) + '.' + cpfAtual.substring(3);
+            } else if (cpfAtual.length > 6 && cpfAtual.length <= 9) {
+                campo.value = cpfAtual.substring(0, 3) + '.' + cpfAtual.substring(3, 6) + '.' + cpfAtual.substring(6);
+            } else if (cpfAtual.length > 9) {
+                campo.value = cpfAtual.substring(0, 3) + '.' + cpfAtual.substring(3, 6) + '.' + cpfAtual.substring(6, 9) + '-' + cpfAtual.substring(9);
+            } else {
+                campo.value = cpfAtual;
+            }
+        }
+         function formatarRG(campo) {
+    // Remove caracteres não numéricos
+    var rgAtual = campo.value.replace(/[^\d]/g, '');
+
+    // Adiciona os pontos e traço conforme o formato do RG
+    if (rgAtual.length <= 2) {
+      campo.value = rgAtual;
+    } else if (rgAtual.length <= 5) {
+      campo.value = rgAtual.substring(0, 2) + '.' + rgAtual.substring(2);
+    } else if (rgAtual.length <= 8) {
+      campo.value = rgAtual.substring(0, 2) + '.' + rgAtual.substring(2, 5) + '.' + rgAtual.substring(5);
+    } else {
+      campo.value = rgAtual.substring(0, 2) + '.' + rgAtual.substring(2, 5) + '.' + rgAtual.substring(5, 8) + '-' + rgAtual.substring(8);
+    }
+  }
+    </script>
+
+<script>
+const webcamElement = document.getElementById('webcam');
+const captureButton = document.getElementById('capture');
+const canvasElement = document.getElementById('canvas');
+const imagemBase64Input = document.getElementById('imagemBase64'); // Campo oculto
+
+navigator.mediaDevices.getUserMedia({ video: true })
+    .then(function (stream) {
+        webcamElement.srcObject = stream;
+    })
+    .catch(function (error) {
+        console.error('Erro ao acessar a webcam:', error);
+    });
+
+captureButton.addEventListener('click', function () {
+    const context = canvasElement.getContext('2d');
+    canvasElement.width = webcamElement.videoWidth;
+    canvasElement.height = webcamElement.videoHeight;
+    context.drawImage(webcamElement, 0, 0, webcamElement.videoWidth, webcamElement.videoHeight);
+
+    // Compactação da imagem antes da conversão para base64
+    const quality = 0.6; // Qualidade da compactação (0 a 1). 0.6 geralmente é uma boa escolha para JPEG.
+    canvasElement.toBlob(function(blob) {
+        const reader = new FileReader();
+        reader.onloadend = function() {
+            // Remove o prefixo 'data:image/jpeg;base64,'
+            const imageDataUrl = reader.result.split(',')[1];
+
+            // Atualize o campo oculto com a imagem compactada em formato base64
+            imagemBase64Input.value = imageDataUrl;
+
+            // Exiba a imagem compactada (opcional)
+            const capturedImage = document.getElementById('captured-image');
+            capturedImage.src = 'data:image/jpeg;base64,' + imageDataUrl;
+            capturedImage.style.display = 'block';
+        };
+        reader.readAsDataURL(blob);
+    }, 'image/jpeg', quality);
+});
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous">
+</script>
+</html>
