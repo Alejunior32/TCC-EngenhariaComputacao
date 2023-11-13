@@ -23,9 +23,8 @@
 
     <h1>Digite seu CPF</h1>
     <form method="post" action="{{ url_for('buscar-usuario') }}">
-        <label for="cpf">CPF:</label>
-        <input type="text" name="cpf" placeholder="Digite o CPF" maxlength="14" oninput="formatarCPF(this)" required>
-        <button type="submit">Buscar</button>
+        <input type="text" class="form-control" name="cpf" placeholder="Digite o CPF" maxlength="14" oninput="formatarCPF(this)" required>
+        <button type="submit" class="btn btn-primary">Buscar</button>
     </form>
 
     <script>

@@ -1,5 +1,5 @@
 body{
-    background-image: url(..static/images/Tela-fundo.avif);
+    background-image: url('../images/Tela-fundo.avif');
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
@@ -7,8 +7,17 @@ body{
     display: flex;
     align-items: center;
     flex-direction: column;
-    justify-content: center;
+    justify-content: center;    
 }
+
+h1{
+    color:aliceblue;
+}
+
+form{
+    display: flex;
+}
+
 
 .flashes {
     list-style-type: none;
