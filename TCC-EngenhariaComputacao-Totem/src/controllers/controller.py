@@ -7,13 +7,6 @@ import base64
 
 from src.services.reconhecimentoFacial import reconhecer_face
 
-
-class IndexController(MethodView):
-    def get(self):
-        with mysql.cursor() as cur:
-            cur.execute("SELECT * FROM medico")
-            data = cur.fetchall()
-        return render_template('public/index.html', data=data)
     
 class HomeController(MethodView):
     def get(self):
@@ -48,20 +41,41 @@ class BuscarUsuarioPorCpfController(MethodView):
 
         if data:
             # Usuário encontrado
-            flash('Paciente encontrado!')
-            primeiro_registro = data[0]
-            imagem_paciente = primeiro_registro[6]
-            resultado_reconhecimento = reconhecer_face(imagem_paciente)
-            if resultado_reconhecimento:
-                flash("Pessoa reconhecida.")
-            else:
-                flash("Pessoa não reconhecida.")
-            return redirect(url_for('buscar-usuario'))
+            # flash('Paciente encontrado!')
+            # primeiro_registro = data[0]
+            # imagem_paciente = primeiro_registro[6]
+            # resultado_reconhecimento = reconhecer_face(imagem_paciente)
+            # if resultado_reconhecimento:
+            #     flash("Pessoa reconhecida.")
+            # else:
+            #     flash("Pessoa não reconhecida.")
+            # return redirect(url_for('buscar-usuario'))
+
+            return redirect(url_for('reconhecimento-facial'))
         else:
             # Usuário não encontrado
             flash('Paciente não encontrado', 'error')  # 'error' é uma classe de estilo para destacar a mensagem de erro
             return redirect(url_for('buscar-usuario'))
 
+
+class ReconehcimentoFacialController(MethodView):
+    def get(self):
+
+        return render_template('reconhecimento.html')
+
+class VideoController(MethodView):
+    def video_feed(self):
+        def generate():
+            while True:
+                frame = reconhecer_face()  # Obter o quadro processado do OpenCV
+                ret, jpeg = cv2.imencode('.jpg', frame)
+
+                if ret:
+                    frame_bytes = jpeg.tobytes()
+                    yield (b'--frame\r\n'
+                           b'Content-Type: image/jpeg\r\n\r\n' + frame_bytes + b'\r\n\r\n')
+
+        return Response(generate(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
     # def __init__(self):
