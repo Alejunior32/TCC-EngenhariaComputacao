@@ -1,5 +1,6 @@
+import cv2
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
-from flask import request,render_template,redirect, current_app, flash, url_for
+from flask import request, render_template, redirect, current_app, flash, url_for, Response
 from cryptography.hazmat.backends import default_backend
 from flask.views import MethodView
 from src.db import mysql
@@ -7,11 +8,12 @@ import base64
 
 from src.services.reconhecimentoFacial import reconhecer_face
 
-    
+
 class HomeController(MethodView):
     def get(self):
         return render_template('home.html')
-    
+
+
 class SenhaController(MethodView):
     def get(self):
         # Obter o último número gerado da variável de aplicação
@@ -26,10 +28,11 @@ class SenhaController(MethodView):
         # Passar o novo número para o template
         return render_template('senha.html', new_number=senha)
 
+
 class BuscarUsuarioPorCpfController(MethodView):
     def get(self):
         return render_template('form-cpf.html')
-    
+
     def post(self):
         cpf = request.form['cpf']
         # print(cpf)
@@ -41,35 +44,32 @@ class BuscarUsuarioPorCpfController(MethodView):
 
         if data:
             # Usuário encontrado
-            # flash('Paciente encontrado!')
-            # primeiro_registro = data[0]
-            # imagem_paciente = primeiro_registro[6]
-            # resultado_reconhecimento = reconhecer_face(imagem_paciente)
-            # if resultado_reconhecimento:
-            #     flash("Pessoa reconhecida.")
-            # else:
-            #     flash("Pessoa não reconhecida.")
-            # return redirect(url_for('buscar-usuario'))
-
-            return redirect(url_for('reconhecimento-facial'))
+            primeiro_registro = data[0]
+            imagem_paciente = primeiro_registro[6]
+            resultado_reconhecimento = reconhecer_face(imagem_paciente)
+            if resultado_reconhecimento:
+                return redirect(url_for('reconhecimento-facial'))
+            else:
+                flash('Paciente encontrado,\n mas não reconhecido!')
+                return redirect(url_for('buscar-usuario'))
         else:
             # Usuário não encontrado
             flash('Paciente não encontrado', 'error')  # 'error' é uma classe de estilo para destacar a mensagem de erro
             return redirect(url_for('buscar-usuario'))
 
 
-class ReconehcimentoFacialController(MethodView):
+class ReconhecimentoFacialController(MethodView):
     def get(self):
-
+        flash('Paciente encontrado\n e reconhecido!')
         return render_template('reconhecimento.html')
+
 
 class VideoController(MethodView):
     def video_feed(self):
         def generate():
             while True:
-                frame = reconhecer_face()  # Obter o quadro processado do OpenCV
+                frame = cv2.imread('src/temp/paciente.jpg')  # Obter o quadro processado do OpenCV
                 ret, jpeg = cv2.imencode('.jpg', frame)
-
                 if ret:
                     frame_bytes = jpeg.tobytes()
                     yield (b'--frame\r\n'
@@ -77,6 +77,8 @@ class VideoController(MethodView):
 
         return Response(generate(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
+    def get(self):
+        return self.video_feed()
 
     # def __init__(self):
     #     self.IV = b'AAAAAAAAAAAAAAAA'

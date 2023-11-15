@@ -5,15 +5,13 @@ from PIL import Image
 
 
 def verificar_pessoa(caminho_imagem_paciente, imagem_teste):
-    # Carregue a imagem do paciente
+    # Carrega a imagem do paciente
     imagem_paciente = face_recognition.load_image_file(caminho_imagem_paciente)
     encoding_paciente = face_recognition.face_encodings(imagem_paciente)[0]
 
-    # Execute o reconhecimento facial
+    # Executa o reconhecimento facial
     face_locations = face_recognition.face_locations(imagem_teste)
     face_encodings = face_recognition.face_encodings(imagem_teste, face_locations)
-
-    nome_pessoa = "Desconhecido"  # Inicialize o nome como "Desconhecido" por padrão
 
     for encoding_teste, face_location in zip(face_encodings, face_locations):
         match = face_recognition.compare_faces([encoding_paciente], encoding_teste)[0]
@@ -29,8 +27,8 @@ def verificar_pessoa(caminho_imagem_paciente, imagem_teste):
 def reconhecer_face(imagem_paciente):
 
     imagem = Image.open(BytesIO(imagem_paciente))
-    imagem.save("src/temp/me.jpg", "JPEG")
-    caminho_imagem_paciente = 'src/temp/me.jpg'
+    imagem.save("src/temp/paciente.jpg", "JPEG")
+    caminho_imagem_paciente = 'src/temp/paciente.jpg'
 
     # Inicialize a câmera
     cap = cv2.VideoCapture(0)
