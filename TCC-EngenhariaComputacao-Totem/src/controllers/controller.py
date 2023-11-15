@@ -68,7 +68,7 @@ class VideoController(MethodView):
     def video_feed(self):
         def generate():
             while True:
-                frame = cv2.imread('src/temp/paciente.jpg')  # Obter o quadro processado do OpenCV
+                frame = cv2.imread('src/temp/foto.jpg')  # Obter o quadro processado do OpenCV
                 ret, jpeg = cv2.imencode('.jpg', frame)
                 if ret:
                     frame_bytes = jpeg.tobytes()

@@ -36,6 +36,8 @@ def reconhecer_face(imagem_paciente):
     # Capture um único quadro da câmera
     ret, frame = cap.read()
 
+    cv2.imwrite('src/temp/foto.jpg', frame)
+
     # Converta o quadro de BGR para RGB (necessário para face_recognition)
     rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
