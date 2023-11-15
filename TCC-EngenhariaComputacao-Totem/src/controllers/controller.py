@@ -5,6 +5,8 @@ from flask.views import MethodView
 from src.db import mysql
 import base64
 
+from src.services.reconhecimentoFacial import reconhecer_face
+
 
 class IndexController(MethodView):
     def get(self):
@@ -46,7 +48,14 @@ class BuscarUsuarioPorCpfController(MethodView):
 
         if data:
             # Usuário encontrado
-            flash('Usuário encontrado!')
+            flash('Paciente encontrado!')
+            primeiro_registro = data[0]
+            imagem_paciente = primeiro_registro[6]
+            resultado_reconhecimento = reconhecer_face(imagem_paciente)
+            if resultado_reconhecimento:
+                flash("Pessoa reconhecida.")
+            else:
+                flash("Pessoa não reconhecida.")
             return redirect(url_for('buscar-usuario'))
         else:
             # Usuário não encontrado
