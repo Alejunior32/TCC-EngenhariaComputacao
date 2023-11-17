@@ -8,15 +8,15 @@
     <title>TCC | Agendamento</title>
 </head>
 <body>
-    <div layout:fragment="content">
+<div layout:fragment="content">
 
-        <div th:if="${#lists.isEmpty(especialidades)}">
-            <div th:each="especialidade : ${especialidades}}">
-                <a th:text="${especialidade.titulo}}" th:href="@{/agendamentos/agendar/detalhes(idEspecialidade=${especialidade.id})}">
-                </a>
-            </div>
+    <div th:if="${not #lists.isEmpty(especialidades)}">
+        <div th:each="especialidade : ${especialidades}">
+            <a th:text="${especialidade.titulo}" th:href="@{/agendamentos/agendar(idEspecialidade=${especialidade.id})}"></a>
         </div>
-
     </div>
+
+
+</div>
 </body>
 </html>

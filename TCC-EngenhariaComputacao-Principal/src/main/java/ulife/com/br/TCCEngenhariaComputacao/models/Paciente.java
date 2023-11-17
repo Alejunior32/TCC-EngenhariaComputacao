@@ -41,4 +41,8 @@ public class Paciente{
 
     @OneToOne
     private Convenio convenio;
+
+    public Paciente(Long id) {
+        this.id = id;
+    }
 }

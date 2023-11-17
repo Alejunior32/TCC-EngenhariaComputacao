@@ -50,6 +50,10 @@ public class MedicoService {
         return medicoRepository.findByUsuario(usuario);
     }
 
+    public List<Medico> findAllByEspecialidadeId(Long especialidadeId){
+        return medicoRepository.findAllByEspecialidadeId(especialidadeId);
+    }
+
     public boolean usuarioExistente(String email){
         return usuarioService.existsByLogin(email);
     }

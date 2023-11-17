@@ -37,4 +37,7 @@ public class Medico {
     @OneToOne
     private Usuario usuario;
 
+    public Medico(Long id) {
+        this.id = id;
+    }
 }

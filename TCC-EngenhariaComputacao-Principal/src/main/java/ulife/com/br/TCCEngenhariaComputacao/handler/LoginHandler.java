@@ -24,7 +24,7 @@ public class LoginHandler implements AuthenticationSuccessHandler {
 
         Usuario usuario = (Usuario) authentication.getPrincipal();
 
-        if (usuario.getPrimeiroAcesso() && usuario.getRole() != Role.ROLE_PACIENTE) {
+        if (usuario.getPrimeiroAcesso()) {
             response.sendRedirect("/primeiro-acesso");
         } else {
             response.sendRedirect("/");

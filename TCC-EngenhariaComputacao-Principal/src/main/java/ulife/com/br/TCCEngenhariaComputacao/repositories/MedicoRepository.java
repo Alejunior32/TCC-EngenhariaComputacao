@@ -15,4 +15,6 @@ public interface MedicoRepository extends JpaRepository<Medico,Long> {
 
     @Query("SELECT m FROM Medico m WHERE m.nome LIKE %:palavra%")
     List<Medico> findAllByPalavraBarraDePesquisa(String palavra);
+
+    List<Medico> findAllByEspecialidadeId(Long especialidadeId);
 }

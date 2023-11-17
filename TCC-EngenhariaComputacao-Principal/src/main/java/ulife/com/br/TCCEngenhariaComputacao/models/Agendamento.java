@@ -37,6 +37,6 @@ public class Agendamento {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dataConsulta;
 
-    private StatusAgendamentoMedico statusAgendamentoMedico;
-    private StatusAgendamentoPaciente statusAgendamentoPaciente;
+    private String statusAgendamentoMedico;
+    private String statusAgendamentoPaciente;
 }

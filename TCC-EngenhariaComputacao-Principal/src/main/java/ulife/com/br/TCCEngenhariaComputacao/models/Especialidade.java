@@ -25,4 +25,7 @@ public class Especialidade {
     @NotBlank
     private String descricao;
 
+    public Especialidade(Long id) {
+        this.id = id;
+    }
 }
