@@ -8,9 +8,9 @@
 
 # :clipboard: descrição do projeto
 
-O projeto tem como objetivo desenvolver um sistema voltado para área da saúde através de duas aplicações webs, sendo uma aplicação Java e uma aplicação Python.
-A TCC-EngenhariaComputacao-Principal é uma aplicação Java responsável por realizar os processos de cadastros e agendamentos de consultas por um Médico ou Funcionário.
-A TCC-EngenhariaComputacao-Totem é uma aplicação Python responsável pelo auto-atendimento do Paciente no consultório/laboratório através do reconhecimento facial.
+O projeto tem como objetivo desenvolver um sistema voltado para área da saúde através de duas aplicações webs, sendo uma aplicação Java e uma aplicação Python.  
+A TCC-EngenhariaComputacao-Principal é uma aplicação Java responsável por realizar os processos de cadastros e agendamentos de consultas por um Médico ou Funcionário.  
+A TCC-EngenhariaComputacao-Totem é uma aplicação Python responsável pelo auto-atendimento do Paciente no consultório/laboratório através do reconhecimento facial.  
 
 # :hammer: Funcionalidades do projeto
 
