@@ -48,6 +48,22 @@ class BuscarUsuarioPorCpfController(MethodView):
             imagem_paciente = primeiro_registro[6]
             resultado_reconhecimento = reconhecer_face(imagem_paciente)
             if resultado_reconhecimento:
+                with mysql.cursor() as cur:
+                    cur.execute("SELECT * FROM agendamento WHERE paciente_id = %s", primeiro_registro[0])
+                    dataAgendamento = cur.fetchall()
+
+                    if dataAgendamento:
+
+                        primeiro_agendamento = dataAgendamento[0]
+                        novo_status = "PACIENTE_PRESENTE"
+                        atualizacao_sql = ("UPDATE tcc_engenhariacomputacao.agendamento SET "
+                                           "status_agendamento_medico = %s " "WHERE paciente_id = %s")
+                        cur.execute(atualizacao_sql, (novo_status, primeiro_registro[0]))
+                        mysql.commit()
+                    else:
+                        flash('Paciente encontrado,\n mas não possui agendamento!')
+                        return redirect(url_for('buscar-usuario'))
+
                 return redirect(url_for('reconhecimento-facial'))
             else:
                 flash('Paciente encontrado,\n mas não reconhecido!')
@@ -61,6 +77,7 @@ class BuscarUsuarioPorCpfController(MethodView):
 class ReconhecimentoFacialController(MethodView):
     def get(self):
         flash('Paciente encontrado\n e reconhecido!')
+
         return render_template('reconhecimento.html')
 
 
