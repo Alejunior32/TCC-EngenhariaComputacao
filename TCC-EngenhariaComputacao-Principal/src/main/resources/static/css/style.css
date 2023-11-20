@@ -64,13 +64,20 @@
   background-color: #0056b3;
 }
 
+@import url("https://fonts.googleapis.com/css2?family=Teko:wght@600&display=swap");
 h1 {
-  text-align: center;
-  margin: 20px;
+  text-align: left;
+  margin: 0px;
+  margin-bottom: 5%;
+  padding-left: 10%;
+  color: #f8f9fa;
+  background-color: #093364;
+  font-family: "Teko", sans-serif;
 }
 
 body {
   font-family: Arial, Helvetica, sans-serif;
+  background-color: #f8f9fa;
 }
 
 .card-agendamento {

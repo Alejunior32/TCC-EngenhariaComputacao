@@ -3,7 +3,6 @@
       layout:decorate="~{layout.html}">
 <head>
     <title>TCC | Exame</title>
-    <link rel="stylesheet" th:href="@{/css/layout.css}">
 </head>
 <body>
     <div layout:fragment="content">
@@ -12,7 +11,7 @@
             <h1 >Exames</h1>
         </div>
 
-        <div class="alert alert-primary" th:if="${#lists.isEmpty(especialidades)}">
+        <div class="alert alert-primary" th:if="${#lists.isEmpty(exames)}">
             Nenhum exame cadastrado!
         </div>
         <div class="alert alert-success" th:if="${mensagem}" th:text="${mensagem}"></div>
