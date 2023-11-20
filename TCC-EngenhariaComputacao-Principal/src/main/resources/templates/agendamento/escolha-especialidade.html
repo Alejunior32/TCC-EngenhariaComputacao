@@ -1,22 +1,29 @@
 <!doctype html>
-<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout.html}">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout.html}">
+
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{/css/layout.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}" />
     <title>TCC | Agendamento</title>
 </head>
-<body>
-<div layout:fragment="content">
 
-    <div th:if="${not #lists.isEmpty(especialidades)}">
-        <div th:each="especialidade : ${especialidades}">
-            <a th:text="${especialidade.titulo}" th:href="@{/agendamentos/agendar(idEspecialidade=${especialidade.id})}"></a>
+<body>
+    <div layout:fragment="content">
+        <div th:if="${not #lists.isEmpty(especialidades)}">
+            <div th:each="especialidade : ${especialidades}">
+                <a th:href="@{/agendamentos/consulta/agendar(idEspecialidade=${especialidade.id})}">
+                    <img th:src="${especialidade.urlImagem != ''} ? ${especialidade.urlImagem} : @{https://unsplash.com/pt-br/fotografias/pessoas-em-camisa-branca-segurando-copos-transparentes-701-FJcjLAQ}" width="120" height="70">
+                    <span th:text="${especialidade.descricao}"></span>
+                    <span th:text="${especialidade.titulo}" ></span>
+                </a>
+            </div>
+        </div>
+        <div th:if="${#lists.isEmpty(especialidades)}">
+            <p>A lista de especialidades está vazia.</p>
         </div>
     </div>
-
-
-</div>
+    </div>
 </body>
+
 </html>

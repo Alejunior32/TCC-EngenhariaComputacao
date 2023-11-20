@@ -15,6 +15,14 @@ create table especialidade(
       primary key(id)
 );
 
+create table exame(
+      id bigint not null auto_increment,
+      titulo varchar(150),
+      descricao varchar(255),
+      url_imagem varchar(255),
+      primary key(id)
+);
+
 create table medico(
     id bigint not null auto_increment,
     especialidade_id bigint not null,

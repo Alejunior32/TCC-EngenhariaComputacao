@@ -1,70 +1,103 @@
-.formulario{
-    padding: 5%;
-    border-radius: 10px;
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
-    width: 50%;
+.formulario {
+  padding: 5%;
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  width: 50%;
 }
 
-.card{
-    padding: 5%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
+.card {
+  padding: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 }
 
-.pesquisa{
-    display:flex;
-    justify-content: center;
-    padding: 10px;
+.pesquisa {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
 }
 
-.pesquisa-barra{
-    width: 50%;
-    margin: 5px;
+.pesquisa-barra {
+  width: 50%;
+  margin: 5px;
 }
 
-.botao{
-    margin: 5px;
+.botao {
+  margin: 5px;
 }
-
-table{
-    margin: 5%;
-}
-
 
 .webcam-container {
-     display: flex;
-     align-items: center;
-     gap: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
 #webcam {
-      width: 350px;
-      height: auto;
-      display: inline-block;
+  width: 350px;
+  height: auto;
+  display: inline-block;
 }
 
 #captured-image {
-      width: 315px;
-      height: auto;
-      display: inline-block;
+  width: 315px;
+  height: auto;
+  display: inline-block;
 }
 
 #captured-image {
-      margin-top: 10px;
+  margin-top: 10px;
 }
 
 #capture {
-       background-color: #007bff;
-       color: white;
-       border: none;
-       padding: 10px 20px;
-       border-radius: 5px;
-       cursor: pointer;
-       transition: background-color 0.3s ease;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 #capture:hover {
-       background-color: #0056b3;
+  background-color: #0056b3;
+}
+
+h1 {
+  text-align: center;
+  margin: 20px;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.card-agendamento {
+  display: flex;
+  padding: 20px;
+  margin: 20px;
+  justify-content: center;
+}
+
+.card-agendamento a {
+  text-decoration: none;
+}
+
+.tipo-agendamento {
+  margin: 20px;
+  text-align: center;
+  border: 1px solid black;
+  border-radius: 10px;
+  background-image: url(../images/Tela-fundo.avif);
+}
+
+.tipo-agendamento h2 {
+  color: white;
+}
+
+.tipo-agendamento img {
+  width: auto;
+  max-width: 660px;
+  border-radius: 10px;
 }

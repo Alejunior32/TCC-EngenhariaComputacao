@@ -10,6 +10,12 @@
 
         <h1 class="titulo">Médicos</h1>
 
+        <div class="alert alert-primary" th:if="${#lists.isEmpty(medicos)}">
+            Nenhum médico cadastrado!
+        </div>
+        <div class="alert alert-success" th:if="${mensagem}" th:text="${mensagem}"></div>
+        <div class="alert alert-danger" th:if="${erro}" th:text="${erro}"></div>
+
         <div class="pesquisa">
     
             <form class="pesquisa-barra d-flex" method="GET" th:action="@{/medico?nome=${palavra}}">
@@ -20,13 +26,9 @@
             <a href="/medico/cadastrar" class="botao btn btn-primary">Novo médico</a>
         </div>
 
-        <div class="alert alert-primary" th:if="${#lists.isEmpty(medicos)}">
-            Nenhum médico cadastrado!
-        </div>
-        <div class="alert alert-success" th:if="${mensagem}" th:text="${mensagem}"></div>
-        <div class="alert alert-danger" th:if="${erro}" th:text="${erro}"></div>
+
     
-        <div class="apresentacao"  th:if="${not #lists.isEmpty(medicos)}">
+        <div class="card"  th:if="${not #lists.isEmpty(medicos)}">
             <table class="table">
                 <thead>
                 <tr>

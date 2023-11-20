@@ -21,9 +21,9 @@ public class EspecialidadeController {
     private EspecialidadeService especialidadeService;
 
     @GetMapping
-    public ModelAndView listarEspecialidades() {
+    public ModelAndView listarEspecialidades(@RequestParam(name = "palavra", required = false) String palavra) {
         ModelAndView mv = new ModelAndView("especialidade/lista.html");
-        mv.addObject("especialidades",especialidadeService.listar());
+        mv.addObject("especialidades",especialidadeService.listar(palavra));
         return mv;
     }
 

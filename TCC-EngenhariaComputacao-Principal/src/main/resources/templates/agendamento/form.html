@@ -42,7 +42,7 @@
         </div>
 
         <div th:if="${not #lists.isEmpty(horarios)}">
-            <form method="post" th:action="@{/agendamentos/agendar}" th:object="${cadastroAgendamentoDto}">
+            <form method="post" th:action="@{/agendamentos/consulta/agendar}" th:object="${cadastroAgendamentoDto}">
 
                 <input type="hidden" th:value="${cadastroAgendamentoDto.especialidade}" th:field="${cadastroAgendamentoDto.especialidade}">
                 <input type="hidden" th:value="${cadastroAgendamentoDto.medico}" th:field="${cadastroAgendamentoDto.medico}">
@@ -57,7 +57,7 @@
 
                 <div>
                     <button type="submit" class="btn btn-primary">Cadastrar</button>
-                    <a th:href="@{/agendamentos}" class="btn btn-primary">Voltar</a>
+                    <a th:href="@{/agendamentos/consulta}" class="btn btn-primary">Voltar</a>
                 </div>
             </form>
         </div>

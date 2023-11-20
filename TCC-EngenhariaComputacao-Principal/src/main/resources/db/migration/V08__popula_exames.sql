@@ -1,0 +1,6 @@
+INSERT INTO exame(titulo,descricao,url_imagem) VALUES
+('Hemograma Completo','Avalia a quantidade e a qualidade das células sanguíneas, incluindo glóbulos vermelhos, glóbulos brancos e plaquetas. Pode ajudar a diagnosticar anemias, infecções e distúrbios do sangue.','https://bkt-sa-east-1-cms-drupal.s3.sa-east-1.amazonaws.com/salomaozoppi.com.br/styles/large/s3/2020-06/hemo.png?itok=QWtjwCSS'),
+('Perfil Lipídico','Mede os níveis de colesterol total, colesterol LDL, colesterol HDL e triglicerídeos no sangue. É usado para avaliar o risco de doenças cardiovasculares.',''),
+('Exame de Urina (EAS)','Analisa a urina quanto à presença de células, proteínas, glicose, entre outros. Pode ser usado para diagnosticar problemas renais, infecções do trato urinário e diabetes.','https://beepsaude.com.br/wp-content/uploads/2021/07/Como-fazer-exame-de-urina-beep-saude.png'),
+('TSH (Hormônio Estimulante da Tireoide)','Avalia a função da tireoide, ajudando no diagnóstico de distúrbios como hipotireoidismo ou hipertireoidismo.','https://blog.labcac.com.br/wp-content/uploads/2020/07/original-e60ca0eb95a9b80bbb868e87a3d8fa38-1024x682.jpeg'),
+('PSA (Antígeno Prostático Específico)','Um exame de sangue usado para ajudar a detectar problemas na próstata, como câncer de próstata.','https://portaldaurologia.org.br/publico/wp-content/uploads/2019/06/PSA.jpg');

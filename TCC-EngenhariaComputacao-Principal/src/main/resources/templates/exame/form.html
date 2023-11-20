@@ -3,38 +3,38 @@
     layout:decorate="~{layout.html}">
 <head>
     <link rel="stylesheet" th:href="@{/css/style.css}" />
-    <title>TCC | Especialidade</title>
+    <title>TCC | Exame</title>
 </head>
     <div layout:fragment="content">
 
         <div class="card">
 
             <div >
-                <h1>Especialidade</h1>
+                <h1>Exame</h1>
 
             </div>
 
             <div class="formulario">
-                <form method="post" th:action="@{/especialidade/cadastrar}" th:object="${especialidade}" class="card-body row" >
+                <form method="post" th:action="@{/exame/cadastrar}" th:object="${exame}" class="card-body row" >
                     <input type="hidden" th:field="*{id}">
                     <div class="mb-3">
-                        <label for="titulo" class="form-label">Especialidade</label>
-                        <input type="text" class="form-control" id="titulo" th:field="${especialidade.titulo}"
+                        <label for="titulo" class="form-label">Exame</label>
+                        <input type="text" class="form-control" id="titulo" th:field="${exame.titulo}"
                                placeholder="Digite o nome da especialidade" required>
                     </div>
                     <div class="mb-3">
                         <label for="descricao" class="form-label">Descrição</label>
-                        <textarea class="form-control" id="descricao" rows="3" placeholder="Breve descrição sobre a especialidade médica"
-                                  th:field="${especialidade.descricao}" required></textarea>
+                        <textarea class="form-control" id="descricao" rows="3" placeholder="Breve descrição sobre o exame médico"
+                                  th:field="${exame.descricao}" required></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="foto" class="form-label">url da imagem</label>
-                        <input type="text" class="form-control" id="foto" th:field="${especialidade.urlImagem}"
+                        <input type="text" class="form-control" id="foto" th:field="${exame.urlImagem}"
                                placeholder="url da imagem" >
                     </div>
                     <div>
                         <button type="submit" class="btn btn-primary mt-3">Cadastrar</button>
-                        <a th:href="@{/especialidade}" class="btn btn-primary mt-3">Voltar</a>
+                        <a th:href="@{/exame}" class="btn btn-primary mt-3">Voltar</a>
                     </div>
                 </form>
             </div>

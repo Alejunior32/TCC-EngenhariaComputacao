@@ -29,7 +29,7 @@ public class LoginController {
 
     @GetMapping("/")
     public String layout(){
-        return "layout";
+        return "home";
     }
 
     @GetMapping("/primeiro-acesso")

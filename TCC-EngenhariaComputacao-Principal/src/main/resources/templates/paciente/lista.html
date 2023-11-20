@@ -27,7 +27,7 @@
         <a href="/paciente/cadastrar" class="botao btn btn-primary">Novo Paciente</a>
     </div>
 
-    <div class="apresentacao"  th:if="${not #lists.isEmpty(pacientes)}">
+    <div class="card"  th:if="${not #lists.isEmpty(pacientes)}">
         <table class="table">
             <thead>
             <tr>
@@ -39,9 +39,9 @@
             <tbody>
             <tr th:each="paciente : ${pacientes}">
                 <td th:text="${paciente.nome}"></td>
-                <td th:number="${paciente.dataNascimento}"></td>
+                <td th:text="${paciente.dataNascimento}"></td>
                 <td>
-                    <a th:href="@{/agendamento/(idPaciente=${paciente.id})}" class="btn btn-outline-secondary">Agendamentos</a>
+                    <a th:href="@{/agendamentoConsulta/(idPaciente=${paciente.id})}" class="btn btn-outline-secondary">Agendamentos</a>
                 </td>
             </tr>
             </tbody>

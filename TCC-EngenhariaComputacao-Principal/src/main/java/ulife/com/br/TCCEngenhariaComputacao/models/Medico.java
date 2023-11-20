@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
-import java.util.Set;
 
 @Table(name = "medico")
 @Entity
@@ -32,7 +31,7 @@ public class Medico {
 
     @JsonIgnore
     @OneToMany(mappedBy = "medico")
-    private List<Agendamento> agendamentos;
+    private List<AgendamentoConsulta> agendamentoConsultas;
 
     @OneToOne
     private Usuario usuario;

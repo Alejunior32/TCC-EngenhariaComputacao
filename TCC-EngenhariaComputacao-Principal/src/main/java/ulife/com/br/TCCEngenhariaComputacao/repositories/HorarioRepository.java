@@ -14,7 +14,7 @@ import java.time.LocalDate;
 public interface HorarioRepository extends JpaRepository<Horario,Long> {
 
     @Query("SELECT h FROM Horario h " +
-            "WHERE NOT EXISTS (SELECT a FROM Agendamento a " +
+            "WHERE NOT EXISTS (SELECT a FROM AgendamentoConsulta a " +
             "                  WHERE a.horario = h " +
             "                  AND a.dataConsulta = :dataConsulta " +
             "                  AND a.medico = :medico)")

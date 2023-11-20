@@ -1,29 +1,22 @@
 package ulife.com.br.TCCEngenhariaComputacao.controllers;
 
-import jakarta.validation.Valid;
 import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ulife.com.br.TCCEngenhariaComputacao.dto.agendamento.AgendamentoMapper;
 import ulife.com.br.TCCEngenhariaComputacao.dto.agendamento.CadastroAgendamentoDto;
-import ulife.com.br.TCCEngenhariaComputacao.dto.medico.CadastroMedicoDTO;
-import ulife.com.br.TCCEngenhariaComputacao.dto.medico.MedicoMapper;
-import ulife.com.br.TCCEngenhariaComputacao.dto.usuario.UsuarioMapper;
 import ulife.com.br.TCCEngenhariaComputacao.enums.Role;
 import ulife.com.br.TCCEngenhariaComputacao.models.*;
 import ulife.com.br.TCCEngenhariaComputacao.services.*;
 
-import java.time.LocalDate;
-
 @Controller
 @RequestMapping("/agendamentos")
-public class AgendamentoController {
+public class AgendamentoConsultaController {
 
     @Autowired
-    AgendamentoService agendamentoService;
+    AgendamentoConsultaService agendamentoService;
 
     @Autowired
     EspecialidadeService especialidadeService;
@@ -38,7 +31,7 @@ public class AgendamentoController {
     PacienteService pacienteService;
 
     @GetMapping
-    public ModelAndView listarAgendamentos(Authentication authentication) {
+    public ModelAndView agendamento(Authentication authentication) {
         Usuario usuario = (Usuario) authentication.getPrincipal();
         ModelAndView mv = new ModelAndView("agendamento/lista.html");
 
@@ -48,7 +41,18 @@ public class AgendamentoController {
         return mv;
     }
 
-    @GetMapping("/agendar")
+    @GetMapping("/consulta")
+    public ModelAndView listarAgendamentosConsulta(Authentication authentication) {
+        Usuario usuario = (Usuario) authentication.getPrincipal();
+        ModelAndView mv = new ModelAndView("agendamento/lista-consultas.html");
+
+        if (usuario.getRole().equals(Role.ROLE_PACIENTE))
+            mv.addObject("agendamentos",agendamentoService.listarAgendamentosPaciente(pacienteService.findByUsuario(usuario)));
+
+        return mv;
+    }
+
+    @GetMapping("/consulta/agendar")
     public ModelAndView agendar(Authentication authentication,@RequestParam(required = false) Long idEspecialidade ,@RequestParam(required = false) Long idMedico) {
         Usuario usuario = (Usuario) authentication.getPrincipal();
         ModelAndView mv = new ModelAndView();
@@ -72,7 +76,7 @@ public class AgendamentoController {
         return mv;
     }
 
-    @PostMapping("/agendar")
+    @PostMapping("/consulta/agendar")
     public ModelAndView cadastroAgendamento(Authentication authentication,CadastroAgendamentoDto cadastroAgendamentoDto){
         Usuario usuario = (Usuario) authentication.getPrincipal();
         ModelAndView mv = new ModelAndView("redirect:/agendamentos");
@@ -80,4 +84,5 @@ public class AgendamentoController {
         agendamentoService.salvarAgendamento(AgendamentoMapper.fromDto(cadastroAgendamentoDto));
         return mv;
     }
+
 }

@@ -19,17 +19,18 @@ public class EspecialidadeService {
         return especialidadeRepository.findAll();
     }
 
+    public List<Especialidade> listar(String palavra) {
+        if (palavra != null)
+            return especialidadeRepository.findAllByPalavraBarraDePesquisa(palavra);
+
+        return especialidadeRepository.findAll();
+    }
+
     public Especialidade buscarPorId(Long idEspecialidade) {
         return especialidadeRepository.findById(idEspecialidade).orElseThrow(() -> new EntityNotFoundException("Especialidade não encontrada!"));
     }
 
     public Especialidade salvar(Especialidade especialidade) {
         return especialidadeRepository.save(especialidade);
-    }
-
-    @Transactional(readOnly = true)
-    public List<String> buscarEspecialidadeByTermo(String termo) {
-
-        return especialidadeRepository.findEspecialidadesByTermo(termo);
     }
 }

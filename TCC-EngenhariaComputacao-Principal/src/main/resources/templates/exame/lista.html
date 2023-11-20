@@ -2,33 +2,33 @@
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout.html}">
 <head>
-    <title>TCC | Especialidade</title>
+    <title>TCC | Exame</title>
     <link rel="stylesheet" th:href="@{/css/layout.css}">
 </head>
 <body>
     <div layout:fragment="content">
 
         <div class="titulo">
-            <h1 >Especialidades</h1>
+            <h1 >Exames</h1>
         </div>
 
         <div class="alert alert-primary" th:if="${#lists.isEmpty(especialidades)}">
-            Nenhuma especialidade cadastrada!
+            Nenhum exame cadastrado!
         </div>
         <div class="alert alert-success" th:if="${mensagem}" th:text="${mensagem}"></div>
         <div class="alert alert-danger" th:if="${erro}" th:text="${erro}"></div>
 
         <div class="pesquisa">
 
-            <form class="pesquisa-barra d-flex" method="GET" th:action="@{/especialidade?nome=${palavra}}">
+            <form class="pesquisa-barra d-flex" method="GET" th:action="@{/exame?nome=${palavra}}">
                 <input class="form-control me-2 " type="search" name="palavra" placeholder="Search" aria-label="Search">
                 <button class="btn btn-primary" type="submit">Pesquisar</button>
             </form>
 
-            <a href="/especialidade/cadastrar" class="botao btn btn-primary">Nova Especialidade</a>
+            <a href="/exame/cadastrar" class="botao btn btn-primary">Novo Exame</a>
         </div>
 
-        <div class="card"  th:if="${not #lists.isEmpty(especialidades)}">
+        <div class="card"  th:if="${not #lists.isEmpty(exames)}">
             <table class="table">
                 <thead>
                 <tr>
@@ -37,10 +37,10 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="especialidade : ${especialidades}">
-                        <td th:text="${especialidade.titulo}"></td>
+                    <tr th:each="exame : ${exames}">
+                        <td th:text="${exame.titulo}"></td>
                         <td>
-                            <a th:href="@{/especialidade/detalhes(idEspecialidade=${especialidade.id})}" class="btn btn-outline-secondary">Detalhes</a>
+                            <a th:href="@{/exame/detalhes(idExame=${exame.id})}" class="btn btn-outline-secondary">Detalhes</a>
                         </td>
                     </tr>
                 </tbody>

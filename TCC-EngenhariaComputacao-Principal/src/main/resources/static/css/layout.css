@@ -1,29 +1,27 @@
-nav{
-    background-image: url(../images/Tela-fundo.avif);
-    background-repeat: no-repeat;
-    background-size: cover;
+nav {
+  background-image: url(../images/Tela-fundo.avif);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-.logout{
-    display: flex;
-    justify-content: flex-end;
+.logout {
+  display: flex;
+  justify-content: flex-end;
 }
 
-.texto-nav{
-    color: aliceblue;
+.texto-nav {
+  color: aliceblue;
 }
 
-footer{
-    background-image: url(../images/Tela-fundo.avif);
-    background-repeat: no-repeat;
-    background-size: cover;
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-around;
+footer {
+  background-image: url(../images/Tela-fundo.avif);
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
 }
 
-.texto-rodape{
-    color: aliceblue;
+.texto-rodape {
+  color: aliceblue;
 }
-
-

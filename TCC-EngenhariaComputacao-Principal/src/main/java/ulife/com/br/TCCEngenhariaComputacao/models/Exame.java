@@ -1,20 +1,18 @@
 package ulife.com.br.TCCEngenhariaComputacao.models;
 
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
-import java.util.List;
-
-@Table(name = "especialidade")
+@Table(name = "exame")
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class Especialidade {
-
+public class Exame {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,7 +25,7 @@ public class Especialidade {
 
     private String urlImagem;
 
-    public Especialidade(Long id) {
+    public Exame(Long id) {
         this.id = id;
     }
 }

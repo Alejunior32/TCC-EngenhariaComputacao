@@ -32,7 +32,7 @@ public class Paciente{
     private LocalDate dataNascimento;
 
     @OneToMany(mappedBy = "paciente")
-    private List<Agendamento> agendamentos;
+    private List<AgendamentoConsulta> agendamentoConsultas;
 
     @OneToOne
     private Usuario usuario;
