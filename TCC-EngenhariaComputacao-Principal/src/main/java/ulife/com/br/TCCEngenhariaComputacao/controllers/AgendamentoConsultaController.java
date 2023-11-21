@@ -36,10 +36,14 @@ public class AgendamentoConsultaController {
     @GetMapping
     public ModelAndView agendamento(Authentication authentication) {
         Usuario usuario = (Usuario) authentication.getPrincipal();
-        ModelAndView mv = new ModelAndView("agendamento/lista.html");
+        ModelAndView mv ;
 
         if (usuario.getRole().equals(Role.ROLE_PACIENTE))
-            mv.addObject("agendamentos",agendamentoService.listarAgendamentosPaciente(pacienteService.findByUsuario(usuario)));
+            mv = new ModelAndView("agendamento/escolha-agendamento-paciente.html");
+        else if (usuario.getRole().equals(Role.ROLE_MEDICO))
+            mv =  new ModelAndView("redirect:/agendamentos/consulta");
+        else
+            mv = new ModelAndView("agendamento/escolha-agendamento-admin.html");
 
         return mv;
     }
@@ -47,10 +51,20 @@ public class AgendamentoConsultaController {
     @GetMapping("/consulta")
     public ModelAndView listarAgendamentosConsulta(Authentication authentication) {
         Usuario usuario = (Usuario) authentication.getPrincipal();
-        ModelAndView mv = new ModelAndView("agendamento/lista-consultas.html");
+        ModelAndView mv;
 
-        if (usuario.getRole().equals(Role.ROLE_PACIENTE))
-            mv.addObject("agendamentos",agendamentoService.listarAgendamentosPaciente(pacienteService.findByUsuario(usuario)));
+        if (usuario.getRole().equals(Role.ROLE_PACIENTE)) {
+            mv = new ModelAndView("agendamento/lista-consultas-paciente.html");
+            mv.addObject("agendamentos", agendamentoService.listarAgendamentosConsultaPaciente(pacienteService.findByUsuario(usuario)));
+        }
+        else if (usuario.getRole().equals(Role.ROLE_MEDICO)){
+            mv = new ModelAndView("agendamento/lista-consultas-medico.html");
+            mv.addObject("agendamentos", agendamentoService.listarAgendamentosConsultaMedico(medicoService.findByUsuario(usuario)));
+        }
+        else{
+            mv = new ModelAndView("agendamento/lista-consultas-admin.html");
+            mv.addObject("agendamentos", agendamentoService.listarAgendamentosConsultaAprovacao());
+        }
 
         return mv;
     }

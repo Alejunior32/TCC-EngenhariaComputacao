@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ulife.com.br.TCCEngenhariaComputacao.dto.login.EmailDTO;
 import ulife.com.br.TCCEngenhariaComputacao.dto.login.NovaSenhaDTO;
+import ulife.com.br.TCCEngenhariaComputacao.enums.Role;
 import ulife.com.br.TCCEngenhariaComputacao.models.Usuario;
 import ulife.com.br.TCCEngenhariaComputacao.services.LoginService;
 import ulife.com.br.TCCEngenhariaComputacao.services.TokenRedefinirSenhaService;
@@ -28,8 +29,12 @@ public class LoginController {
     }
 
     @GetMapping("/")
-    public String layout(){
-        return "home";
+    public String layout(Authentication authentication){
+        Usuario usuario = (Usuario) authentication.getPrincipal();
+
+        if (usuario.getRole().equals(Role.ROLE_ADMIN))
+            return "home-admin";
+        return "home-geral";
     }
 
     @GetMapping("/primeiro-acesso")

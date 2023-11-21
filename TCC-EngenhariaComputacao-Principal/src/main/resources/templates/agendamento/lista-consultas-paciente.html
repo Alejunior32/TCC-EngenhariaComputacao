@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout-geral.html}">
+<head>
+    <title>TCC | Agendamentos</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <h1>Agendamentos</h1>
+    <div class="alert alert-primary" th:if="${#lists.isEmpty(agendamentos)}">
+        Não possui nenhum agendamentoConsulta!
+    </div>
+    <div class="alert alert-success" th:if="${mensagem}" th:text="${mensagem}"></div>
+    <div class="alert alert-danger" th:if="${erro}" th:text="${erro}"></div>
+
+    <div class="card">
+        <a href="/agendamentos/consulta/agendar" class="btn btn-primary">Nova Consulta</a>
+
+        <div th:each="agendamento : ${agendamentos}">
+            <div class="texto-card" >
+                <span th:text="${agendamento.dataConsulta}" ></span>
+                <span th:text="${agendamento.statusAgendamentoPaciente}" ></span>
+                <span th:text="${agendamento.horario.horaMinuto}"></span>
+                <span th:text="${agendamento.medico.nome}" ></span>
+                <span th:text="${agendamento.Especialidade.titulo}"></span>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
