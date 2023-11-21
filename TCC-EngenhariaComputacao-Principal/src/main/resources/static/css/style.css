@@ -93,9 +93,9 @@ body {
 .tipo-agendamento {
   margin: 20px;
   text-align: center;
-  border: 1px solid black;
+  box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
-  background-image: url(../images/Tela-fundo.avif);
+  background-color: #093364;
 }
 
 .tipo-agendamento h2 {
@@ -106,4 +106,54 @@ body {
   width: auto;
   max-width: 660px;
   border-radius: 10px;
+}
+
+.card-lista {
+  display: flex;
+  margin: 0px 300px;
+  margin-bottom: 40px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.3);
+  text-decoration: none;
+}
+
+.card-lista img {
+  width: 220px;
+  height: 220px;
+  border-radius: 10px;
+}
+
+.tag-agendamento {
+  background-color: #093364;
+  text-decoration: none;
+  color: white;
+  text-align: center;
+  padding: 3px;
+  border-radius: 5px;
+  margin-bottom: 30px;
+}
+.texto-card {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  color: #093364;
+}
+
+.card-home {
+  display: flex;
+  background-color: #f8f9fa;
+  color: #093364;
+  padding: 20px;
+  margin-bottom: 30px;
+  border: 5px;
+  box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.3);
+}
+
+.card-home img {
+  align-items: center;
+}
+
+.card-home-texto {
+  padding-left: 20px;
 }

@@ -15,8 +15,8 @@ public class HorarioService {
     @Autowired
     HorarioRepository horarioRepository;
 
-    public List<Horario> findHorariosDisponiveisDoMedicoNoDia(Medico medico){
-        return horarioRepository.findHorariosDisponiveisDoMedicoNoDia(medico, LocalDate.now());
+    public List<Horario> findHorariosDisponiveisDoMedicoNoDia(Medico medico,LocalDate dataConsulta){
+        return horarioRepository.findHorariosDisponiveisDoMedicoNoDia(medico, dataConsulta);
     }
 
 }

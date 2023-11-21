@@ -1,0 +1,20 @@
+.footer {
+  background-color: #0b182c;
+  margin-top: 5%;
+  padding: 20px;
+  color: white;
+  display: flex;
+  font-family: "Teko", sans-serif;
+  font-size: large;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.footer a {
+  text-decoration: none;
+  color: white;
+}
+
+.test {
+  min-height: 100vh;
+}

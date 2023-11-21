@@ -9,12 +9,17 @@
 
 <body>
     <div layout:fragment="content">
-        <div th:if="${not #lists.isEmpty(especialidades)}">
+
+        <h1>Agendamentos</h1>
+
+        <div class="card" th:if="${not #lists.isEmpty(especialidades)}">
             <div th:each="especialidade : ${especialidades}">
-                <a th:href="@{/agendamentos/consulta/agendar(idEspecialidade=${especialidade.id})}">
+                <a class="card-lista" th:href="@{/agendamentos/consulta/agendar(idEspecialidade=${especialidade.id})}">
                     <img th:src="${especialidade.urlImagem != ''} ? ${especialidade.urlImagem} : @{https://unsplash.com/pt-br/fotografias/pessoas-em-camisa-branca-segurando-copos-transparentes-701-FJcjLAQ}" width="120" height="70">
-                    <span th:text="${especialidade.descricao}"></span>
-                    <span th:text="${especialidade.titulo}" ></span>
+                    <div class="texto-card" >
+                        <span class="tag-agendamento" th:text="${especialidade.titulo}" ></span>
+                        <span th:text="${especialidade.descricao}"></span>
+                    </div>
                 </a>
             </div>
         </div>

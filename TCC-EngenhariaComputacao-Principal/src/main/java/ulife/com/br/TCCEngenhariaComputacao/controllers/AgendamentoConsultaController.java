@@ -1,5 +1,6 @@
 package ulife.com.br.TCCEngenhariaComputacao.controllers;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,8 @@ import ulife.com.br.TCCEngenhariaComputacao.dto.agendamento.CadastroAgendamentoD
 import ulife.com.br.TCCEngenhariaComputacao.enums.Role;
 import ulife.com.br.TCCEngenhariaComputacao.models.*;
 import ulife.com.br.TCCEngenhariaComputacao.services.*;
+
+import java.time.LocalDate;
 
 @Controller
 @RequestMapping("/agendamentos")
@@ -53,7 +56,9 @@ public class AgendamentoConsultaController {
     }
 
     @GetMapping("/consulta/agendar")
-    public ModelAndView agendar(Authentication authentication,@RequestParam(required = false) Long idEspecialidade ,@RequestParam(required = false) Long idMedico) {
+    public ModelAndView agendar(Authentication authentication,@RequestParam(required = false) Long idEspecialidade ,
+                                @RequestParam(required = false) Long idMedico,
+                                @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataConsulta) {
         Usuario usuario = (Usuario) authentication.getPrincipal();
         ModelAndView mv = new ModelAndView();
 
@@ -62,9 +67,10 @@ public class AgendamentoConsultaController {
             mv.setViewName("agendamento/form");
             mv.addObject("idEspecialidade", idEspecialidade);
             mv.addObject("medicos",medicoService.findAllByEspecialidadeId(idEspecialidade));
-            if (idMedico != null){
-                mv.addObject("horarios", horarioService.findHorariosDisponiveisDoMedicoNoDia(medicoService.findById(idMedico)));
-                CadastroAgendamentoDto cadastroAgendamentoDto = new CadastroAgendamentoDto(new Especialidade(idEspecialidade),new Medico(idMedico),null,null, null);
+            if (idMedico != null && dataConsulta !=  null){
+                Medico medico = medicoService.findById(idMedico);
+                mv.addObject("horarios", horarioService.findHorariosDisponiveisDoMedicoNoDia(medico, dataConsulta));
+                CadastroAgendamentoDto cadastroAgendamentoDto = new CadastroAgendamentoDto(new Especialidade(idEspecialidade),new Medico(idMedico),null,null, dataConsulta);
                 mv.addObject("cadastroAgendamentoDto",cadastroAgendamentoDto);
             }
         } else {
