@@ -50,32 +50,32 @@ A TCC-EngenhariaComputacao-Totem é uma aplicação Python responsável pelo aut
 
 #### Totem:
 
-- Gerar Senha Para Atendimento, (**GET**) http://localhost:4000/senha
-- Confirmar Presença Consultório, (**POST**) http://localhost:4000/buscar-usuario-cpf
+- Gerar Senha Para Atendimento, (**GET**) localhost:4000/senha
+- Confirmar Presença Consultório, (**POST**) localhost:4000/buscar-usuario-cpf
 
 ## Requisições do Administrador
 
 #### Especialidade:
 
-- Cadastrar Especialidade, (**POST**) http://localhost:8080/especialidade/cadastrar
-- Listar Especialidades, (**GET**) http://localhost:8080/especialidade
+- Cadastrar Especialidade, (**POST**) localhost:8080/especialidade/cadastrar
+- Listar Especialidades, (**GET**) localhost:8080/especialidade
 
 #### Exame:
 
-- Cadastrar Exame, (**POST**) http://localhost:8080/exame/cadastrar
-- Listar Exames, (**GET**) http://localhost:8080/exame
+- Cadastrar Exame, (**POST**) localhost:8080/exame/cadastrar
+- Listar Exames, (**GET**) localhost:8080/exame
 
 #### Exame:
 
-- Cadastrar Medico, (**POST**) http://localhost:8080/medico/cadastrar
-- Listar Medicos, (**GET**) http://localhost:8080/medico
+- Cadastrar Medico, (**POST**) localhost:8080/medico/cadastrar
+- Listar Medicos, (**GET**) localhost:8080/medico
 
 #### Paciente:
 
-- Cadastrar Medico, (**POST**) http://localhost:8080/paciente/cadastrar
-- Listar Medicos, (**GET**) http://localhost:8080/paciente
+- Cadastrar Medico, (**POST**) localhost:8080/paciente/cadastrar
+- Listar Medicos, (**GET**) localhost:8080/paciente
 
 ## Requisições do Médico
 
-- Listar Consultas do Dia, (**GET**) http://localhost:8080/agendamentos/consulta
+- Listar Consultas do Dia, (**GET**)localhost:8080/agendamentos/consulta
 
