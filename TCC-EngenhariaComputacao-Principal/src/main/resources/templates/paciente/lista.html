@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">
+<head>
+    <title>TCC | Pacientes</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<div layout:fragment="content">
+
+    <h1 class="titulo" >Pacientes</h1>
+
+    <div class="alert alert-primary" th:if="${#lists.isEmpty(pacientes)}">
+        Nenhum paciente cadastrado!
+    </div>
+    <div class="alert alert-success" th:if="${mensagem}" th:text="${mensagem}"></div>
+    <div class="alert alert-danger" th:if="${erro}" th:text="${erro}"></div>
+
+    <div class="pesquisa">
+
+        <form class="pesquisa-barra d-flex" method="GET" th:action="@{/paciente?nome=${palavra}}">
+            <input class="form-control me-2 " type="search" name="palavra" placeholder="Search" aria-label="Search">
+            <button class="btn btn-primary" type="submit">Pesquisar</button>
+        </form>
+
+        <a href="/paciente/cadastrar" class="botao btn btn-primary">Novo Paciente</a>
+    </div>
+
+    <div class="card"  th:if="${not #lists.isEmpty(pacientes)}">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Data de Nacimento</th>
+                <th>Detalhes</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="paciente : ${pacientes}">
+                <td th:text="${paciente.nome}"></td>
+                <td th:text="${paciente.dataNascimento}"></td>
+                <td>
+                    <a th:href="@{/agendamentoConsulta/(idPaciente=${paciente.id})}" class="btn btn-outline-secondary">Agendamentos</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+</body>
+</html>

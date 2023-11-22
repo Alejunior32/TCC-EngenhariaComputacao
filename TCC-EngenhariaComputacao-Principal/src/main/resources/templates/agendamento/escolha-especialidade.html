@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout-geral.html}">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <title>TCC | Agendamento</title>
+</head>
+
+<body>
+    <div layout:fragment="content">
+
+        <h1>Agendamentos</h1>
+
+        <div class="card" th:if="${not #lists.isEmpty(especialidades)}">
+            <div th:each="especialidade : ${especialidades}">
+                <a class="card-lista" th:href="@{/agendamentos/consulta/agendar(idEspecialidade=${especialidade.id})}">
+                    <img th:src="${especialidade.urlImagem != ''} ? ${especialidade.urlImagem} : @{https://unsplash.com/pt-br/fotografias/pessoas-em-camisa-branca-segurando-copos-transparentes-701-FJcjLAQ}" width="120" height="70">
+                    <div class="texto-card" >
+                        <span class="tag-agendamento" th:text="${especialidade.titulo}" ></span>
+                        <span th:text="${especialidade.descricao}"></span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div th:if="${#lists.isEmpty(especialidades)}">
+            <p>A lista de especialidades está vazia.</p>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>

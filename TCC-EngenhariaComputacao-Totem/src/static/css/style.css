@@ -1,0 +1,60 @@
+body{
+    background-image: url('../images/Tela-fundo.avif');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;    
+}
+
+h1{
+    color:aliceblue;
+}
+
+form{
+    display: flex;
+}
+
+
+.flashes {
+    list-style-type: none;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+}
+
+.flashes li {
+    color: #d9534f;
+}
+
+.container {
+    position: relative;
+    width: 1000px;
+    height: 100px;
+    margin: 0 auto;
+}
+
+.text-box {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+#voltar {
+    margin-left: 3px;
+}
+
+#buscar {
+    margin-left: 3px;
+}
+

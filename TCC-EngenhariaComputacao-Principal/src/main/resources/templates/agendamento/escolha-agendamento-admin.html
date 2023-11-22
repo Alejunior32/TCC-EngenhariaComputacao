@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">
+<head>
+    <title>TCC | Agendamentos</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <h1>Agendamentos</h1>
+
+    <div class="card">
+
+        <div class="card-agendamento">
+            <div class="tipo-agendamento">
+                <a href="/agendamentos/consulta">
+                    <img th:src="@{/images/consulta.jpg}" alt="consulta" width="700" height="445">
+                    <h2>Consultas</h2>
+                </a>
+            </div>
+            <div class="tipo-agendamento">
+                <a href="/agendamentos/exame">
+                    <img th:src="@{/images/exame.jpg}" alt="exame" width="700" height="445">
+                    <h2>Exames</h2>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

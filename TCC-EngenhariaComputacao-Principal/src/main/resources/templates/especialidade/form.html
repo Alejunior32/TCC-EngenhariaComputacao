@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ulraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout.html}">
+<head>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <title>TCC | Especialidade</title>
+</head>
+    <div layout:fragment="content">
+
+        <h1>Especialidade</h1>
+        <div class="card">
+
+            <div class="formulario">
+                <form method="post" th:action="@{/especialidade/cadastrar}" th:object="${especialidade}" class="card-body row" >
+                    <input type="hidden" th:field="*{id}">
+                    <div class="mb-3">
+                        <label for="titulo" class="form-label">Especialidade</label>
+                        <input type="text" class="form-control" id="titulo" th:field="${especialidade.titulo}"
+                               placeholder="Digite o nome da especialidade" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="descricao" class="form-label">Descrição</label>
+                        <textarea class="form-control" id="descricao" rows="3" placeholder="Breve descrição sobre a especialidade médica"
+                                  th:field="${especialidade.descricao}" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="foto" class="form-label">url da imagem</label>
+                        <input type="text" class="form-control" id="foto" th:field="${especialidade.urlImagem}"
+                               placeholder="url da imagem" >
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary mt-3">Cadastrar</button>
+                        <a th:href="@{/especialidade}" class="btn btn-primary mt-3">Voltar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</html>

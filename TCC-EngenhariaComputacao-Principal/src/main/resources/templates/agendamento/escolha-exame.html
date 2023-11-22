@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout.html}">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <title>TCC | Agendamento</title>
+</head>
+
+<body>
+    <div layout:fragment="content">
+
+        <h1>Agendamentos</h1>
+
+        <div class="card" th:if="${not #lists.isEmpty(exames)}">
+            <div th:each="exame : ${exames}">
+                <a class="card-lista"  th:href="@{/agendamentos/exame/agendar(idExame=${exame.id})}">
+                    <img th:src="${exame.urlImagem != ''} ? ${exame.urlImagem} : @{https://unsplash.com/pt-br/fotografias/pessoas-em-camisa-branca-segurando-copos-transparentes-701-FJcjLAQ}" width="120" height="70">
+                    <div class="texto-card" >
+                        <span class="tag-agendamento" th:text="${exame.titulo}" ></span>
+                        <span th:text="${exame.descricao}"></span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>

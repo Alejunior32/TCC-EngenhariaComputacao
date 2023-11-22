@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ulraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout-geral.html}">
+<head>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <title>TCC | Agendamento</title>
+    <script>
+        // Quando a página carrega
+        document.addEventListener("DOMContentLoaded", function() {
+            var idMedico = localStorage.getItem("idMedico");
+            document.getElementById("medico").value = idMedico || "";
+        });
+
+        function redirecionarPagina() {
+            var idEspecialidade = document.getElementById("especialidade").value;
+            var idMedico = document.getElementById("medico").value;
+            var dataConsulta = document.getElementById("data").value;
+
+            // Armazenar os valores no localStorage
+            localStorage.setItem("idMedico", idMedico);
+
+            if (idEspecialidade && idMedico && dataConsulta) {
+                window.location.href = "agendar?idEspecialidade=" + idEspecialidade +
+                                      "&idMedico=" + idMedico +
+                                      "&dataConsulta=" + dataConsulta;
+            }
+        }
+    </script>
+</head>
+<body>
+
+<section class="layout-content" layout:fragment="content">
+    <main role="main">
+
+        <h1>Agendamento de Consulta</h1>
+
+        <div class="card">
+            <div class="formulario">
+            <input type="hidden" id="especialidade" th:value="${idEspecialidade}">
+
+            <div class="input-group mb-3">
+                <label for="medico" class="input-group-text">Médicos</label>
+                <select class="form-select" id="medico" name="medico" th:value="${idMedico}" onchange="redirecionarPagina()">
+                    <option value="" th:selected="${idMedico eq null or idMedico eq ''}">Selecione um médico</option>
+                    <option th:each="medico : ${medicos}" th:value="${medico.id}" th:text="${medico.nome}" th:selected="${medico.id eq idMedico}"></option>
+                </select>
+            </div>
+
+            <div class="input-group mb-3">
+                <label for="data" class="input-group-text">Data da consulta</label>
+                <input  type="date" id="data" onchange="redirecionarPagina()">
+            </div>
+
+
+            <div th:if="${not #lists.isEmpty(horarios)}">
+                <form method="post" th:action="@{/agendamentos/consulta/agendar}" th:object="${cadastroAgendamentoDto}">
+
+                    <input type="hidden" th:value="${cadastroAgendamentoDto.especialidade}" th:field="${cadastroAgendamentoDto.especialidade}">
+                    <input type="hidden" th:value="${cadastroAgendamentoDto.medico}" th:field="${cadastroAgendamentoDto.medico}">
+                    <input type="hidden" th:value="${cadastroAgendamentoDto.paciente}" th:field="${cadastroAgendamentoDto.paciente}">
+                    <input type="hidden" th:value="${cadastroAgendamentoDto.dataConsulta}" th:field="${cadastroAgendamentoDto.dataConsulta}">
+
+
+                        <div class="input-group mb-3">
+                            <label for="horario" class="input-group-text">Horarios disponiveis</label>
+                            <select class="form-select" id="horario"  th:field="${cadastroAgendamentoDto.horario}"  required>
+                                <option th:each="horario : ${horarios}" th:value="${horario.id}" th:text="${horario.horaMinuto}"></option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <button type="submit" class="btn btn-primary">Cadastrar</button>
+                            <a th:href="@{/agendamentos/consulta}" class="btn btn-primary">Voltar</a>
+                        </div>
+                </form>
+            </div>
+        </div>
+        </div>
+    </main>
+</section>
+
+</body>
+</html>

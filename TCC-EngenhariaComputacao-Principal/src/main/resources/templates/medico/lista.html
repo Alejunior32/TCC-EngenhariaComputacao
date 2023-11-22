@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">
+<head>
+    <title>TCC | Especialidade</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<div layout:fragment="content">
+
+        <h1 class="titulo">Médicos</h1>
+
+        <div class="alert alert-primary" th:if="${#lists.isEmpty(medicos)}">
+            Nenhum médico cadastrado!
+        </div>
+        <div class="alert alert-success" th:if="${mensagem}" th:text="${mensagem}"></div>
+        <div class="alert alert-danger" th:if="${erro}" th:text="${erro}"></div>
+
+        <div class="pesquisa">
+    
+            <form class="pesquisa-barra d-flex" method="GET" th:action="@{/medico?nome=${palavra}}">
+                <input class="form-control me-2 " type="search" name="palavra" placeholder="Search" aria-label="Search">
+                <button class="btn btn-primary" type="submit">Pesquisar</button>
+            </form>
+
+            <a href="/medico/cadastrar" class="botao btn btn-primary">Novo médico</a>
+        </div>
+
+
+    
+        <div class="card"  th:if="${not #lists.isEmpty(medicos)}">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>crm</th>
+                    <th>Especialidade</th>
+                    <th>Detalhes</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="medico : ${medicos}">
+                    <td th:text="${medico.nome}"></td>
+                    <td th:text="${medico.crm}"></td>
+                    <td th:text="${medico.especialidade.titulo}"></td>
+                    <td>
+                        <a th:href="@{/medico/detalhes(idMedico=${medico.id})}" class="btn btn-outline-secondary">Detalhes</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+</div>
+</html>

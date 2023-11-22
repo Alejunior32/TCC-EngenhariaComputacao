@@ -1,0 +1,45 @@
+.formulario-login {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  display: flex;
+  min-width: 80%;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.imagem-medico img {
+  border-radius: 10px;
+}
+
+.card-login {
+  max-width: 55%;
+  min-width: 760px;
+}
+
+.login-botao {
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  background-image: url(../images/Tela-fundo.avif);
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media (max-width: 1310px) {
+  .card-login {
+    min-width: 60%;
+  }
+
+  .imagem-medico img {
+    display: none;
+  }
+}
