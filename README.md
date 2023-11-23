@@ -73,13 +73,13 @@ A TCC-EngenhariaComputacao-Totem é uma aplicação Python responsável pelo aut
 
 - Cadastrar Medico, (**POST**) localhost:8080/medico/cadastrar
 - Listar Medicos, (**GET**) localhost:8080/medico
-- Excluir Especialidade, (**DELETE**) localhost:8080/especialidade/excluir
+- Excluir Medico, (**DELETE**) localhost:8080/medico/excluir
 
 #### Paciente:
 
 - Cadastrar Medico, (**POST**) localhost:8080/paciente/cadastrar  
 - Listar Medicos, (**GET**) localhost:8080/paciente
-- Excluir Especialidade, (**DELETE**) localhost:8080/paciente/excluir
+- Excluir Paciente, (**DELETE**) localhost:8080/paciente/excluir
 
 ## Requisições do Médico:
 
