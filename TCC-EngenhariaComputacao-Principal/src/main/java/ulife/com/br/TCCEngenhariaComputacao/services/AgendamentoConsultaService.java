@@ -17,13 +17,13 @@ import java.util.List;
 public class AgendamentoConsultaService {
 
     @Autowired
-    AgendamentoConsultaRepository agendamentoConsultaRepository;
+    private AgendamentoConsultaRepository agendamentoConsultaRepository;
 
     @Autowired
-    MedicoService medicoService;
+    private MedicoService medicoService;
 
     @Autowired
-    PacienteService pacienteService;
+    private PacienteService pacienteService;
 
 
     public List<AgendamentoConsulta> listarAgendamentosConsultaPaciente(Paciente paciente){
@@ -34,11 +34,37 @@ public class AgendamentoConsultaService {
         return agendamentoConsultaRepository.findAllByMedicoAndDataConsulta(medico, LocalDate.now());
     }
 
+    public List<AgendamentoConsulta> listarTodosAgendamentosConsultaMedico(Medico medico){
+        return agendamentoConsultaRepository.findAllByMedico(medico);
+    }
+
+    public List<AgendamentoConsulta> listarTodosAgendamentosConsultaPaciente(Paciente paciente){
+        return agendamentoConsultaRepository.findAllByPaciente(paciente);
+    }
+
     public List<AgendamentoConsulta> listarAgendamentosConsultaAprovacao(){
         return agendamentoConsultaRepository.findAllByStatusAgendamentoPaciente(StatusAgendamentoPaciente.AGUARDANDO_CONFIRMACAO_AGENDAMENTO);
     }
 
     public AgendamentoConsulta salvarAgendamento(AgendamentoConsulta agendamentoConsulta){
         return agendamentoConsultaRepository.save(agendamentoConsulta);
+    }
+
+    public void excluirAgendamentosPaciente(Paciente paciente){
+        List<AgendamentoConsulta> agendamentosPaciente = listarTodosAgendamentosConsultaPaciente(paciente);
+        if (agendamentosPaciente != null && !agendamentosPaciente.isEmpty()) {
+            for (AgendamentoConsulta agendamento : agendamentosPaciente) {
+                agendamentoConsultaRepository.delete(agendamento);
+            }
+        }
+    }
+
+    public void excluirAgendamentosMedico(Medico medico){
+        List<AgendamentoConsulta> agendamentosMedico = listarTodosAgendamentosConsultaMedico(medico);
+        if (agendamentosMedico != null && !agendamentosMedico.isEmpty()) {
+            for (AgendamentoConsulta agendamento : agendamentosMedico) {
+                agendamentoConsultaRepository.delete(agendamento);
+            }
+        }
     }
 }

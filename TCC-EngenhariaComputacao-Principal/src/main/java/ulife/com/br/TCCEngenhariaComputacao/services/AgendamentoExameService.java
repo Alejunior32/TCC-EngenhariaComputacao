@@ -13,10 +13,10 @@ import java.util.List;
 public class AgendamentoExameService {
 
     @Autowired
-    AgendamentoExameRepository agendamentoExameRepository;
+    private AgendamentoExameRepository agendamentoExameRepository;
 
     @Autowired
-    PacienteService pacienteService;
+    private PacienteService pacienteService;
 
     public List<AgendamentoExame> listarAgendamentosPaciente(Paciente paciente){
         return agendamentoExameRepository.findAllByPaciente(paciente);

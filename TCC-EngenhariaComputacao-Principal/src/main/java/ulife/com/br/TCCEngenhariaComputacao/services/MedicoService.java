@@ -18,6 +18,9 @@ public class MedicoService {
     private MedicoRepository medicoRepository;
 
     @Autowired
+    AgendamentoConsultaService agendamentoConsultaService;
+
+    @Autowired
     private UsuarioService usuarioService;
 
     @Autowired
@@ -60,6 +63,7 @@ public class MedicoService {
 
     public void excluirPorId(Long idMedico) throws EntityNotFoundException {
         Medico medico = findById(idMedico);
+        agendamentoConsultaService.excluirAgendamentosMedico(medico);
         medicoRepository.delete(medico);
     }
 }

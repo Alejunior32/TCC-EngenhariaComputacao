@@ -21,6 +21,9 @@ public class PacienteService {
     PacienteRepository pacienteRepository;
 
     @Autowired
+    AgendamentoConsultaService agendamentoConsultaService;
+
+    @Autowired
     ConvenioService convenioService;
 
     @Autowired
@@ -55,8 +58,6 @@ public class PacienteService {
         return pacienteRepository.findAll();
     }
 
-
-
     public Paciente findByUsuario(Usuario usuario) {
         return pacienteRepository.findByUsuario(usuario);
     }
@@ -67,6 +68,8 @@ public class PacienteService {
 
     public void excluirPorId(Long idPaciente) throws EntityNotFoundException {
         Paciente paciente = buscarPorId(idPaciente);
+        agendamentoConsultaService.excluirAgendamentosPaciente(paciente);
         pacienteRepository.delete(paciente);
     }
+
 }

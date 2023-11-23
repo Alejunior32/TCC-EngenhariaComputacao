@@ -15,6 +15,10 @@ public interface AgendamentoConsultaRepository extends JpaRepository<Agendamento
 
     List<AgendamentoConsulta> findAllByMedicoAndDataConsulta(Medico medico, LocalDate dataConsulta);
 
+    List<AgendamentoConsulta> findAllByMedico(Medico medico);
+
+    List<AgendamentoConsulta> findAllByPaciente(Medico medico);
+
     List<AgendamentoConsulta> findAllByPaciente(Paciente paciente);
 
     List<AgendamentoConsulta> findAllByStatusAgendamentoPaciente(StatusAgendamentoPaciente status);
