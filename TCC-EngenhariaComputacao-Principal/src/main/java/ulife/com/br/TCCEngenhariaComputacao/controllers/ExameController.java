@@ -54,4 +54,16 @@ public class ExameController {
         exameService.salvar(exame);
         return  mv;
     }
+
+    @RequestMapping("excluir")
+    public ModelAndView excluirExame(@RequestParam Long idExame){
+        ModelAndView mv = new ModelAndView("redirect:/exame");
+        try{
+            exameService.excluirPorId(idExame);
+        }catch (EntityNotFoundException exception){
+            exception.getMessage();
+        }
+
+        return mv;
+    }
 }

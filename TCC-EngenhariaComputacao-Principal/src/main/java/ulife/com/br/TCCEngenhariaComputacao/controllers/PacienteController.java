@@ -69,4 +69,16 @@ public class PacienteController {
         return  mv;
     }
 
+    @RequestMapping("excluir")
+    public ModelAndView excluirPaciente(@RequestParam Long idPaciente){
+        ModelAndView mv = new ModelAndView("redirect:/paciente");
+        try{
+            pacienteService.excluirPorId(idPaciente);
+        }catch (EntityNotFoundException exception){
+            exception.getMessage();
+        }
+
+        return mv;
+    }
+
 }

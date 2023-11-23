@@ -44,6 +44,7 @@
                     <td th:text="${medico.especialidade.titulo}"></td>
                     <td>
                         <a th:href="@{/medico/detalhes(idMedico=${medico.id})}" class="btn btn-outline-secondary">Detalhes</a>
+                        <a th:href="@{/medico/excluir(idMedico=${medico.id})}" class="btn btn-outline-danger"  onclick="return confirm('Você deseja realmente excluir este Medico?')">Excluir</a>
                     </td>
                 </tr>
                 </tbody>

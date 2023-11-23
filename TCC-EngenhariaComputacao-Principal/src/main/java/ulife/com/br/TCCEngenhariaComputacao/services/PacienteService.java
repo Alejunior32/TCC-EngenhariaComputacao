@@ -64,4 +64,9 @@ public class PacienteService {
     public boolean usuarioExistente(String email){
         return usuarioService.existsByLogin(email);
     }
+
+    public void excluirPorId(Long idPaciente) throws EntityNotFoundException {
+        Paciente paciente = buscarPorId(idPaciente);
+        pacienteRepository.delete(paciente);
+    }
 }

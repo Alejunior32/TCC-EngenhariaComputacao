@@ -57,4 +57,9 @@ public class MedicoService {
     public boolean usuarioExistente(String email){
         return usuarioService.existsByLogin(email);
     }
+
+    public void excluirPorId(Long idMedico) throws EntityNotFoundException {
+        Medico medico = findById(idMedico);
+        medicoRepository.delete(medico);
+    }
 }
