@@ -54,7 +54,6 @@ class BuscarUsuarioPorCpfController(MethodView):
 
                     if dataagendamento_consulta:
 
-                        primeiro_agendamento_consulta = dataagendamento_consulta[0]
                         novo_status = "PACIENTE_PRESENTE"
                         atualizacao_sql = ("UPDATE tcc_engenhariacomputacao.agendamento_consulta SET "
                                            "status_agendamento_medico = %s " "WHERE paciente_id = %s")
