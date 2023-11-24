@@ -39,9 +39,11 @@
                         <span class="descricao">Especialidade:</span>
                         <span th:text="${agendamento.Especialidade.titulo}"></span>
                     </div>
+                    <div class="form-lista-agendamento-botao">
+                        <a th:href="@{/agendamentos/consulta/excluir(idAgendamento=${agendamento.id})}" class="btn btn-danger"  onclick="return confirm('Você deseja realmente cancelar este Agendamento?')">Cancelar</a>
+                    </div>
                 </div>
             </div>
-            <a th:href="@{/agendamentos/consulta/excluir(idAgendamento=${agendamento.id})}" class="btn btn-outline-danger"  onclick="return confirm('Você deseja realmente cancelar este Agendamento?')">Cancelar Agendamento</a>
         </div>
         <a href="/agendamentos/consulta/agendar" class="btn btn-primary">Nova Consulta</a>
     </div>

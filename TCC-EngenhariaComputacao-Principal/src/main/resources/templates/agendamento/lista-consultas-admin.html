@@ -9,7 +9,7 @@
 <div layout:fragment="content">
     <h1>Agendamentos</h1>
     <div class="alert alert-primary" th:if="${#lists.isEmpty(agendamentos)}">
-        Não possui nenhum Agendamento de Consulta!
+        Não possui nenhum agendamento de consulta para confirmar!
     </div>
     <div class="alert alert-success" th:if="${mensagem}" th:text="${mensagem}"></div>
     <div class="alert alert-danger" th:if="${erro}" th:text="${erro}"></div>
@@ -48,9 +48,12 @@
                     <span class="descricao">Especialidade:</span>
                     <span th:text="${agendamento.Especialidade.titulo}"></span>
                     </div>
+                    <div class="form-lista-agendamento-botao">
+                        <a th:href="@{/agendamentos/consulta/confirmaAgendamento(idAgendamento=${agendamento.id})}" class="btn btn-success">Confirmar</a>
+                        <a th:href="@{/agendamentos/consulta/excluir(idAgendamento=${agendamento.id})}" class="btn btn-danger"  onclick="return confirm('Você deseja realmente cancelar este Agendamento?')">Cancelar</a>
+                    </div>
                 </div>
             </div>
-            <a th:href="@{/agendamentos/consulta/excluir(idAgendamento=${agendamento.id})}" class="btn btn-outline-danger"  onclick="return confirm('Você deseja realmente cancelar este Agendamento?')">Cancelar Agendamento</a>
         </div>
     </div>
 

@@ -88,4 +88,10 @@ public class AgendamentoConsultaService {
         AgendamentoConsulta agendamentoConsulta = buscarPorId(idAgendamento);
         agendamentoConsultaRepository.delete(agendamentoConsulta);
     }
+
+    public void atualizarStatusConsulta(Long idAgendamento) throws EntityNotFoundException {
+        AgendamentoConsulta agendamentoConsulta = buscarPorId(idAgendamento);
+        agendamentoConsulta.setStatusAgendamentoPaciente("PACIENTE_PRESENTE");
+        agendamentoConsultaRepository.save(agendamentoConsulta);
+    }
 }

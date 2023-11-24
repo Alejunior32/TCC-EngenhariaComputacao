@@ -16,6 +16,11 @@
     display: flex;
 }
 
+.form-lista-agendamento-botao {
+    display: flex;
+    justify-content: center;
+}
+
 .descricao {
     font-weight: bold;
     margin-right: 5px;

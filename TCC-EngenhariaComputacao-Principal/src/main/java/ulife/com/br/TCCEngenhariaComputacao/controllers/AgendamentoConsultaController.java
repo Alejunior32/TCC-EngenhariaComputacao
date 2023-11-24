@@ -120,4 +120,18 @@ public class AgendamentoConsultaController {
         return mv;
     }
 
+    @RequestMapping("consulta/confirmaAgendamento")
+    public ModelAndView confirmarAgendamentoConsulta(Authentication authentication, @RequestParam Long idAgendamento) {
+        Usuario usuario = (Usuario) authentication.getPrincipal();
+        ModelAndView mv = new ModelAndView("redirect:/agendamentos/consulta");
+
+        try{
+            agendamentoService.atualizarStatusConsulta(idAgendamento);
+        } catch (EntityNotFoundException exception){
+            exception.getMessage();
+        }
+
+        return mv;
+    }
+
 }
