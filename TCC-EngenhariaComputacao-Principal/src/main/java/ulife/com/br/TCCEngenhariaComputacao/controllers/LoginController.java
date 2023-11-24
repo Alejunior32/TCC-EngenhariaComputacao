@@ -29,12 +29,15 @@ public class LoginController {
     }
 
     @GetMapping("/")
-    public String layout(Authentication authentication){
-        Usuario usuario = (Usuario) authentication.getPrincipal();
+    public String layout(Authentication authentication) {
+        if (authentication != null && authentication.getPrincipal() instanceof Usuario) {
+            Usuario usuario = (Usuario) authentication.getPrincipal();
 
-        if (usuario.getRole().equals(Role.ROLE_ADMIN))
-            return "home-admin";
-        return "home-geral";
+            if (usuario.getRole().equals(Role.ROLE_ADMIN))
+                return "home-admin";
+            return "home-geral";
+        }
+        return "redirect:/login";
     }
 
     @GetMapping("/primeiro-acesso")
@@ -79,5 +82,10 @@ public class LoginController {
         return loginService.esqueciSenha(tokenString,novaSenhaDTO);
     }
 
-
+    @GetMapping("/login-error")
+    public ModelAndView loginError(ModelAndView modelAndView) {
+        modelAndView.addObject("loginError", true);
+        modelAndView.setViewName("login/login");
+        return modelAndView;
+    }
 }
