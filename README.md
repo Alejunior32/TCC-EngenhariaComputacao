@@ -48,7 +48,7 @@ A TCC-EngenhariaComputacao-Totem é uma aplicação Python responsável pelo aut
 - Agendar Consulta, (**POST**) localhost:8080/agendamentos/consulta/agendar
 - Listar Consultas, (**GET**) localhost:8080/agendamentos/consulta
 - Agendar Exame, (**POST**) localhost:8080/agendamentos/exame/agendar
-- Listar Exames, **GET**) localhost:8080/agendamentos/exame
+- Listar Exames, (**GET**) localhost:8080/agendamentos/exame
 
 #### Totem:
 
@@ -61,25 +61,27 @@ A TCC-EngenhariaComputacao-Totem é uma aplicação Python responsável pelo aut
 
 - Cadastrar Especialidade, (**POST**) localhost:8080/especialidade/cadastrar
 - Listar Especialidades, (**GET**) localhost:8080/especialidade
-- Excluir Especialidade, (**DELETE**) localhost:8080/especialidade/excluir
+- Atualizar Especialidade, (**PUT**) localhost:8080/especialidade/cadastrar{idEspecialidade}
+- Excluir Especialidade, (**DELETE**) localhost:8080/especialidade/excluir{idEspecialidade}
 
 #### Exame:
 
 - Cadastrar Exame, (**POST**) localhost:8080/exame/cadastrar
 - Listar Exames, (**GET**) localhost:8080/exame
-- Excluir Exame, (**DELETE**) localhost:8080/exame/excluir
+- Atualizar Exame, (**PUT**) localhost:8080/exame/cadastrar{idExame}
+- Excluir Exame, (**DELETE**) localhost:8080/exame/excluir{idExame}
 
 #### Medico:
 
 - Cadastrar Medico, (**POST**) localhost:8080/medico/cadastrar
 - Listar Medicos, (**GET**) localhost:8080/medico
-- Excluir Medico, (**DELETE**) localhost:8080/medico/excluir
+- Excluir Medico, (**DELETE**) localhost:8080/medico/excluir{idMedico}
 
 #### Paciente:
 
 - Cadastrar Medico, (**POST**) localhost:8080/paciente/cadastrar  
 - Listar Medicos, (**GET**) localhost:8080/paciente
-- Excluir Paciente, (**DELETE**) localhost:8080/paciente/excluir
+- Excluir Paciente, (**DELETE**) localhost:8080/paciente/excluir{idPaciente}
 
 ## Requisições do Médico:
 
