@@ -55,28 +55,32 @@ A TCC-EngenhariaComputacao-Totem é uma aplicação Python responsável pelo aut
 - Gerar Senha Para Atendimento, (**GET**) localhost:4000/senha
 - Confirmar Presença Consultório, (**POST**) localhost:4000/buscar-usuario-cpf
 
-## Requisições do Administrador
+## Requisições do Administrador:
 
 #### Especialidade:
 
 - Cadastrar Especialidade, (**POST**) localhost:8080/especialidade/cadastrar
 - Listar Especialidades, (**GET**) localhost:8080/especialidade
+- Excluir Especialidade, (**DELETE**) localhost:8080/especialidade/excluir
 
 #### Exame:
 
 - Cadastrar Exame, (**POST**) localhost:8080/exame/cadastrar
 - Listar Exames, (**GET**) localhost:8080/exame
+- Excluir Exame, (**DELETE**) localhost:8080/exame/excluir
 
-#### Exame:
+#### Medico:
 
 - Cadastrar Medico, (**POST**) localhost:8080/medico/cadastrar
 - Listar Medicos, (**GET**) localhost:8080/medico
+- Excluir Medico, (**DELETE**) localhost:8080/medico/excluir
 
 #### Paciente:
 
 - Cadastrar Medico, (**POST**) localhost:8080/paciente/cadastrar  
-- Listar Medicos, (**GET**) localhost:8080/paciente  
+- Listar Medicos, (**GET**) localhost:8080/paciente
+- Excluir Paciente, (**DELETE**) localhost:8080/paciente/excluir
 
-## Requisições do Médico
+## Requisições do Médico:
 
 - Listar Consultas do Dia, (**GET**)localhost:8080/agendamentos/consulta  
