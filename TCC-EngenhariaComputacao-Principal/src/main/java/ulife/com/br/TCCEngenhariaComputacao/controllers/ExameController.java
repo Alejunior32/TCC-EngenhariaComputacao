@@ -65,7 +65,7 @@ public class ExameController {
     @PostMapping("cadastrar")
     private ModelAndView cadastrarExame(@Valid Exame exame, RedirectAttributes redirectAttributes){
         ModelAndView mv = new ModelAndView("redirect:/exame");
-        redirectAttributes.addFlashAttribute("mensagem","novo exame cadastrada com sucesso!");
+        redirectAttributes.addFlashAttribute("mensagem","Novo Exame cadastrado com sucesso!");
         exameService.salvar(exame);
         return  mv;
     }
