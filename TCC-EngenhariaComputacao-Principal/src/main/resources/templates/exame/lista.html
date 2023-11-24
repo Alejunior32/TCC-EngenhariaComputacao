@@ -40,6 +40,7 @@
                         <td th:text="${exame.titulo}"></td>
                         <td>
                             <a th:href="@{/exame/detalhes(idExame=${exame.id})}" class="btn btn-outline-secondary">Detalhes</a>
+                            <a th:href="@{/exame/cadastrar(idExame=${exame.id})}" class="btn btn-outline-warning">Editar</a>
                             <a th:href="@{/exame/excluir(idExame=${exame.id})}" class="btn btn-outline-danger"  onclick="return confirm('Você deseja realmente excluir este Exame?')">Excluir</a>
                         </td>
                     </tr>

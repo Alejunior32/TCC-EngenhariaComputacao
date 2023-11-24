@@ -36,16 +36,31 @@ public class EspecialidadeController {
     }
 
     @GetMapping("cadastrar")
-    private ModelAndView formularioEspecialidade(){
+    private ModelAndView formularioEspecialidade(@RequestParam(required = false) Long idEspecialidade){
         ModelAndView mv = new ModelAndView("especialidade/form.html");
-        mv.addObject("especialidade",new Especialidade());
+
+        Especialidade especialidade;
+
+        if (idEspecialidade == null){
+            especialidade = new Especialidade();
+        } else {
+            try {
+                especialidade = especialidadeService.buscarPorId(idEspecialidade);
+            } catch (Exception e) {
+                especialidade = new Especialidade();
+                mv = new ModelAndView("redirect:/especialidade");
+                mv.addObject("mensagem", "Falha ao editar Especialidade");
+            }
+        }
+
+        mv.addObject("especialidade", especialidade);
         return mv;
     }
 
     @PostMapping("cadastrar")
     private ModelAndView cadastrarEspecialidade(@Valid Especialidade especialidade, RedirectAttributes redirectAttributes){
         ModelAndView mv = new ModelAndView("redirect:/especialidade");
-        redirectAttributes.addFlashAttribute("mensagem","nova especialidade cadastrada com sucesso!");
+        redirectAttributes.addFlashAttribute("mensagem","Nova Especialidade cadastrada com sucesso!");
         especialidadeService.salvar(especialidade);
         return  mv;
     }

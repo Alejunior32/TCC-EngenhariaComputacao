@@ -41,9 +41,24 @@ public class ExameController {
     }
 
     @GetMapping("cadastrar")
-    private ModelAndView formularioExame(){
+    private ModelAndView formularioExame(@RequestParam(required = false) Long idExame){
         ModelAndView mv = new ModelAndView("exame/form.html");
-        mv.addObject("exame",new Exame());
+
+        Exame exame;
+
+        if (idExame == null){
+            exame = new Exame();
+        } else {
+            try {
+                exame = exameService.buscarPorId(idExame);
+            } catch (Exception e){
+                exame = new Exame();
+                mv = new ModelAndView("redirect:/exame");
+                mv.addObject("mensagem", "Falha ao editar Exame");
+            }
+        }
+
+        mv.addObject("exame", exame);
         return mv;
     }
 
