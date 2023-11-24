@@ -14,4 +14,5 @@ public interface AgendamentoExameRepository extends JpaRepository<AgendamentoExa
 
     List<AgendamentoExame> findAllByPaciente(Paciente paciente);
 
+    List<AgendamentoExame> findAllByStatusAgendamentoPaciente(String status);
 }
