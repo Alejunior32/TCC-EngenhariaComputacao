@@ -4,6 +4,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import ulife.com.br.TCCEngenhariaComputacao.dto.medico.CadastroMedicoDTO;
 import ulife.com.br.TCCEngenhariaComputacao.models.Medico;
 import ulife.com.br.TCCEngenhariaComputacao.models.Usuario;
 import ulife.com.br.TCCEngenhariaComputacao.repositories.MedicoRepository;
@@ -65,5 +66,18 @@ public class MedicoService {
         Medico medico = findById(idMedico);
         agendamentoConsultaService.excluirAgendamentosMedico(medico);
         medicoRepository.delete(medico);
+    }
+
+    public Medico editar(CadastroMedicoDTO cadastroMedicoDTO,Long idMedico) {
+        Medico medico = findById(idMedico);
+
+        medico.setNome(cadastroMedicoDTO.getNome());
+        medico.setCrm(cadastroMedicoDTO.getCrm());
+        medico.setEspecialidade(cadastroMedicoDTO.getEspecialidade());
+
+        medico.getUsuario().setLogin(cadastroMedicoDTO.getEmail());
+        usuarioService.salvarUsuario(medico.getUsuario());
+
+        return medicoRepository.save(medico);
     }
 }

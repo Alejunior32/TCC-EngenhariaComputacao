@@ -25,7 +25,7 @@ public class SecurityConfigurations {
                                 .requestMatchers("/images/**","/css/**","templates/**").permitAll()
                                 .requestMatchers(HttpMethod.GET,"/esqueci-a-senha").permitAll()
                                 .requestMatchers(HttpMethod.POST,"/login","/paciente/cadastrar","/esqueci-a-senha").permitAll()
-                                .requestMatchers("/especialidade", "/medico", "/paciente", "/exame").hasRole("ADMIN")
+                                .requestMatchers("/especialidade", "/medico", "/paciente", "/exame", "/editar").hasRole("ADMIN")
 //                                .anyRequest().authenticated()
                                 .anyRequest().permitAll()
                 )
