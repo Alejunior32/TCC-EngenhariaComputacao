@@ -25,6 +25,9 @@ public class AgendamentoConsultaService {
     @Autowired
     private PacienteService pacienteService;
 
+    @Autowired
+    private EmailService emailService;
+
 
     public List<AgendamentoConsulta> listarAgendamentosConsultaPaciente(Paciente paciente){
         return agendamentoConsultaRepository.findAllByPaciente(paciente);
@@ -47,6 +50,13 @@ public class AgendamentoConsultaService {
     }
 
     public AgendamentoConsulta salvarAgendamento(AgendamentoConsulta agendamentoConsulta){
+        emailService.sendEmail(agendamentoConsulta.getPaciente().getUsuario().getLogin(),"Consulta com um " +
+                        agendamentoConsulta.getMedico().getEspecialidade().getTitulo()+ " Agendada!",
+                "Consulta agendada com o(a) médico(a): "+ agendamentoConsulta.getMedico().getNome()+ "(" + agendamentoConsulta.getMedico().getEspecialidade().getTitulo() +")\n"
+                        + "Dia: " + agendamentoConsulta.getDataConsulta() + "\nHorário: " + agendamentoConsulta.getHorario().getHoraMinuto());
+        emailService.sendEmail(agendamentoConsulta.getMedico().getUsuario().getLogin(),"Consulta Agendada!",
+                "Consulta agendada com o(a) paciente: "+ agendamentoConsulta.getPaciente().getNome()+ "\n"
+                        + "Dia: " + agendamentoConsulta.getDataConsulta() + "\nHorário: " + agendamentoConsulta.getHorario().getHoraMinuto());
         return agendamentoConsultaRepository.save(agendamentoConsulta);
     }
 
@@ -57,6 +67,7 @@ public class AgendamentoConsultaService {
                 agendamentoConsultaRepository.delete(agendamento);
             }
         }
+
     }
 
     public void excluirAgendamentosMedico(Medico medico){
