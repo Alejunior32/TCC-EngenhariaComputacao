@@ -21,4 +21,8 @@ public class AgendamentoExameService {
     public List<AgendamentoExame> listarAgendamentosPaciente(Paciente paciente){
         return agendamentoExameRepository.findAllByPaciente(paciente);
     }
+
+    public List<AgendamentoExame> listarTodosAgendamentos(){
+        return agendamentoExameRepository.findAll();
+    }
 }

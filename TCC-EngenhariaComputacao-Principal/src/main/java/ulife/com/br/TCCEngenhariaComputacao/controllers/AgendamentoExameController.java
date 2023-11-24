@@ -29,10 +29,15 @@ public class AgendamentoExameController {
     @GetMapping("/exame")
     public ModelAndView listarAgendamentosExame(Authentication authentication) {
         Usuario usuario = (Usuario) authentication.getPrincipal();
-        ModelAndView mv = new ModelAndView("agendamento/lista-exames.html");
+        ModelAndView mv = new ModelAndView("agendamento/lista-exames-geral.html");
 
-        if (usuario.getRole().equals(Role.ROLE_PACIENTE))
-            mv.addObject("agendamentos",agendamentoService.listarAgendamentosPaciente(pacienteService.findByUsuario(usuario)));
+        if (usuario.getRole().equals(Role.ROLE_PACIENTE)) {
+            mv = new ModelAndView("agendamento/lista-exames-paciente.html");
+            mv.addObject("agendamentos", agendamentoService.listarAgendamentosPaciente(pacienteService.findByUsuario(usuario)));
+        } else if (usuario.getRole().equals(Role.ROLE_ADMIN)||usuario.getRole().equals(Role.ROLE_MEDICO)) {
+            mv = new ModelAndView("agendamento/lista-exames-geral.html");
+            mv.addObject("agendamentos", agendamentoService.listarTodosAgendamentos());
+        }
 
         return mv;
     }

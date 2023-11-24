@@ -26,8 +26,8 @@ public class SecurityConfigurations {
                                 .requestMatchers(HttpMethod.GET,"/esqueci-a-senha").permitAll()
                                 .requestMatchers(HttpMethod.POST,"/login","/paciente/cadastrar","/esqueci-a-senha").permitAll()
                                 .requestMatchers("/especialidade", "/medico", "/paciente", "/exame", "/editar").hasRole("ADMIN")
-//                                .anyRequest().authenticated()
-                                .anyRequest().permitAll()
+                                .anyRequest().authenticated()
+//                                .anyRequest().permitAll()
                 )
                 .formLogin(form -> form
                         .loginPage("/login")

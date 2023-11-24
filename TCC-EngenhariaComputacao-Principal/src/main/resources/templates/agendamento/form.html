@@ -7,24 +7,31 @@
     <script>
         // Quando a página carrega
         document.addEventListener("DOMContentLoaded", function() {
-            var idMedico = localStorage.getItem("idMedico");
-            document.getElementById("medico").value = idMedico || "";
-        });
+    var idMedico = localStorage.getItem("idMedico");
+    var dataConsulta = localStorage.getItem("dataConsulta");
 
-        function redirecionarPagina() {
-            var idEspecialidade = document.getElementById("especialidade").value;
-            var idMedico = document.getElementById("medico").value;
-            var dataConsulta = document.getElementById("data").value;
+    document.getElementById("medico").value = idMedico || "";
 
-            // Armazenar os valores no localStorage
-            localStorage.setItem("idMedico", idMedico);
+    if (dataConsulta) {
+        document.getElementById("data").value = dataConsulta;
+    }
+});
 
-            if (idEspecialidade && idMedico && dataConsulta) {
-                window.location.href = "agendar?idEspecialidade=" + idEspecialidade +
-                                      "&idMedico=" + idMedico +
-                                      "&dataConsulta=" + dataConsulta;
-            }
-        }
+function redirecionarPagina() {
+    var idEspecialidade = document.getElementById("especialidade").value;
+    var idMedico = document.getElementById("medico").value;
+    var dataConsulta = document.getElementById("data").value;
+
+    // Armazenar os valores no localStorage
+    localStorage.setItem("idMedico", idMedico);
+    localStorage.setItem("dataConsulta", dataConsulta);
+
+    if (idEspecialidade && idMedico && dataConsulta) {
+        window.location.href = "agendar?idEspecialidade=" + idEspecialidade +
+                              "&idMedico=" + idMedico +
+                              "&dataConsulta=" + dataConsulta;
+    }
+}
     </script>
 </head>
 <body>

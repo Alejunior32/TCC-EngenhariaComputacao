@@ -1,5 +1,6 @@
 package ulife.com.br.TCCEngenhariaComputacao.services;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ulife.com.br.TCCEngenhariaComputacao.enums.Role;
@@ -46,7 +47,11 @@ public class AgendamentoConsultaService {
     }
 
     public List<AgendamentoConsulta> listarAgendamentosConsultaAprovacao(){
-        return agendamentoConsultaRepository.findAllByStatusAgendamentoPaciente(StatusAgendamentoPaciente.AGUARDANDO_CONFIRMACAO_AGENDAMENTO);
+        return agendamentoConsultaRepository.findAllByStatusAgendamentoPaciente(StatusAgendamentoPaciente.AGUARDANDO_CONFIRMACAO_AGENDAMENTO.toString());
+    }
+
+    public AgendamentoConsulta buscarPorId(Long idConsulta) {
+        return agendamentoConsultaRepository.findById(idConsulta).orElseThrow(() -> new EntityNotFoundException("Consulta não existe!"));
     }
 
     public AgendamentoConsulta salvarAgendamento(AgendamentoConsulta agendamentoConsulta){
@@ -77,5 +82,10 @@ public class AgendamentoConsultaService {
                 agendamentoConsultaRepository.delete(agendamento);
             }
         }
+    }
+
+    public void excluirAgendamento(Long idAgendamento) throws EntityNotFoundException {
+        AgendamentoConsulta agendamentoConsulta = buscarPorId(idAgendamento);
+        agendamentoConsultaRepository.delete(agendamentoConsulta);
     }
 }

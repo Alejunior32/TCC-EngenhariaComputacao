@@ -2,31 +2,49 @@
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout-geral.html}">
 <head>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
     <title>TCC | Agendamentos</title>
 </head>
 <body>
 <div layout:fragment="content">
     <h1>Agendamentos</h1>
     <div class="alert alert-primary" th:if="${#lists.isEmpty(agendamentos)}">
-        Não possui nenhum agendamentoConsulta!
+        Não possui nenhum Agendamento de Consulta!
     </div>
     <div class="alert alert-success" th:if="${mensagem}" th:text="${mensagem}"></div>
     <div class="alert alert-danger" th:if="${erro}" th:text="${erro}"></div>
 
-    <div class="card">
 
+    <div class="card">
         <div th:each="agendamento : ${agendamentos}">
-            <div class="texto-card" >
-                <span th:text="${agendamento.dataConsulta}" ></span>
-                <span th:text="${agendamento.statusAgendamentoMedico}" ></span>
-                <span th:text="${agendamento.horario.horaMinuto}"></span>
-                <span th:text="${agendamento.medico.nome}" ></span>
-                <span th:text="${agendamento.Especialidade.titulo}"></span>
+            <div class="rounded-box">
+                <div class="texto-card">
+                    <div class="form-lista-agendamento">
+                        <span class="descricao">Nome Paciente:</span>
+                        <span th:text="${agendamento.paciente.nome}" ></span>
+                    </div>
+                    <div class="form-lista-agendamento">
+                        <span class="descricao">Data Consulta:</span>
+                        <span th:text="${agendamento.dataConsulta}" ></span>
+                    </div>
+                    <div class="form-lista-agendamento">
+                        <span class="descricao">Status Presença Paciente:</span>
+                        <span th:if="${agendamento.statusAgendamentoMedico eq 'AGUARDANDO_CONFIRMACAO_AGENDAMENTO'}" class="errado">&#10007;</span>
+                        <span th:if="${agendamento.statusAgendamentoMedico eq 'PACIENTE_PRESENTE'}" class="certo">&#x2714;</span>
+                    </div>
+                    <div class="form-lista-agendamento">
+                        <span class="descricao">Status Agendamento:</span>
+                        <span th:if="${agendamento.statusAgendamentoPaciente eq 'AGUARDANDO_CONFIRMACAO_AGENDAMENTO'}" class="errado">&#10007;</span>
+                        <span th:if="${agendamento.statusAgendamentoPaciente eq 'PACIENTE_PRESENTE'}" class="certo">&#x2714;</span>
+                    </div>
+                    <div class="form-lista-agendamento">
+                        <span class="descricao">Horário:</span>
+                        <span th:text="${agendamento.horario.horaMinuto}"></span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
-</div>
 
 </body>
 </html>

@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">
+<head>
+    <title>TCC | Agendamentos</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <h1>Agendamentos</h1>
+    <div class="alert alert-primary" th:if="${#lists.isEmpty(agendamentos)}">
+        Não possui nenhum Agendamento de Exame!
+    </div>
+    <div class="alert alert-success" th:if="${mensagem}" th:text="${mensagem}"></div>
+    <div class="alert alert-danger" th:if="${erro}" th:text="${erro}"></div>
+
+</div>
+
+</body>
+</html>
