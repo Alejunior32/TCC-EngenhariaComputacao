@@ -47,35 +47,35 @@ class BuscarUsuarioPorCpfController(MethodView):
             primeiro_registro = data[0]
             imagem_paciente = primeiro_registro[6]
             resultado_reconhecimento = reconhecer_face(imagem_paciente)
+
             if resultado_reconhecimento:
                 with mysql.cursor() as cur:
                     cur.execute("SELECT * FROM agendamento_consulta WHERE paciente_id = %s", primeiro_registro[0])
-                    dataagendamento_consulta = cur.fetchall()
+                    data_agendamento_consulta = cur.fetchall()
 
-                    if dataagendamento_consulta:
-
+                    if data_agendamento_consulta:
                         novo_status = "PACIENTE_PRESENTE"
                         atualizacao_sql = ("UPDATE tcc_engenhariacomputacao.agendamento_consulta SET "
-                                           "status_agendamento_medico = %s " "WHERE paciente_id = %s")
+                                           "status_agendamento_medico = %s WHERE paciente_id = %s")
                         cur.execute(atualizacao_sql, (novo_status, primeiro_registro[0]))
                         mysql.commit()
-                    else:
-                        flash('Paciente encontrado,\n mas não possui agendamento_consulta!')
-                        return redirect(url_for('buscar-usuario'))
 
-                return redirect(url_for('reconhecimento-facial'))
+                        return redirect(url_for('reconhecimento-facial'))
+                    else:
+                        flash('PACIENTE ENCONTRADO MAS NÃO POSSUI AGENDAMENTO')
+                        return redirect(url_for('buscar-usuario'))
             else:
-                flash('Paciente encontrado,\n mas não reconhecido!')
+                flash('PACIENTE ENCONTRADO MAS NÃO RECONHECIDO')
                 return redirect(url_for('buscar-usuario'))
         else:
             # Usuário não encontrado
-            flash('Paciente não encontrado', 'error')  # 'error' é uma classe de estilo para destacar a mensagem de erro
+            flash('PACIENTE NÃO ENCONTRADO')
             return redirect(url_for('buscar-usuario'))
 
 
 class ReconhecimentoFacialController(MethodView):
     def get(self):
-        flash('Paciente encontrado\n e reconhecido!')
+        flash('PACIENTE ENCONTRADO E RECONHECIDO')
 
         return render_template('reconhecimento.html')
 
