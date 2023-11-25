@@ -78,7 +78,6 @@ public class AgendamentoConsultaController {
         ModelAndView mv = new ModelAndView();
 
         if (idEspecialidade != null) {
-            // Se o idEspecialidade estiver presente, redirecione para o formulário de agendamento
             mv.setViewName("agendamento/form");
             mv.addObject("idEspecialidade", idEspecialidade);
             mv.addObject("medicos",medicoService.findAllByEspecialidadeId(idEspecialidade));
@@ -89,7 +88,6 @@ public class AgendamentoConsultaController {
                 mv.addObject("cadastroAgendamentoDto",cadastroAgendamentoDto);
             }
         } else {
-            // Se não houver idEspecialidade, mostre a página de escolha de especialidade
             mv.setViewName("agendamento/escolha-especialidade");
             mv.addObject("especialidades", especialidadeService.listar());
         }

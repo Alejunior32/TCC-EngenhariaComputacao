@@ -19,7 +19,10 @@ public class MedicoService {
     private MedicoRepository medicoRepository;
 
     @Autowired
-    AgendamentoConsultaService agendamentoConsultaService;
+    private AgendamentoConsultaService agendamentoConsultaService;
+
+    @Autowired
+    private AgendamentoExameService agendamentoExameService;
 
     @Autowired
     private UsuarioService usuarioService;

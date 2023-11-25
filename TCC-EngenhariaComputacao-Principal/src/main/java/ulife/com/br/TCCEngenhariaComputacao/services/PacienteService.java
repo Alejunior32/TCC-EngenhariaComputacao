@@ -27,6 +27,9 @@ public class PacienteService {
     private ConvenioService convenioService;
 
     @Autowired
+    private AgendamentoExameService agendamentoExameService;
+
+    @Autowired
     private UsuarioService usuarioService;
 
     @Autowired
@@ -87,6 +90,7 @@ public class PacienteService {
     public void excluirPorId(Long idPaciente) throws EntityNotFoundException {
         Paciente paciente = buscarPorId(idPaciente);
         agendamentoConsultaService.excluirAgendamentosPaciente(paciente);
+        agendamentoExameService.excluirAgendamentosPaciente(paciente);
         pacienteRepository.delete(paciente);
     }
 

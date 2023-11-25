@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ulraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout-geral.html}">
+<head>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <title>TCC | Agendamento</title>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+    var dataConsulta = localStorage.getItem("dataConsulta");
+
+    if (dataConsulta) {
+        document.getElementById("data").value = dataConsulta;
+    }
+});
+
+function redirecionarPagina() {
+    var idExame = document.getElementById("exame").value;
+    var dataConsulta = document.getElementById("data").value;
+
+    localStorage.setItem("dataConsulta", dataConsulta);
+
+    if (idExame && dataConsulta) {
+        window.location.href = "agendar?idExame=" + idExame +
+                              "&dataConsulta=" + dataConsulta;
+    }
+}
+    </script>
+</head>
+<body>
+
+<section class="layout-content" layout:fragment="content">
+    <main role="main">
+
+        <h1>Agendamento de Exame</h1>
+
+        <div class="card">
+            <div class="formulario">
+            <input type="hidden" id="exame" th:value="${idExame}">
+
+            <div class="input-group mb-3">
+                <label for="data" class="input-group-text">Data da consulta</label>
+                <input  type="date" id="data" onchange="redirecionarPagina()">
+            </div>
+
+            <div th:if="${not #lists.isEmpty(horarios)}">
+                <form method="post" th:action="@{/agendamentos/exame/agendar}" th:object="${cadastroAgendamentoDto}">
+
+                    <input type="hidden" th:value="${cadastroAgendamentoDto.exame}" th:field="${cadastroAgendamentoDto.exame}">
+                    <input type="hidden" th:value="${cadastroAgendamentoDto.paciente}" th:field="${cadastroAgendamentoDto.paciente}">
+                    <input type="hidden" th:value="${cadastroAgendamentoDto.dataConsulta}" th:field="${cadastroAgendamentoDto.dataConsulta}">
+
+
+                        <div class="input-group mb-3">
+                            <label for="horario" class="input-group-text">Horarios disponiveis</label>
+                            <select class="form-select" id="horario"  th:field="${cadastroAgendamentoDto.horario}"  required>
+                                <option th:each="horario : ${horarios}" th:value="${horario.id}" th:text="${horario.horaMinuto}"></option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <button type="submit" class="btn btn-primary">Cadastrar</button>
+                            <a th:href="@{/agendamentos/exame}" class="btn btn-primary">Voltar</a>
+                        </div>
+                </form>
+            </div>
+        </div>
+        </div>
+    </main>
+</section>
+
+</body>
+</html>

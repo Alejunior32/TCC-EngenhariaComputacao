@@ -52,13 +52,23 @@ class BuscarUsuarioPorCpfController(MethodView):
                 with mysql.cursor() as cur:
                     cur.execute("SELECT * FROM agendamento_consulta WHERE paciente_id = %s", primeiro_registro[0])
                     data_agendamento_consulta = cur.fetchall()
+                    cur.execute("SELECT * FROM agendamento_exame WHERE paciente_id = %s", primeiro_registro[0])
+                    data_agendamento_exame = cur.fetchall()
 
-                    if data_agendamento_consulta:
+                    if data_agendamento_consulta or data_agendamento_exame:
                         novo_status = "PACIENTE_PRESENTE"
-                        atualizacao_sql = ("UPDATE tcc_engenhariacomputacao.agendamento_consulta SET "
-                                           "status_agendamento_medico = %s WHERE paciente_id = %s")
-                        cur.execute(atualizacao_sql, (novo_status, primeiro_registro[0]))
-                        mysql.commit()
+
+                        if data_agendamento_consulta:
+                            atualizacao_sql_consulta = ("UPDATE tcc_engenhariacomputacao.agendamento_consulta SET "
+                                                        "status_agendamento_medico = %s WHERE paciente_id = %s")
+                            cur.execute(atualizacao_sql_consulta, (novo_status, primeiro_registro[0]))
+                            mysql.commit()
+
+                        if data_agendamento_exame:
+                            atualizacao_sql_exame = ("UPDATE tcc_engenhariacomputacao.agendamento_exame SET "
+                                                     "status_agendamento_medico = %s WHERE paciente_id = %s")
+                            cur.execute(atualizacao_sql_exame, (novo_status, primeiro_registro[0]))
+                            mysql.commit()
 
                         return redirect(url_for('reconhecimento-facial'))
                     else:
