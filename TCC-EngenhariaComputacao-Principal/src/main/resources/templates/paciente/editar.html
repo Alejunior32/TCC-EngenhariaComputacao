@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ulraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">
+<head>
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+  <title>TCC | Paciente</title>
+</head>
+<div layout:fragment="content">
+
+  <div class="alert alert-danger" th:if="${erro}" th:text="${erro}"></div>
+
+  <h1>Editar Paciente</h1>
+  <div class="card">
+
+    <div class="formulario">
+
+      <form method="post" th:action="@{/paciente/editar(idPaciente=${idPaciente})}" th:object="${cadastroPacienteDto}">
+        <input type="hidden" id="idConvenio" name="idConvenio" th:value="${idConvenio}" />
+
+
+        <div class="mb-3">
+          <label for="nome" class="form-label">Nome</label>
+          <input type="text" class="form-control" id="nome" th:field="${cadastroPacienteDto.nome}"
+                 placeholder="Digite o nome do paciente" th:value="${cadastroPacienteDto.nome}" required>
+          <div class="text-danger" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
+        </div>
+        <div class="mb-3">
+          <label for="rg" class="form-label">RG</label>
+          <input type="text" class="form-control" id="rg" th:field="${cadastroPacienteDto.rg}"
+                 placeholder="Digite o RG do paciente" th:value="${cadastroPacienteDto.rg}" required>
+          <div class="text-danger" th:if="${#fields.hasErrors('rg')}" th:errors="*{rg}"></div>
+        </div>
+        <div class="mb-3">
+          <label for="cpf" class="form-label">CPF</label>
+          <input type="text" class="form-control" id="cpf" th:field="${cadastroPacienteDto.cpf}"
+                 placeholder="Digite o CPF do paciente" th:value="${cadastroPacienteDto.cpf}" required>
+          <div class="text-danger" th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}"></div>
+        </div>
+        <div class="mb-3">
+          <label for="dataNascimento" class="form-label">Data de Nascimento</label>
+          <input type="date" class="form-control" id="dataNascimento" th:field="${cadastroPacienteDto.dataNascimento}"
+                 placeholder="Digite a data de nascimento do paciente" th:value="${cadastroPacienteDto.dataNascimento}" required>
+          <div class="text-danger" th:if="${#fields.hasErrors('dataNascimento')}" th:errors="*{dataNascimento}"></div>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="text" class="form-control" id="email" th:field="${cadastroPacienteDto.email}"
+                 placeholder="Digite o email do paciente" th:value="${cadastroPacienteDto.email}" required>
+          <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+        </div>
+        <div class="mb-3">
+          <label for="nome-convenio" class="form-label">Nome Convênio</label>
+          <input type="text" class="form-control" id="nome-convenio" th:field="${cadastroPacienteDto.convenio.nomeConvenio}"
+                 placeholder="Digite o nome do Convenio" th:value="${cadastroPacienteDto.convenio.nomeConvenio}" required>
+          <div class="text-danger" th:if="${#fields.hasErrors('convenio.nomeConvenio')}" th:errors="*{convenio.nomeConvenio}"></div>
+        </div>
+        <div class="mb-3">
+          <label for="plano" class="form-label">Plano</label>
+          <input type="text" class="form-control" id="plano" th:field="${cadastroPacienteDto.convenio.plano}"
+                 placeholder="Digite seu Plano" th:value="${cadastroPacienteDto.convenio.plano}" required>
+          <div class="text-danger" th:if="${#fields.hasErrors('convenio.plano')}" th:errors="*{convenio.plano}"></div>
+        </div>
+        <div class="mb-3">
+          <label for="numeroIdentificacao" class="form-label">Número de Identificação</label>
+          <input type="text" class="form-control" id="numeroIdentificacao" th:field="${cadastroPacienteDto.convenio.numeroIdentificacao}"
+                 placeholder="Digite o número do convênio" th:value="${cadastroPacienteDto.convenio.numeroIdentificacao}" required>
+          <div class="text-danger" th:if="${#fields.hasErrors('convenio.numeroIdentificacao')}" th:errors="*{convenio.numeroIdentificacao}"></div>
+        </div>
+        <div class="mb-3">
+          <label for="dataInicio" class="form-label">Data de Início</label>
+          <input type="date" class="form-control" id="dataInicio" th:field="${cadastroPacienteDto.convenio.dataInicio}"
+                 placeholder="Digite a data de início do convênio" th:value="${cadastroPacienteDto.convenio.dataInicio}" required>
+          <div class="text-danger" th:if="${#fields.hasErrors('convenio.dataInicio')}" th:errors="*{convenio.dataInicio}"></div>
+        </div>
+        <div class="mb-3">
+          <label for="dataTermino" class="form-label">Data de Vencimento</label>
+          <input type="date" class="form-control" id="dataTermino" th:field="${cadastroPacienteDto.convenio.dataTermino}"
+                 placeholder="Digite a data de vencimento do convênio" th:value="${cadastroPacienteDto.convenio.dataTermino}" required>
+          <div class="text-danger" th:if="${#fields.hasErrors('convenio.dataTermino')}" th:errors="*{convenio.dataTermino}"></div>
+        </div>
+        <div>
+          <button type="submit" class="btn btn-primary">Editar</button>
+          <a th:href="@{/paciente}" class="btn btn-primary">Voltar</a>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+</div>
+
+</html>

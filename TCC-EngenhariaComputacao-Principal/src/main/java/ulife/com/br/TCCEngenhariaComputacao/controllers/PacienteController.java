@@ -15,6 +15,7 @@ import ulife.com.br.TCCEngenhariaComputacao.dto.convenio.ConvenioMapper;
 import ulife.com.br.TCCEngenhariaComputacao.dto.paciente.CadastroPacienteDTO;
 import ulife.com.br.TCCEngenhariaComputacao.dto.paciente.PacienteMapper;
 import ulife.com.br.TCCEngenhariaComputacao.dto.usuario.UsuarioMapper;
+import ulife.com.br.TCCEngenhariaComputacao.models.Paciente;
 import ulife.com.br.TCCEngenhariaComputacao.services.PacienteService;
 
 
@@ -68,6 +69,37 @@ public class PacienteController {
 
         return  mv;
     }
+
+
+    @GetMapping("editar")
+    public ModelAndView formEditarPaciente(@RequestParam(name = "idPaciente") Long idPaciente) {
+        ModelAndView mv = new ModelAndView("paciente/editar.html");
+
+        Paciente paciente = pacienteService.buscarPorId(idPaciente);;
+
+        mv.addObject("cadastroPacienteDto", PacienteMapper.formEntity(paciente));
+        mv.addObject("idPaciente", idPaciente);
+        mv.addObject("idConvenio", paciente.getConvenio().getId());
+
+        return mv;
+    }
+
+    @PostMapping("editar")
+    public ModelAndView editarPaciente(
+            @Valid CadastroPacienteDTO cadastroPacienteDTO,
+            RedirectAttributes redirectAttributes,
+            @RequestParam(name = "idPaciente") Long idPaciente,
+            @RequestParam(name = "idConvenio") Long idConvenio) {
+        ModelAndView mv = new ModelAndView("redirect:/paciente");
+
+        if (String.valueOf(cadastroPacienteDTO.getRg()).length() == 12) {
+            mv.addObject("message", "Paciente editado com sucesso");
+            pacienteService.editar(cadastroPacienteDTO, idPaciente, idConvenio);
+        }
+
+        return mv;
+    }
+
 
     @RequestMapping("excluir")
     public ModelAndView excluirPaciente(@RequestParam Long idPaciente){
