@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import ulife.com.br.TCCEngenhariaComputacao.enums.StatusAgendamentoPaciente;
 import ulife.com.br.TCCEngenhariaComputacao.models.AgendamentoConsulta;
 import ulife.com.br.TCCEngenhariaComputacao.models.AgendamentoExame;
+import ulife.com.br.TCCEngenhariaComputacao.models.Medico;
 import ulife.com.br.TCCEngenhariaComputacao.models.Paciente;
 import ulife.com.br.TCCEngenhariaComputacao.repositories.AgendamentoExameRepository;
 
@@ -24,6 +25,11 @@ public class AgendamentoExameService {
     private EmailService emailService;
 
     public List<AgendamentoExame> listarAgendamentosPaciente(Paciente paciente){
+        return agendamentoExameRepository.findAllByPaciente(paciente);
+
+    }
+
+    public List<AgendamentoExame> listarTodosAgendamentosExamePaciente(Paciente paciente){
         return agendamentoExameRepository.findAllByPaciente(paciente);
     }
 
@@ -50,6 +56,15 @@ public class AgendamentoExameService {
     public void excluirAgendamento(Long idAgendamento) throws EntityNotFoundException {
         AgendamentoExame agendamentoExame = buscarPorId(idAgendamento);
         agendamentoExameRepository.delete(agendamentoExame);
+    }
+
+    public void excluirAgendamentosPaciente(Paciente paciente) {
+        List<AgendamentoExame> agendamentosPaciente = listarTodosAgendamentosExamePaciente(paciente);
+        if (agendamentosPaciente != null && !agendamentosPaciente.isEmpty()) {
+            for (AgendamentoExame agendamento : agendamentosPaciente) {
+                agendamentoExameRepository.delete(agendamento);
+            }
+        }
     }
 
     public void atualizarStatusConsulta(Long idAgendamento) throws EntityNotFoundException {
