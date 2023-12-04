@@ -10,6 +10,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ulife.com.br.TCCEngenhariaComputacao.dto.medico.CadastroMedicoDTO;
 import ulife.com.br.TCCEngenhariaComputacao.dto.medico.MedicoMapper;
 import ulife.com.br.TCCEngenhariaComputacao.dto.usuario.UsuarioMapper;
+import ulife.com.br.TCCEngenhariaComputacao.models.Medico;
 import ulife.com.br.TCCEngenhariaComputacao.services.EspecialidadeService;
 import ulife.com.br.TCCEngenhariaComputacao.services.MedicoService;
 
@@ -27,17 +28,6 @@ public class MedicoController {
     public ModelAndView listarMedicos(@RequestParam(name = "palavra", required = false) String palavra ) {
         ModelAndView mv = new ModelAndView("medico/lista.html");
         mv.addObject("medicos",medicoService.listar(palavra));
-        return mv;
-    }
-
-    @GetMapping("/detalhes")
-    public ModelAndView detalhesMedico(@RequestParam Long idMedico){
-        ModelAndView mv = new ModelAndView("medico/detalhes.html");
-        try {
-            mv.addObject("medico", medicoService.findById(idMedico));
-        }catch (EntityNotFoundException exception){
-            mv.addObject("erroBusca",exception.getMessage());
-        }
         return mv;
     }
 
@@ -69,5 +59,42 @@ public class MedicoController {
         return  mv;
     }
 
+    @GetMapping("editar")
+    public ModelAndView formEditar(@RequestParam(name = "idMedico") Long idMedico ){
+        ModelAndView mv = new ModelAndView("medico/editar.html");
+
+        Medico medico = medicoService.findById(idMedico);
+
+        mv.addObject("cadastroMedicoDto", MedicoMapper.formeEntity(medico));
+        mv.addObject("idMedico",idMedico);
+        mv.addObject("especialidades", especialidadeService.listar());
+        return mv;
+    }
+
+    @PostMapping("editar")
+    public ModelAndView editarMedico(@Valid CadastroMedicoDTO cadastroMedicoDTO, RedirectAttributes redirectAttributes, @RequestParam(name = "idMedico") Long idMedico ) {
+        ModelAndView mv= new ModelAndView("redirect:/medico");
+
+        if (String.valueOf(cadastroMedicoDTO.getCrm()).length() == 6 ) {
+            mv.addObject("message", "Medico editado");
+            medicoService.editar(cadastroMedicoDTO,idMedico);
+        }
+
+        return  mv;
+    }
+
+
+
+    @RequestMapping("excluir")
+    public ModelAndView excluirMedico(@RequestParam Long idMedico){
+        ModelAndView mv = new ModelAndView("redirect:/medico");
+        try{
+            medicoService.excluirPorId(idMedico);
+        }catch (EntityNotFoundException exception){
+            exception.getMessage();
+        }
+
+        return mv;
+    }
 
 }

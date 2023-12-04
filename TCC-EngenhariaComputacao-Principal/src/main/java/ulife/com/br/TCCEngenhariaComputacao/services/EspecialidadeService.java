@@ -33,4 +33,9 @@ public class EspecialidadeService {
     public Especialidade salvar(Especialidade especialidade) {
         return especialidadeRepository.save(especialidade);
     }
+
+    public void excluirPorId(Long idEspecialidade) throws EntityNotFoundException {
+        Especialidade especialidade = this.buscarPorId(idEspecialidade);
+        especialidadeRepository.delete(especialidade);
+    }
 }

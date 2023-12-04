@@ -1,5 +1,6 @@
 package ulife.com.br.TCCEngenhariaComputacao.controllers;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,19 +20,19 @@ import java.time.LocalDate;
 public class AgendamentoConsultaController {
 
     @Autowired
-    AgendamentoConsultaService agendamentoService;
+    private AgendamentoConsultaService agendamentoService;
 
     @Autowired
-    EspecialidadeService especialidadeService;
+    private EspecialidadeService especialidadeService;
 
     @Autowired
-    MedicoService medicoService;
+    private MedicoService medicoService;
 
     @Autowired
-    HorarioService horarioService;
+    private HorarioService horarioService;
 
     @Autowired
-    PacienteService pacienteService;
+    private PacienteService pacienteService;
 
     @GetMapping
     public ModelAndView agendamento(Authentication authentication) {
@@ -77,7 +78,6 @@ public class AgendamentoConsultaController {
         ModelAndView mv = new ModelAndView();
 
         if (idEspecialidade != null) {
-            // Se o idEspecialidade estiver presente, redirecione para o formulário de agendamento
             mv.setViewName("agendamento/form");
             mv.addObject("idEspecialidade", idEspecialidade);
             mv.addObject("medicos",medicoService.findAllByEspecialidadeId(idEspecialidade));
@@ -88,7 +88,6 @@ public class AgendamentoConsultaController {
                 mv.addObject("cadastroAgendamentoDto",cadastroAgendamentoDto);
             }
         } else {
-            // Se não houver idEspecialidade, mostre a página de escolha de especialidade
             mv.setViewName("agendamento/escolha-especialidade");
             mv.addObject("especialidades", especialidadeService.listar());
         }
@@ -102,6 +101,34 @@ public class AgendamentoConsultaController {
         ModelAndView mv = new ModelAndView("redirect:/agendamentos");
         cadastroAgendamentoDto.setPaciente(pacienteService.findByUsuario(usuario));
         agendamentoService.salvarAgendamento(AgendamentoMapper.fromDto(cadastroAgendamentoDto));
+        return mv;
+    }
+
+    @RequestMapping("consulta/excluir")
+    public ModelAndView excluirAgendamentoConsulta(Authentication authentication, @RequestParam Long idAgendamento) {
+        Usuario usuario = (Usuario) authentication.getPrincipal();
+        ModelAndView mv = new ModelAndView("redirect:/agendamentos/consulta");
+
+        try{
+            agendamentoService.excluirAgendamento(idAgendamento);
+        } catch (EntityNotFoundException exception){
+            exception.getMessage();
+        }
+
+        return mv;
+    }
+
+    @RequestMapping("consulta/confirmaAgendamento")
+    public ModelAndView confirmarAgendamentoConsulta(Authentication authentication, @RequestParam Long idAgendamento) {
+        Usuario usuario = (Usuario) authentication.getPrincipal();
+        ModelAndView mv = new ModelAndView("redirect:/agendamentos/consulta");
+
+        try{
+            agendamentoService.atualizarStatusConsulta(idAgendamento);
+        } catch (EntityNotFoundException exception){
+            exception.getMessage();
+        }
+
         return mv;
     }
 

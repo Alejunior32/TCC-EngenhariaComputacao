@@ -19,4 +19,8 @@ public class HorarioService {
         return horarioRepository.findHorariosDisponiveisDoMedicoNoDia(medico, dataConsulta);
     }
 
+    public List<Horario> findAll(){
+        return horarioRepository.findAll();
+    }
+
 }

@@ -5,12 +5,8 @@
     <link rel="stylesheet" th:href="@{/css/style.css}" />
     <title>TCC | Agendamento</title>
     <script>
-        // Quando a página carrega
-        document.addEventListener("DOMContentLoaded", function() {
-    var idMedico = localStorage.getItem("idMedico");
+    document.addEventListener("DOMContentLoaded", function() {
     var dataConsulta = localStorage.getItem("dataConsulta");
-
-    document.getElementById("medico").value = idMedico || "";
 
     if (dataConsulta) {
         document.getElementById("data").value = dataConsulta;
@@ -18,17 +14,13 @@
 });
 
 function redirecionarPagina() {
-    var idEspecialidade = document.getElementById("especialidade").value;
-    var idMedico = document.getElementById("medico").value;
+    var idExame = document.getElementById("exame").value;
     var dataConsulta = document.getElementById("data").value;
 
-    // Armazenar os valores no localStorage
-    localStorage.setItem("idMedico", idMedico);
     localStorage.setItem("dataConsulta", dataConsulta);
 
-    if (idEspecialidade && idMedico && dataConsulta) {
-        window.location.href = "agendar?idEspecialidade=" + idEspecialidade +
-                              "&idMedico=" + idMedico +
+    if (idExame && dataConsulta) {
+        window.location.href = "agendar?idExame=" + idExame +
                               "&dataConsulta=" + dataConsulta;
     }
 }
@@ -39,31 +31,21 @@ function redirecionarPagina() {
 <section class="layout-content" layout:fragment="content">
     <main role="main">
 
-        <h1>Agendamento de Consulta</h1>
+        <h1>Agendamento de Exame</h1>
 
         <div class="card">
             <div class="formulario">
-            <input type="hidden" id="especialidade" th:value="${idEspecialidade}">
-
-            <div class="input-group mb-3">
-                <label for="medico" class="input-group-text">Médicos</label>
-                <select class="form-select" id="medico" name="medico" th:value="${idMedico}" onchange="redirecionarPagina()">
-                    <option value="" th:selected="${idMedico eq null or idMedico eq ''}">Selecione um médico</option>
-                    <option th:each="medico : ${medicos}" th:value="${medico.id}" th:text="${medico.nome}" th:selected="${medico.id eq idMedico}"></option>
-                </select>
-            </div>
+            <input type="hidden" id="exame" th:value="${idExame}">
 
             <div class="input-group mb-3">
                 <label for="data" class="input-group-text">Data da consulta</label>
                 <input  type="date" id="data" onchange="redirecionarPagina()">
             </div>
 
-
             <div th:if="${not #lists.isEmpty(horarios)}">
-                <form method="post" th:action="@{/agendamentos/consulta/agendar}" th:object="${cadastroAgendamentoDto}">
+                <form method="post" th:action="@{/agendamentos/exame/agendar}" th:object="${cadastroAgendamentoDto}">
 
-                    <input type="hidden" th:value="${cadastroAgendamentoDto.especialidade}" th:field="${cadastroAgendamentoDto.especialidade}">
-                    <input type="hidden" th:value="${cadastroAgendamentoDto.medico}" th:field="${cadastroAgendamentoDto.medico}">
+                    <input type="hidden" th:value="${cadastroAgendamentoDto.exame}" th:field="${cadastroAgendamentoDto.exame}">
                     <input type="hidden" th:value="${cadastroAgendamentoDto.paciente}" th:field="${cadastroAgendamentoDto.paciente}">
                     <input type="hidden" th:value="${cadastroAgendamentoDto.dataConsulta}" th:field="${cadastroAgendamentoDto.dataConsulta}">
 
@@ -77,7 +59,7 @@ function redirecionarPagina() {
 
                         <div>
                             <button type="submit" class="btn btn-primary">Cadastrar</button>
-                            <a th:href="@{/agendamentos/consulta}" class="btn btn-primary">Voltar</a>
+                            <a th:href="@{/agendamentos/exame}" class="btn btn-primary">Voltar</a>
                         </div>
                 </form>
             </div>

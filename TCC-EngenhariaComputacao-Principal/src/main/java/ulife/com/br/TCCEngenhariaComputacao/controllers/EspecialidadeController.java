@@ -4,10 +4,7 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ulife.com.br.TCCEngenhariaComputacao.models.Especialidade;
@@ -27,30 +24,46 @@ public class EspecialidadeController {
         return mv;
     }
 
-    @GetMapping("/detalhes")
-    public ModelAndView detalhesEspecilidade(@RequestParam Long idEspecialidade){
-        ModelAndView mv = new ModelAndView("especialidade/detalhes.html");
-        try{
-            mv.addObject("especialidade",especialidadeService.buscarPorId(idEspecialidade));
-        }catch (EntityNotFoundException exception){
-            mv.addObject("erroBuscar",exception.getMessage());
-        }
-        return mv;
-    }
-
     @GetMapping("cadastrar")
-    private ModelAndView formularioEspecialidade(){
+    private ModelAndView formularioEspecialidade(@RequestParam(required = false) Long idEspecialidade){
         ModelAndView mv = new ModelAndView("especialidade/form.html");
-        mv.addObject("especialidade",new Especialidade());
+
+        Especialidade especialidade;
+
+        if (idEspecialidade == null){
+            especialidade = new Especialidade();
+        } else {
+            try {
+                especialidade = especialidadeService.buscarPorId(idEspecialidade);
+            } catch (Exception e) {
+                especialidade = new Especialidade();
+                mv = new ModelAndView("redirect:/especialidade");
+                mv.addObject("mensagem", "Falha ao editar Especialidade");
+            }
+        }
+
+        mv.addObject("especialidade", especialidade);
         return mv;
     }
 
     @PostMapping("cadastrar")
     private ModelAndView cadastrarEspecialidade(@Valid Especialidade especialidade, RedirectAttributes redirectAttributes){
         ModelAndView mv = new ModelAndView("redirect:/especialidade");
-        redirectAttributes.addFlashAttribute("mensagem","nova especialidade cadastrada com sucesso!");
+        redirectAttributes.addFlashAttribute("mensagem","Nova Especialidade cadastrada com sucesso!");
         especialidadeService.salvar(especialidade);
         return  mv;
+    }
+
+    @RequestMapping("excluir")
+    public ModelAndView excluirEspecilidade(@RequestParam Long idEspecialidade){
+        ModelAndView mv = new ModelAndView("redirect:/especialidade");
+        try{
+            especialidadeService.excluirPorId(idEspecialidade);
+        }catch (EntityNotFoundException exception){
+            exception.getMessage();
+        }
+
+        return mv;
     }
 
 }

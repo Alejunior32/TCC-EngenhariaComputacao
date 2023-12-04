@@ -4,6 +4,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import ulife.com.br.TCCEngenhariaComputacao.dto.convenio.ConvenioMapper;
 import ulife.com.br.TCCEngenhariaComputacao.dto.paciente.CadastroPacienteDTO;
 import ulife.com.br.TCCEngenhariaComputacao.models.Convenio;
 import ulife.com.br.TCCEngenhariaComputacao.models.Paciente;
@@ -11,20 +12,25 @@ import ulife.com.br.TCCEngenhariaComputacao.models.Usuario;
 import ulife.com.br.TCCEngenhariaComputacao.repositories.PacienteRepository;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Random;
 
 @Service
 public class PacienteService {
 
     @Autowired
-    PacienteRepository pacienteRepository;
+    private PacienteRepository pacienteRepository;
 
     @Autowired
-    ConvenioService convenioService;
+    private AgendamentoConsultaService agendamentoConsultaService;
 
     @Autowired
-    UsuarioService usuarioService;
+    private ConvenioService convenioService;
+
+    @Autowired
+    private AgendamentoExameService agendamentoExameService;
+
+    @Autowired
+    private UsuarioService usuarioService;
 
     @Autowired
     private EmailService emailService;
@@ -55,7 +61,23 @@ public class PacienteService {
         return pacienteRepository.findAll();
     }
 
+    public Paciente editar(CadastroPacienteDTO cadastroPacienteDTO, Long idPaciente, Long idConvenio) {
+        Paciente paciente = buscarPorId(idPaciente);
 
+        paciente.setNome(cadastroPacienteDTO.getNome());
+        paciente.setRg(cadastroPacienteDTO.getRg());
+        paciente.setCpf(cadastroPacienteDTO.getCpf());
+        paciente.setDataNascimento(cadastroPacienteDTO.getDataNascimento());
+
+        Convenio convenio = ConvenioMapper.fromDto(cadastroPacienteDTO.getConvenio());
+        convenio.setId(idConvenio);
+        convenioService.salvar(convenio);
+
+        paciente.getUsuario().setLogin(cadastroPacienteDTO.getEmail());
+        usuarioService.salvarUsuario(paciente.getUsuario());
+
+        return pacienteRepository.save(paciente);
+    }
 
     public Paciente findByUsuario(Usuario usuario) {
         return pacienteRepository.findByUsuario(usuario);
@@ -64,4 +86,12 @@ public class PacienteService {
     public boolean usuarioExistente(String email){
         return usuarioService.existsByLogin(email);
     }
+
+    public void excluirPorId(Long idPaciente) throws EntityNotFoundException {
+        Paciente paciente = buscarPorId(idPaciente);
+        agendamentoConsultaService.excluirAgendamentosPaciente(paciente);
+        agendamentoExameService.excluirAgendamentosPaciente(paciente);
+        pacienteRepository.delete(paciente);
+    }
+
 }

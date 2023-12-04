@@ -23,6 +23,9 @@
                 </a>
             </div>
         </div>
+        <div th:if="${#lists.isEmpty(exames)}">
+            <p>A lista de especialidades está vazia.</p>
+        </div>
     </div>
     </div>
 </body>

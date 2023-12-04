@@ -11,45 +11,45 @@
 
     <h1>Cadastrar Médico</h1>
     <div class="card">
-    
+
         <div class="formulario">
 
-            <form method="post" th:action="@{/medico/cadastrar}" th:object="${cadastroMedicoDto}">
-    
+            <form method="post" th:action="@{/medico/editar(idMedico=${idMedico})}" th:object="${cadastroMedicoDto}">
+
                 <div class="mb-3">
                     <label for="nome" class="form-label">Nome</label>
                     <input type="text" class="form-control" id="nome" th:field="${cadastroMedicoDto.nome}"
-                        placeholder="Digite o nome do médico" required>
+                           placeholder="Digite o nome do médico" th:value="${cadastroMedicoDto.nome}" required>
                     <div class="text-danger" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
                     <input type="email" class="form-control" id="email" th:field="${cadastroMedicoDto.email}"
-                        placeholder="Digite o nome do médico" required>
+                           placeholder="Digite o nome do médico" th:value="${cadastroMedicoDto.email}" required>
                     <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
                 </div>
                 <div class="mb-3">
                     <label for="crm" class="form-label">Crm</label>
                     <input type="text" class="form-control" id="crm" rows="3" th:field="${cadastroMedicoDto.crm}"
-                        placeholder="" required></input>
+                           placeholder="" th:value="${cadastroMedicoDto.crm}" required>
                     <div class="text-danger" th:if="${#fields.hasErrors('crm')}" th:errors="*{crm}"></div>
                 </div>
                 <div class="mb-3">
                     <label for="especialidade" class="form-label">Especialidade</label>
-                    <select id="especialidade"  th:field="${cadastroMedicoDto.especialidade}"  required>
+                    <select id="especialidade"  th:field="${cadastroMedicoDto.especialidade}" th:value="${cadastroMedicoDto.especialidade}" required>
                         <option th:each="especialidade : ${especialidades}" th:value="${especialidade.id}" th:text="${especialidade.titulo}"></option>
                     </select>
                 </div>
-    
-    
+
+
                 <div>
-                    <button type="submit" class="btn btn-primary">Cadastrar</button>
+                    <button type="submit" class="btn btn-primary">Editar</button>
                     <a th:href="@{/medico}" class="btn btn-primary">Voltar</a>
                 </div>
-    
+
             </form>
         </div>
-    
+
     </div>
 </div>
 

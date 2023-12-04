@@ -1,36 +1,30 @@
-package ulife.com.br.TCCEngenhariaComputacao.models;
+package ulife.com.br.TCCEngenhariaComputacao.dto.agendamento;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
+import ulife.com.br.TCCEngenhariaComputacao.models.Exame;
+import ulife.com.br.TCCEngenhariaComputacao.models.Horario;
+import ulife.com.br.TCCEngenhariaComputacao.models.Paciente;
 
 import java.time.LocalDate;
 
-@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AgendamentoExame {
+public class CadastroAgendamentoExameDto{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @ManyToOne
     private Exame exame;
 
-    @ManyToOne
     private Paciente paciente;
 
-    @ManyToOne
     private Horario horario;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dataConsulta;
-    private String statusAgendamentoPaciente;
-    private String statusAgendamentoMedico;
+
 }
+
