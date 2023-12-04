@@ -24,17 +24,6 @@ public class EspecialidadeController {
         return mv;
     }
 
-    @GetMapping("/detalhes")
-    public ModelAndView detalhesEspecilidade(@RequestParam Long idEspecialidade){
-        ModelAndView mv = new ModelAndView("especialidade/detalhes.html");
-        try{
-            mv.addObject("especialidade",especialidadeService.buscarPorId(idEspecialidade));
-        }catch (EntityNotFoundException exception){
-            mv.addObject("erroBuscar",exception.getMessage());
-        }
-        return mv;
-    }
-
     @GetMapping("cadastrar")
     private ModelAndView formularioEspecialidade(@RequestParam(required = false) Long idEspecialidade){
         ModelAndView mv = new ModelAndView("especialidade/form.html");

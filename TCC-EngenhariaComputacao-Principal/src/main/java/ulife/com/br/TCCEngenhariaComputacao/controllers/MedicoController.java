@@ -31,17 +31,6 @@ public class MedicoController {
         return mv;
     }
 
-    @GetMapping("/detalhes")
-    public ModelAndView detalhesMedico(@RequestParam Long idMedico){
-        ModelAndView mv = new ModelAndView("medico/detalhes.html");
-        try {
-            mv.addObject("medico", medicoService.findById(idMedico));
-        }catch (EntityNotFoundException exception){
-            mv.addObject("erroBusca",exception.getMessage());
-        }
-        return mv;
-    }
-
     @GetMapping("cadastrar")
     public ModelAndView formularioCadastro(){
         ModelAndView mv = new ModelAndView("medico/form.html");

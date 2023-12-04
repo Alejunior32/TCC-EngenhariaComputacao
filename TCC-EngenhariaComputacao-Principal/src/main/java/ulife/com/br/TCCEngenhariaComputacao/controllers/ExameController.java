@@ -29,17 +29,6 @@ public class ExameController {
         return mv;
     }
 
-    @GetMapping("/detalhes")
-    public ModelAndView detalhesExame(@RequestParam Long idExame){
-        ModelAndView mv = new ModelAndView("exame/detalhes.html");
-        try{
-            mv.addObject("exame",exameService.buscarPorId(idExame));
-        }catch (EntityNotFoundException exception){
-            mv.addObject("erroBuscar",exception.getMessage());
-        }
-        return mv;
-    }
-
     @GetMapping("cadastrar")
     private ModelAndView formularioExame(@RequestParam(required = false) Long idExame){
         ModelAndView mv = new ModelAndView("exame/form.html");

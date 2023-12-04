@@ -32,7 +32,7 @@
             <tr>
                 <th>Nome</th>
                 <th>Data de Nacimento</th>
-                <th>Detalhes</th>
+                <th>Opções</th>
             </tr>
             </thead>
             <tbody>
@@ -40,7 +40,6 @@
                 <td th:text="${paciente.nome}"></td>
                 <td th:text="${paciente.dataNascimento}"></td>
                 <td>
-                    <a th:href="@{/agendamentoConsulta/(idPaciente=${paciente.id})}" class="btn btn-outline-secondary">Agendamentos</a>
                     <a th:href="@{/paciente/editar(idPaciente=${paciente.id})}" class="btn btn-outline-warning" >Editar</a>
                     <a th:href="@{/paciente/excluir(idPaciente=${paciente.id})}" class="btn btn-outline-danger"  onclick="return confirm('Você deseja realmente excluir este Paciente?')">Excluir</a>
                 </td>
