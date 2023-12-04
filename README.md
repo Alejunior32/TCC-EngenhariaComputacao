@@ -25,22 +25,18 @@ A TCC-EngenhariaComputacao-Totem é uma aplicação Python responsável pelo aut
 - **Listar Especialidades**: endpoint para listar todas as especialidades cadastradas.  
 - **Editar Especialidade**: endpoint para editar qualquer uma das especialidades cadastradas.  
 - **Excluir Especilidade**: endpoint para excluir qualquer uma das especialidades cadastradas.  
-- **Detalhes da Especialidade**: endpoint para mostrar os detalhes de uma determinada especialidade cadastrada.  
 - **Cadastro de Exames**: endpoint para cadastrar um novo exame.  
 - **Listar Exames**: endpoint para listar todos os exames cadastrados.  
 - **Editar Exame**: endpoint para editar qualquer um dos exames cadastrados.  
 - **Excluir Exame**: endpoint para excluir qualquer um dos exames cadastrados.  
-- **Detalhes do Exame**: endpoint para mostrar os detalhes de um determinado exame cadastrado.   
 - **Cadastro de Médicos**: endpoint para cadastrar um novo médico.  
 - **Listar Médicos**: endpoint para listar todos os médicos cadastrados.  
 - **Editar Médico**: endpoint para editar qualquer um dos médicos cadastrados.  
 - **Excluir Médico**: endpoint para excluir qualquer um dos médicos cadastrados.  
-- **Detalhes do Médico**: endpoint para mostrar os detalhes de um determinado médico cadastrado.  
 - **Cadastro de Pacientes**: endpoint para cadastrar um novo paciente.  
 - **Listar Pacientes**: endpoint para listar todos os pacientes cadastrados.  
 - **Editar Paciente**: endpoint para editar qualquer um dos pacientes cadastrados.  
 - **Excluir Paciente**: endpoint para excluir qualquer um dos pacientes cadastrados.  
-- **Detalhes do Paciente**: endpoint para mostrar os detalhes de um determinado paciente cadastrado.  
 - **Fazer Agendamentos**: endpoint para realizar novos agendamentos.  
 - **Excluir Agendamentos**: endepoint para excluir agendamentos.  
 - **Confirmar Agendamentos**: endpoint para confirmar agendamentos realizados.  
@@ -60,7 +56,7 @@ A TCC-EngenhariaComputacao-Totem é uma aplicação Python responsável pelo aut
 
 - Escolher Tipo de Agendamento, (**POST**) localhost:8080/agendamentos
 - Escolher Tipo de Consulta, (**POST**) localhost:8080/agendamentos/consulta/agendar
-- Agendar Consulta, (**POST**) localhost:8080/agendamentos/exame/agendar{idEspecialidade}
+- Agendar Consulta, (**POST**) localhost:8080/agendamentos/consulta/agendar{idEspecialidade}
 - Listar Consultas, (**GET**) localhost:8080/agendamentos/consulta
 - Excluir Consultas, (**GET**) localhost:8080/agendamentos/consulta/excluir{idConsulta}
 - Agendar Exame, (**POST**) localhost:8080/agendamentos/exame/agendar
@@ -91,7 +87,6 @@ A TCC-EngenhariaComputacao-Totem é uma aplicação Python responsável pelo aut
 - Listar Especialidades, (**GET**) localhost:8080/especialidade
 - Atualizar Especialidade, (**PUT**) localhost:8080/especialidade/cadastrar{idEspecialidade}
 - Excluir Especialidade, (**DELETE**) localhost:8080/especialidade/excluir{idEspecialidade}
-- Detalhes Especialidade, (**GET**) localhost:8080/especialidade/detalhes{idEspecialidade}
 
 #### Exame:
 
@@ -99,23 +94,20 @@ A TCC-EngenhariaComputacao-Totem é uma aplicação Python responsável pelo aut
 - Listar Exames, (**GET**) localhost:8080/exame
 - Atualizar Exame, (**PUT**) localhost:8080/exame/cadastrar{idExame}
 - Excluir Exame, (**DELETE**) localhost:8080/exame/excluir{idExame}
-- Detalhes Exame, (**GET**) localhost:8080/exame/detalhes{idExame}
 
 #### Medico:
 
 - Cadastrar Medico, (**POST**) localhost:8080/medico/cadastrar
 - Listar Medicos, (**GET**) localhost:8080/medico
-- Atualizar Medico, (**PUT**) localhost:8080/exame/editar{idMedico}
+- Atualizar Medico, (**PUT**) localhost:8080/medico/editar{idMedico}
 - Excluir Medico, (**DELETE**) localhost:8080/medico/excluir{idMedico}
-- Detalhes Medico, (**GET**) localhost:8080/exame/detalhes{idMedico}
 
 #### Paciente:
 
-- Cadastrar Medico, (**POST**) localhost:8080/paciente/cadastrar  
-- Listar Medicos, (**GET**) localhost:8080/paciente
-- Atualizar Medico, (**PUT**) localhost:8080/exame/editar{idPaciente}
+- Cadastrar Paciente, (**POST**) localhost:8080/paciente/cadastrar  
+- Listar Pacientes, (**GET**) localhost:8080/paciente
+- Atualizar Paciente, (**PUT**) localhost:8080/paciente/editar{idPaciente}
 - Excluir Paciente, (**DELETE**) localhost:8080/paciente/excluir{idPaciente}
-- Detalhes Paciente, (**GET**) localhost:8080/exame/detalhes{idPaciente}
 
 ## Requisições do Médico:
 
