@@ -1,85 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
     <title>Document</title>
 </head>
+
 <body>
 
     <body>
-<div class="container-message {% if messages %}with-messages{% endif %}">
-    <div class="message-box">
-        <p class="waiting-message">Aguardando Solicitação</p>
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
+        <div class="container-message {% if messages %}with-messages{% endif %}">
+            <div class="message-box">
+                <p class="waiting-message">Aguardando Solicitação</p>
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
                 <ul class="message">
                     {% for message in messages %}
-                        <li class="{% if 'PACIENTE ENCONTRADO MAS NÃO POSSUI AGENDAMENTO' in message or 'PACIENTE ENCONTRADO MAS NÃO RECONHECIDO' in message %}yellow{% elif 'PACIENTE NÃO ENCONTRADO' in message %}red{% else %}default{% endif %}">
-                            {{ message }}
-                        </li>
+                    <li class="{% if 'PACIENTE ENCONTRADO MAS NÃO POSSUI AGENDAMENTO' in message or 'PACIENTE ENCONTRADO MAS NÃO RECONHECIDO' in message %}yellow{% elif 'PACIENTE NÃO ENCONTRADO' in message %}red{% else %}default{% endif %}">
+                        {{ message }}
+                    </li>
                     {% endfor %}
                 </ul>
                 <script>
                     document.querySelector('.message-box .waiting-message').style.display = 'none';
                 </script>
-            {% endif %}
-        {% endwith %}
-    </div>
-</div>
+                {% endif %}
+                {% endwith %}
+            </div>
+        </div>
         <style>
-            h1{
-                color:aliceblue;
+            h1 {
+                color: aliceblue;
                 font-size: 70px
             }
+
             .btn {
-            width: 300px;
-            font-size: 36px;
-            padding: 20px 40px;
-        }
+                width: 350px;
+                font-size: 36px;
+                padding: 20px 40px;
+                margin: 10px;
+                border-radius: 15px;
+            }
         </style>
 
 
-    <h1>Digite seu CPF</h1>
-    <form method="post" action="{{ url_for('buscar-usuario') }}">
-        <input type="text" class="form-control" name="cpf" placeholder="Digite o CPF" maxlength="14" oninput="formatarCPF(this)" required>
-        <button id="buscar" type="submit" class="btn btn-primary">Buscar</button>
-        <br>
+        <h1>Digite seu CPF</h1>
+        <form method="post" action="{{ url_for('buscar-usuario') }}">
+            <input type="text" class="form-control" name="cpf" placeholder="Digite o CPF" maxlength="14" oninput="formatarCPF(this)" required>
+            <button id="buscar" type="submit" class="btn btn-primary">Buscar</button>
             <button id="voltar" onclick="window.location.href='http://localhost:4000/'" type="button" class="btn btn-primary">Voltar</button>
-    </form>
-        <div class="container">
-            <div class="text-box">
-                <p>Ao clicar em "Buscar" o reconhecimento facial iniciará!</p>
-            </div>
+        </form>
+
+        <div class="text-box">
+            <p>Ao clicar em "Buscar" o reconhecimento facial iniciará!</p>
         </div>
 
-    <script>
-        function formatarCPF(campo) {
-            // Remove caracteres não numéricos
-            var cpfAtual = campo.value.replace(/[^\d]/g, '');
 
-            // Adiciona os pontos e traço conforme o formato do CPF
-            if (cpfAtual.length > 3 && cpfAtual.length <= 6) {
-                campo.value = cpfAtual.substring(0, 3) + '.' + cpfAtual.substring(3);
-            } else if (cpfAtual.length > 6 && cpfAtual.length <= 9) {
-                campo.value = cpfAtual.substring(0, 3) + '.' + cpfAtual.substring(3, 6) + '.' + cpfAtual.substring(6);
-            } else if (cpfAtual.length > 9) {
-                campo.value = cpfAtual.substring(0, 3) + '.' + cpfAtual.substring(3, 6) + '.' + cpfAtual.substring(6, 9) + '-' + cpfAtual.substring(9);
-            } else {
-                campo.value = cpfAtual;
+        <footer class="footer">
+            <div class="texto-rodape">
+                <p>© Copyright, AGP LAB</p>
+            </div>
+        </footer>
+
+        <script>
+            function formatarCPF(campo) {
+                // Remove caracteres não numéricos
+                var cpfAtual = campo.value.replace(/[^\d]/g, '');
+
+                // Adiciona os pontos e traço conforme o formato do CPF
+                if (cpfAtual.length > 3 && cpfAtual.length <= 6) {
+                    campo.value = cpfAtual.substring(0, 3) + '.' + cpfAtual.substring(3);
+                } else if (cpfAtual.length > 6 && cpfAtual.length <= 9) {
+                    campo.value = cpfAtual.substring(0, 3) + '.' + cpfAtual.substring(3, 6) + '.' + cpfAtual.substring(6);
+                } else if (cpfAtual.length > 9) {
+                    campo.value = cpfAtual.substring(0, 3) + '.' + cpfAtual.substring(3, 6) + '.' + cpfAtual.substring(6, 9) + '-' + cpfAtual.substring(9);
+                } else {
+                    campo.value = cpfAtual;
+                }
             }
-        }
-    </script>
+        </script>
 
-    <footer class="footer-cpf">
-    <div class="texto-rodape">
-        <p>© Copyright, AGP LAB</p>
-    </div>
-</footer>
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-</body>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    </body>

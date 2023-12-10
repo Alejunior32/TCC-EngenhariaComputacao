@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,32 +10,15 @@
     <title>Totem</title>
 
     <style>
-        h1 {
-            color: aliceblue;
-            font-size: 70px;
-        }
-
         .btn {
             font-size: 36px;
             padding: 20px 40px;
-        }
-
-        .notification-box {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: #f2f2f2;
-            border: 1px solid #ccc;
-            padding: 15px;
-            border-radius: 8px;
-            display: none;
-        }
-
-        .notification-content {
-            text-align: left;
+            border-radius: 15px;
+            margin: 10px;
         }
     </style>
 </head>
+
 <body>
 
     <h1>Paciente novo?</h1>
@@ -53,7 +37,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const notificationBox = document.querySelector('.notification-box');
             notificationBox.style.display = 'block';
         });
